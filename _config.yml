@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
-keywords:
-author: John Doe
+title: unreal-engine-channel
+subtitle: 'welcome to unreal-engine-channel'
+description: 'A website to share technologies for the latest version of Unreal Engine.'
+keywords: Unreal Engine
+author: Jocoboy
 language: en
-timezone: ''
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
@@ -103,4 +103,7 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/unreal-engine-channel/unreal-engine-channel.github.io.git
+  branch: gh-pages
+  message: 
