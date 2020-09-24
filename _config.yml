@@ -4,7 +4,7 @@
 
 # Site
 title: unreal-engine-channel
-subtitle: 'welcome to unreal-engine-channel'
+subtitle: 
 description: 'A website to share technologies for the latest version of Unreal Engine.'
 keywords: Unreal Engine
 author: Jocoboy
@@ -97,6 +97,12 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+plugins:
+    hexo-generator-feed
+feed:
+    type: atom
+    path: atom.xml
+    limit: 20
 ## Themes: https://hexo.io/themes/
 theme: next
 
