@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-09-24T04:55:46.137Z</updated>
+  <updated>2020-10-11T05:40:27.756Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,50 +17,23 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://example.com/2020/09/24/hello-world/"/>
-    <id>http://example.com/2020/09/24/hello-world/</id>
-    <published>2020-09-24T04:55:46.137Z</published>
-    <updated>2020-09-24T04:55:46.137Z</updated>
+    <title>RPG Game开发日志(一)</title>
+    <link href="http://example.com/2020/10/11/RPG-Dev-Log-1/"/>
+    <id>http://example.com/2020/10/11/RPG-Dev-Log-1/</id>
+    <published>2020-10-11T03:53:42.000Z</published>
+    <updated>2020-10-11T05:40:27.756Z</updated>
     
-    <content type="html"><![CDATA[<p>111111111111111111111111111111<br>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>涉及内容：简单场景创建；鼠标跟随贴花制作；动画蓝图制作；移动操控绑定等。</p><a id="more"></a><h2 id="简单场景创建"><a href="#简单场景创建" class="headerlink" title="简单场景创建"></a>简单场景创建</h2><ol><li>清理默认物体，如Floor、Capsule等;</li><li>添加Box Brush，Transform&gt;Location=(0,0,0)，Brush Settings &gt; X=5000,Y=5000,Z=800;</li><li>快捷键ALT复制一个，Transform&gt;Location(0,0,50)，Brush Settings &gt; X=4800,Y=4800,Z=700, Brush Type=Subtractive;</li><li>利用Geometry Editing创建几个测试平台、楼梯等；</li><li>添加StarterContent初学者内容包，为场景物体添加材质。</li><li>保存场景为Training至RPG_Game&gt;Maps。</li></ol><img src="https://img-blog.csdnimg.cn/20201011122013690.png"><h2 id="鼠标跟随贴花制作"><a href="#鼠标跟随贴花制作" class="headerlink" title="鼠标跟随贴花制作"></a>鼠标跟随贴花制作</h2><ol><li>图标来源：<a href="https://www.iconfont.cn/">阿里巴巴矢量图标库</a>  </li><li>添加Goal图标至RPG_Game&gt;Textures；</li><li>创建材质球M_GoalDecal，设置Material Domain=Deferred Decal，Blend Mode=Translucent，Decal Blend Mode = Emissive；</li><li>设置Material蓝图参数；<img src='https://img-blog.csdnimg.cn/20201011123828721.png'></li><li>创建材质实例Inst_GoalDecal，Sets the preview mesh to a plane primitive，修改公开变量Color和EmissiveValue(高光度)；</li><li>以上M_GoalDecal、Inst_GoalDecal添加至RPG_Game&gt;Materials；</li><li>创建Actor BP_GoalDecal至RPG_Game&gt;Actors，添加Decal组件和Box collision，在Event Graph 内添加Begin Overlap(Box)事件。<img src='https://img-blog.csdnimg.cn/20201011124835193.png'></li></ol><h2 id="动画蓝图制作"><a href="#动画蓝图制作" class="headerlink" title="动画蓝图制作"></a>动画蓝图制作</h2><ol><li>骨骼网格体、动画来源：虚幻商城[虚幻争霸：心菲]</li><li>以下将会用到Skeletal Mesh (Shinbi)，Animation Sequence (Shibi_Fwd、Shibi_Idle);</li><li>创建一维混合空间Shibi_BlendSpace1D，Horizontal Axis 命名为 Speed，区间设置为[0,400],0出添加Idle,400出添加Fwd;</li><li>创建动画蓝图ABP_Shibi至RPG_Game&gt;Characters&gt;Animations，新建状态机:Entry-&gt;Idle_Move,新建变量:Speed,设置动画蓝图如下；<img src='https://img-blog.csdnimg.cn/20201011130431251.png'></li><li>进入Event Graph,设置动画蓝图事件如下。<img src='https://img-blog.csdnimg.cn/20201011130521861.png'></li></ol><h2 id="移动操控绑定"><a href="#移动操控绑定" class="headerlink" title="移动操控绑定"></a>移动操控绑定</h2><ol><li>创建Character BP_RPG_Character至RPG_Game&gt;Blueprints，并创建子类Char_Shibi;</li><li>打开Char_Shibi,添加SpringArm和Camera(依附于SpringArm)，设置SpringArm Rotation=(0,-45,0),Target Arm Length=650;</li><li>创建RPG_PlayerController至RPG_Game&gt;Blueprints；</li><li>创建RPG_Game_Mode至RPG_Game&gt;Blueprints,设置Player Controller Class为RPG_PlayerController,Default Pawn Class为Char_Shibi;</li><li>打开项目设置，设置Default GameMode 为RPG_GameMode,Default Maps为Training,添加轴映射MoveForward(W/S)、MoveRight(A/D)、LookUp(Mouse Y)、Turn(Mouse X);</li><li>打开RPG_PlayerController,创建函数CancelMovementCommand,用于处理角色移动状态时销毁鼠标贴花；<img src='https://img-blog.csdnimg.cn/20201011132117897.png'></li><li>Shibi Object获取；<img src='https://img-blog.csdnimg.cn/20201011132352696.png'></li><li>鼠标贴花生成；<img src='https://img-blog.csdnimg.cn/20201011132417698.png'></li><li>移动转向控制。<img src='https://img-blog.csdnimg.cn/20201011133109943.png'><img src='https://img-blog.csdnimg.cn/20201011133157497.png' ><img src='https://img-blog.csdnimg.cn/20201011133223590.png'><img src='https://img-blog.csdnimg.cn/2020101113325827.png'><img src='https://img-blog.csdnimg.cn/20201011133327798.png'></li></ol>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;p&gt;111111111111111111111111111111&lt;br&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://he</summary>
-      
+    <summary type="html">&lt;p&gt;涉及内容：简单场景创建；鼠标跟随贴花制作；动画蓝图制作；移动操控绑定等。&lt;/p&gt;</summary>
     
     
     
-    <category term="test-cate1" scheme="http://example.com/categories/test-cate1/"/>
+    <category term="Logs" scheme="http://example.com/categories/Logs/"/>
     
     
-    <category term="test-tages1" scheme="http://example.com/tags/test-tages1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>test</title>
-    <link href="http://example.com/2020/09/24/test/"/>
-    <id>http://example.com/2020/09/24/test/</id>
-    <published>2020-09-24T02:09:04.000Z</published>
-    <updated>2020-09-24T04:55:46.137Z</updated>
-    
-    <content type="html"><![CDATA[<p>2222222222222222222222222222222<br>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;2222222222222222222222222222222&lt;br&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://h</summary>
-      
-    
-    
-    
-    <category term="test-cate2" scheme="http://example.com/categories/test-cate2/"/>
-    
-    
-    <category term="test-tages2" scheme="http://example.com/tags/test-tages2/"/>
+    <category term="UE_4.22" scheme="http://example.com/tags/UE-4-22/"/>
     
   </entry>
   
