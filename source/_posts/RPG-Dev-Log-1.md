@@ -8,6 +8,8 @@ tags: UE_4.22
 涉及内容：简单场景创建；鼠标跟随贴花制作；动画蓝图制作；移动操控绑定等。
 <!--more-->
 
+# 涉及内容
+
 ## 简单场景创建
 
 1. 清理默认物体，如Floor、Capsule等;
@@ -33,7 +35,7 @@ tags: UE_4.22
 
 1. 骨骼网格体、动画来源：虚幻商城[虚幻争霸：心菲]
 2. 以下将会用到Skeletal Mesh (Shinbi)，Animation Sequence (Shibi_Fwd、Shibi_Idle);
-3. 创建一维混合空间Shibi_BlendSpace1D，Horizontal Axis 命名为 Speed，区间设置为[0,400],0出添加Idle,400出添加Fwd;
+3. 创建一维混合空间Shibi_BlendSpace1D，Horizontal Axis 命名为 Speed，区间设置为[0,400],0处添加Idle,400处添加Fwd;
 4. 创建动画蓝图ABP_Shibi至RPG_Game>Characters>Animations，新建状态机:Entry->Idle_Move,新建变量:Speed,设置动画蓝图如下；<img src='https://img-blog.csdnimg.cn/20201011130431251.png'>
 5. 进入Event Graph,设置动画蓝图事件如下。<img src='https://img-blog.csdnimg.cn/20201011130521861.png'>
 
@@ -49,3 +51,8 @@ tags: UE_4.22
 8. 鼠标贴花生成；<img src='https://img-blog.csdnimg.cn/20201011132417698.png'>
 9. 移动转向控制。<img src='https://img-blog.csdnimg.cn/20201011133109943.png'><img src='https://img-blog.csdnimg.cn/20201011133157497.png' ><img src='https://img-blog.csdnimg.cn/20201011133223590.png'><img src='https://img-blog.csdnimg.cn/2020101113325827.png'><img src='https://img-blog.csdnimg.cn/20201011133327798.png'>
 
+# 最终效果展示
+
+<img src='https://img-blog.csdnimg.cn/20201012174104608.png'>
+
+<img src='https://img-blog.csdnimg.cn/20201012174324500.png'>
