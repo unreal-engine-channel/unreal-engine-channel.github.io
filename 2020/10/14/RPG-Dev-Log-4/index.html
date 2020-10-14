@@ -21,31 +21,43 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="A website to share technologies for the latest version of Unreal Engine.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="unreal-engine-channel">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="涉及内容：自动回复系统，迷你小地图制作，IceLands场景导入等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPG Game开发日志(四)">
+<meta property="og:url" content="http://example.com/2020/10/14/RPG-Dev-Log-4/index.html">
 <meta property="og:site_name" content="unreal-engine-channel">
-<meta property="og:description" content="A website to share technologies for the latest version of Unreal Engine.">
+<meta property="og:description" content="涉及内容：自动回复系统，迷你小地图制作，IceLands场景导入等。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014174148886.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014174040200.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180132825.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180301780.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180647554.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020101423132354.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014232845269.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014171750989.gif">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020101417191758.png">
+<meta property="article:published_time" content="2020-10-14T09:04:18.000Z">
+<meta property="article:modified_time" content="2020-10-14T16:28:13.177Z">
 <meta property="article:author" content="Jocoboy">
-<meta property="article:tag" content="Unreal Engine">
+<meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201014174148886.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2020/10/14/RPG-Dev-Log-4/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>unreal-engine-channel</title>
+  <title>RPG Game开发日志(四) | unreal-engine-channel</title>
   
 
 
@@ -187,9 +199,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -205,10 +218,9 @@
       <meta itemprop="name" content="unreal-engine-channel">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/14/RPG-Dev-Log-4/" class="post-title-link" itemprop="url">RPG Game开发日志(四)</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          RPG Game开发日志(四)
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -261,315 +273,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>涉及内容：自动回复系统，迷你小地图制作，IceLands场景导入等。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/14/RPG-Dev-Log-4/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <p>涉及内容：自动回复系统，迷你小地图制作，IceLands场景导入等。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>UI素材来源：</p>
+<p>虚幻商城[Infinity Blade IceLands]</p>
+<p><a target="_blank" rel="noopener" href="https://www.iconfont.cn/">阿里巴巴矢量图表库</a> [关键词：目标]</p>
+<h2 id="自动回复系统"><a href="#自动回复系统" class="headerlink" title="自动回复系统"></a>自动回复系统</h2><ol>
+<li>打开W_Level，创建Event Dispatchers(事件调度器) UpdateLevel(Integer)，并在CharacterLevel更新后调用;</li>
+<li>打开人物蓝图Char_Shibi，创建自定义事件[void] UpLevel(Integer),用于升级后更新血量/蓝条/耐力值上限,并将W_Level中有关升级粒子动画特效的蓝图迁移整合；<img src='https://img-blog.csdnimg.cn/20201014174148886.png'></li>
+<li>修改[void] ModifyAttribute(E_Attribute,Float)为[void] ModifyAttribute(E_Attribute,Float,Float),扩展函数功能，第三个参数MaxValue用于更新升级后的血量/蓝条/耐力值上限，思路与ModifyValue类似；</li>
+<li>在Event BeginPlay事件末尾绑定事件调度器UpdateLevel至自定义事件UpLevel;<img src='https://img-blog.csdnimg.cn/20201014174040200.png'></li>
+<li>打开W_Level事件图表，将GetXP事件后的结点折叠至图表LoopLevel;</li>
+<li>打开W_PC_Main事件图表，删除Event Construct后有关获取W_Level等自定义组件的节点；</li>
+<li>打开S_Attribute，添加RegenInterval[Float]（回复间隔）、MaxRegenTime[Float]（最大回复时间）、RegenFunctionName[String]（回复回调函数名）、RegenTimerHandle[TimerHandle]（回复TimerHandle);</li>
+<li>打开Char_Shibi，设置Attributes，单次回复量=MaxValue/(RegenInterval*MaxRegenTime)，按照公式，设置数值，使得单次回复量耐力值&gt;血量&gt;灵力；</li>
+<li>创建回调函数[void]HealthRegenTick()、[void]ManaRegenTick()、[void]StaminaRegenTick()回调函数，用于脱战状态和战斗状态回复数值计算，三个函数仅参数不同；<img src='https://img-blog.csdnimg.cn/20201014180132825.png'></li>
+<li>创建函数[void] HandleRegeneration(E_Attribute)，当状态回满时，使用TimerHandle中断回调函数;<img src='https://img-blog.csdnimg.cn/20201014180301780.png'></li>
+<li>创建自定义事件Regenerations,在Event BeginPlay调用，用于循环更新Health/Mana/Stamina相关值，事件末尾调用HandleRegeneration，启用和中止相关tick函数；<img src='https://img-blog.csdnimg.cn/20201014180647554.png'></li>
+<li>函数ModifyAttribute末尾也添加HandleRegeneration的调用，每次修改后都进行一次TimerHandle核对；</li>
+</ol>
+<h2 id="迷你小地图制作"><a href="#迷你小地图制作" class="headerlink" title="迷你小地图制作"></a>迷你小地图制作</h2><ol>
+<li>创建Render Target [MiniMap],右键创建Material [M_MiniMap_Mat]，设置Material Domain=User Interface,Blend Mode=Translucent，编辑蓝图如下;<img src='https://img-blog.csdnimg.cn/2020101423132354.png'></li>
+<li>创建材质实例[Inst_MiniMap_Mat];</li>
+<li>选取父类为SceneCapture2D创建蓝图MiniCapture,将TextureTarget设置为[MiniMap],并取消勾选天气、光线、特效的ShowFlags；</li>
+<li>打开人物蓝图BP_RPG_Character，添加SpringArm、ChildActor,调整SpringArm的Rotation和Arm Length；</li>
+<li>导入direction图标，修改Compression Settings=UserInterface2D(RGBA)，Texture Group=UI，右键创建sprite；</li>
+<li>返回BP_RPG_Character，添加PaperSprite，将刚创建的direction_sprite添加进来，调整rotation，修改颜色，并将碰撞预设设为NoCollision,并勾选Render&gt;Owner No See;</li>
+<li>创建Widget [W_MiniMap]，将Inst_MiniMap_Mat以及相关minimap frame添加进来，并调整zOder顺序，根据[W_MiniMap]中的效果修改Inst_MiniMap_Mat中Density和Radius的值；</li>
+<li>在W_MiniMap中添加Plus和Minus按钮，用于缩放地图，设计思路为：获取Actor[MiniCapture]的拷贝，并通过它获取Capture Component 2D,修改FOV Angle;<img src='https://img-blog.csdnimg.cn/20201014232845269.png'></li>
+</ol>
+<h2 id="IceLands场景导入"><a href="#IceLands场景导入" class="headerlink" title="IceLands场景导入"></a>IceLands场景导入</h2><ol>
+<li>将Map [FrozenCove]导入并构建，打开World Settings，设置Game Mode 为RPG_GameMode;</li>
+<li>完成光源的简单布置，光源大小、颜色、数量等，将部分PointLight由Stationary改为Static；</li>
+<li>完成场景地面的延伸扩展，Nav Mesh Bounds的延伸扩展（需勾选Can ever Affect Navigation),为扩展的地面添加Default碰撞预设；</li>
+<li>修改玩家出生点至平台。</li>
+</ol>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201014171750989.gif'>
+
+<img src='https://img-blog.csdnimg.cn/2020101417191758.png'>
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+        
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/13/RPG-Dev-Log-3/">
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jocoboy">
-      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
-    </span>
+    <div class="social-list">
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="unreal-engine-channel">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/13/RPG-Dev-Log-3/" class="post-title-link" itemprop="url">RPG Game开发日志(三)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-13 21:30:26" itemprop="dateCreated datePublished" datetime="2020-10-13T21:30:26+08:00">2020-10-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-15 00:28:13" itemprop="dateModified" datetime="2020-10-15T00:28:13+08:00">2020-10-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logs/" itemprop="url" rel="index"><span itemprop="name">Logs</span></a>
-                </span>
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
             </span>
 
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
+            <span class="label">RSS</span>
+          </a>
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>涉及内容：人物等级属性绑定，经验条动画效果等。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/13/RPG-Dev-Log-3/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
     </div>
+  </div>
 
-    
-    
-    
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/UE-4-22/" rel="tag"># UE_4.22</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/13/RPG-Dev-Log-3/" rel="prev" title="RPG Game开发日志(三)">
+      <i class="fa fa-chevron-left"></i> RPG Game开发日志(三)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/12/RPG-Dev-Log-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jocoboy">
-      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="unreal-engine-channel">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/12/RPG-Dev-Log-2/" class="post-title-link" itemprop="url">RPG Game开发日志(二)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-12 17:33:57" itemprop="dateCreated datePublished" datetime="2020-10-12T17:33:57+08:00">2020-10-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-15 00:28:13" itemprop="dateModified" datetime="2020-10-15T00:28:13+08:00">2020-10-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logs/" itemprop="url" rel="index"><span itemprop="name">Logs</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>涉及内容：UI血条创建；绑定角色属性等。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/12/RPG-Dev-Log-2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/11/RPG-Dev-Log-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jocoboy">
-      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="unreal-engine-channel">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/11/RPG-Dev-Log-1/" class="post-title-link" itemprop="url">RPG Game开发日志(一)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-10-11 11:53:42" itemprop="dateCreated datePublished" datetime="2020-10-11T11:53:42+08:00">2020-10-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-15 00:28:13" itemprop="dateModified" datetime="2020-10-15T00:28:13+08:00">2020-10-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logs/" itemprop="url" rel="index"><span itemprop="name">Logs</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>涉及内容：简单场景创建；鼠标跟随贴花制作；动画蓝图制作；移动操控绑定等。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/10/11/RPG-Dev-Log-1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -622,6 +410,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">自动回复系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%B7%E4%BD%A0%E5%B0%8F%E5%9C%B0%E5%9B%BE%E5%88%B6%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">迷你小地图制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IceLands%E5%9C%BA%E6%99%AF%E5%AF%BC%E5%85%A5"><span class="nav-number">1.3.</span> <span class="nav-text">IceLands场景导入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
