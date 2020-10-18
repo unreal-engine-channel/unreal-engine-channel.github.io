@@ -224,4 +224,111 @@
         <tag>UE_4.22</tag>
       </tags>
   </entry>
+  <entry>
+    <title>RPG Game开发日志(五)</title>
+    <url>/2020/10/18/RPG-Dev-Log-5/</url>
+    <content><![CDATA[<p>涉及内容：跳跃动作制作，创建任务系统（开篇）</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>虚幻商城[Advanced Mission And Notification System]</p>
+<h2 id="跳跃动作制作"><a href="#跳跃动作制作" class="headerlink" title="跳跃动作制作"></a>跳跃动作制作</h2><ol>
+<li>打开ABP_Shibi事件图表，将Is Falling返回值保存至变量IsInAir;</li>
+<li>进入状态机，添加Idle_Move&lt;=&gt;Jump状态过渡，并将过渡规则与IsInAir关联；</li>
+<li>进入Jump状态，新建状态机Jump，点击进入，设置Entry-&gt;JumpStart=&gt;Loop=&gt;JumpEnd状态过渡，并将过渡规则设置为自动；</li>
+<li>为JumpStart、Loop、JumpEnd添加Jump_Start、Jump_Apex、Jump_Land,并调整播放速率；</li>
+<li>打开Char_Shibi事件图表，添加Space Bar键盘事件，使得角色获得二段跳能力；<img src='https://img-blog.csdnimg.cn/20201018130500837.png'></li>
+<li>打开CharacterMovement细节面板，设置Character Movement:Jump/Falling，Jump Z Velocity=620，Air Control=0.5;</li>
+</ol>
+<h2 id="创建任务系统（开篇）"><a href="#创建任务系统（开篇）" class="headerlink" title="创建任务系统（开篇）"></a>创建任务系统（开篇）</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>创建枚举E_QuestCategories = {主线任务，支线任务，副本任务}；</li>
+<li>创建枚举E_Regions = {冰岛，洞穴，香格里拉}；</li>
+<li>创建枚举E_SubGoalType = {Custom,Hunt,Search,Talk};</li>
+<li>创建结构体S_QuestReward = {Money(Integer),Experience(Integer),Prestige(Integer)};</li>
+<li>创建结构体S_TargetLocation = {HasLocation?(Boolean),Location(Vector)};</li>
+<li>创建结构体S_SubGoalInfo;<img src='https://img-blog.csdnimg.cn/20201018132339967.png'></li>
+<li>创建结构体S_QuestInfo;<img src='https://img-blog.csdnimg.cn/20201018132440276.png'></li>
+</ol>
+<h3 id="创建任务实例的父类"><a href="#创建任务实例的父类" class="headerlink" title="创建任务实例的父类"></a>创建任务实例的父类</h3><h4 id="变量创建"><a href="#变量创建" class="headerlink" title="变量创建"></a>变量创建</h4><ol>
+<li>创建Actor BP_MasterQuest,作为创建任务实例的父类；</li>
+<li>创建变量QuestInfo(S_QuestInfo)，用于记录所有<strong>Quest</strong>信息；</li>
+<li>创建变量StartSubGoalIndices(Integer [])，用于记录开始<strong>Quest</strong>所有<strong>SubGoal</strong>索引；</li>
+<li>创建变量CurrentSubGoalIndices(Integer [])，用于记录当前<strong>Quest</strong>所有<strong>SubGoal</strong>索引；</li>
+<li>创建变量CurrentHuntedAmount(Integer[])，用于记录当前猎杀数量；</li>
+<li>创建变量CurrentSubGoalInfo(S_SubGoalInfo []),用于记录当前<strong>Quest</strong>所有<strong>SubGoal</strong>信息；</li>
+<li>创建变量SelectedSubGoalIndex(Integer)，用于记录当前选择的<strong>SubGoal</strong>索引；</li>
+</ol>
+<h4 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h4><ol>
+<li>创建函数void UpdateSubGoalInfo(),用于根据CurrentSubGoalIndices，更新CurrentSubGoalInfo；<img src='https://img-blog.csdnimg.cn/20201018135432102.png'></li>
+<li>创建函数void SetopStartingSubGoals()，用于设置CurrentSubGoalIndices,并调用UpdateSubGoalInfo;<img src='https://img-blog.csdnimg.cn/20201018135750624.png'></li>
+<li>创建函数Boolean GoToNextSubGoal()，用于判断当前Quest是否还有SubGoal，若有，则将NextIndex保存至CurrentSubGoalIndices，并返回true;<img src='https://img-blog.csdnimg.cn/20201018140354801.png'></li>
+</ol>
+<h3 id="创建UI"><a href="#创建UI" class="headerlink" title="创建UI"></a>创建UI</h3><h4 id="创建W-SubGoal"><a href="#创建W-SubGoal" class="headerlink" title="创建W_SubGoal"></a>创建W_SubGoal</h4><ol start="2">
+<li><p>创建Widget [W_SubGoal],</p>
+<p>层级面板如下<img src='https://img-blog.csdnimg.cn/20201018141429316.png'>,</p>
+<p>最终效果<img src='https://img-blog.csdnimg.cn/20201018141521486.png'>;</p>
+</li>
+<li><p>打开事件图表</p>
+<p><strong>创建变量</strong></p>
+<p>W_Quest_SubGoalInfo(S_SubGoalInfo)，</p>
+<p>W_Quest_AssignedQuest(BP_MasterQuest),</p>
+<p>W_Quest(W_Quest),</p>
+<p>SubGoalIndex(Integer),</p>
+<p>SubGoalInfo(Text);</p>
+<p><strong>创建函数</strong></p>
+<p>void Update(),用于根据W_Quest_SubGoalInfo从W_Quest_AssignedQuest中获取QuestInfo，并更新Text;<img src='https://img-blog.csdnimg.cn/20201018143047970.png'></p>
+<p><strong>函数调用</strong></p>
+<p>事件开始构造时调用Update()，点击SelectedButton时调用W_Quest中的SelectSubGoal()；</p>
+</li>
+</ol>
+<h4 id="创建W-Quest"><a href="#创建W-Quest" class="headerlink" title="创建W_Quest"></a>创建W_Quest</h4><ol>
+<li><p>创建Widget [W_Quest]，</p>
+<p>层级面板如下,<img src='https://img-blog.csdnimg.cn/20201018144005433.png'></p>
+<p>最终效果<img src='https://img-blog.csdnimg.cn/20201018144100772.png'>;</p>
+</li>
+<li><p>打开事件图表</p>
+<p><strong>创建变量</strong></p>
+<p>SubGoalWidgets(W_SubGoal),</p>
+<p>AssignedQuest(BP_MasterQuest),</p>
+<p>SelectedSubGoal(W_SubGoal);</p>
+<p><strong>创建函数</strong></p>
+<ol>
+<li><p>void GenerateSubGoal(),用于清空SubGolaVerticalBox，并从AssignedQuest中获取CurrentSubGoalInfo,循环添加至SubGolaVerticalBox;<img src='https://img-blog.csdnimg.cn/20201018145035536.png'></p>
+</li>
+<li><p>void UpdateCurrentSubGoal(),用于更新SubGoalIcon、SubGoalType、SubGoalInfo等控件信息；<img src='https://img-blog.csdnimg.cn/20201018152129831.png'></p>
+</li>
+<li><p>void SelectSubGoal(W_SubGoal)，用于激活SelectedButton,并调用UpdateCurrentSubGoal;<img src='https://img-blog.csdnimg.cn/202010181515354.png'></p>
+</li>
+<li><p>void UpdateQuest(Quest),用于从AssignedQuest中获取CurrentSubGoalInfo，根据任务Categories设置文本和任务图标样式，并调用GenerateSubGoal和UpdateCurrentSubGoal;<img src='https://img-blog.csdnimg.cn/20201018151930868.png'></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="创建QuestManager"><a href="#创建QuestManager" class="headerlink" title="创建QuestManager"></a>创建QuestManager</h3><ol>
+<li><p>创建Actor Componet [QuestManager]，并添加至Char_Shibi;</p>
+</li>
+<li><p>创建变量</p>
+<p>CurrentQuest(BP_MasterQuest),</p>
+<p>AllQuests(BP_MasterQuest[] Object reference),</p>
+<p>AllQuestClasses(BP_MasterQuest[] class reference),</p>
+<p>Shibi(Char_Shibi);</p>
+</li>
+<li><p>创建函数void AddQuest(BP_MasterQuest),用于从所有Quest class中添加、生成Quest Actor实例,并调用BP_MasterQuest.SetupStartingSubGoals和W_Quest.UpdateQuest;<img src='https://img-blog.csdnimg.cn/20201018153733195.png'></p>
+</li>
+</ol>
+<h3 id="绑定Q键盘事件"><a href="#绑定Q键盘事件" class="headerlink" title="绑定Q键盘事件"></a>绑定Q键盘事件</h3><img src='https://img-blog.csdnimg.cn/20201018154325823.png'>
+
+
+
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201018123029836.png'>
+
+<img src='https://img-blog.csdnimg.cn/20201018123051461.png'>
+
+]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
 </search>
