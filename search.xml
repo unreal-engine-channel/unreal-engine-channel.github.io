@@ -403,4 +403,75 @@
         <tag>UE_4.22</tag>
       </tags>
   </entry>
+  <entry>
+    <title>RPG Game开发日志(七)</title>
+    <url>/2020/10/20/RPG-Dev-Log-7/</url>
+    <content><![CDATA[<p>涉及内容：AI初讲，BehaviorTree–Patrol等;</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="角色边界跳跃"><a href="#角色边界跳跃" class="headerlink" title="角色边界跳跃"></a>角色边界跳跃</h2><ol>
+<li>在场景中添加NavLinkProxy，设置PointLink[0].Left和PointLinks[0].Right在场景中的位置；</li>
+<li>打开细节面板，按照实际情况将Simple Link和Smart Link Direction都设置为Right to Left，将Area Class都设置为NavArea_Default;<img src='https://img-blog.csdnimg.cn/20201020213951911.png'></li>
+</ol>
+<h2 id="AI行为树初讲"><a href="#AI行为树初讲" class="headerlink" title="AI行为树初讲"></a>AI行为树初讲</h2><h3 id="PatrolPath"><a href="#PatrolPath" class="headerlink" title="PatrolPath"></a>PatrolPath</h3><ol>
+<li>清除场景中的所有Block Volume;</li>
+<li>创建Actor [BP_PatrolPath],添加组件Scene、Billboard、Spine;</li>
+<li>进入事件图表，创建变量CloseLoop（Boolean),在构造函数中设置ClosedLoop;<img src='https://img-blog.csdnimg.cn/20201020215735408.png'></li>
+<li>CloseLoop可用于设置AI巡逻路线是否闭环；<img src='https://img-blog.csdnimg.cn/20201020220053700.png'></li>
+<li>在场景中添加BP_PatrolPath，并自定义路线；<img src='https://img-blog.csdnimg.cn/20201020220243597.png'></li>
+</ol>
+<h3 id="PatrolComponent"><a href="#PatrolComponent" class="headerlink" title="PatrolComponent"></a>PatrolComponent</h3><ol>
+<li>创建Component [PatrolComponent],添加变量PatrolPath(BP_PatrolPath)、PatrolIndex(Integer)、RevereDirection(Boolean);</li>
+<li>创建纯函数[Vector] GetSpinePointLocation(Integer)，用于获取巡逻路线各个节点在世界坐标系中的位置；<img src='https://img-blog.csdnimg.cn/20201020220912376.png'></li>
+<li>创建函数[void] UpdatePatrolIndex()，用于实时更新PatrolIndex；当ColoseLoop=true时，实现闭环寻路；当CloseLoop=false时，实现来回寻路；<img src='https://img-blog.csdnimg.cn/20201020221021193.png'></li>
+<li>为BP_RPG_Character添加组件PatrolComponent;</li>
+<li>点击场景中的巡逻NPC，将场景中的PatrolPath指定给NPC;</li>
+</ol>
+<h3 id="BehaviorTree–Patrol"><a href="#BehaviorTree–Patrol" class="headerlink" title="BehaviorTree–Patrol"></a>BehaviorTree–Patrol</h3><ol>
+<li><p>创建Enum [Behaviors] = {Idle,Patrol,Hit,Ability};</p>
+</li>
+<li><p>创建BehaviorTree [BT_NPC]；</p>
+</li>
+<li><p>创建BlackBoard [BB_Base],新建Keys [Behaviors],类型为Enum Behaviors;</p>
+</li>
+<li><p>新建Service [BTS_UpdateBehaviorTree],添加变量BehaviorKey(Blackboard Key),添加宏[Exec] SetBehavior(Behaviors,Exec),将BehaviorKey设置为枚举值；<img src='https://img-blog.csdnimg.cn/20201020222511510.png'></p>
+</li>
+<li><p>在Event Receive Tick AI中调用SetBehavior，选择枚举类型为Patrol;<img src='https://img-blog.csdnimg.cn/20201020222734181.png'></p>
+</li>
+<li><p>新建Task [BTTask_Patrol],添加事件Event Receive Execute AI和Event Receive Abort AI,用于AI行为的执行和中断；<img src='https://img-blog.csdnimg.cn/20201020223107766.png'></p>
+</li>
+<li><p>打开BT_NPC，建立Root——Selector(Service)——Sequence(Decorator)——Leaf(Task);</p>
+<blockquote>
+<p>行为树节点</p>
+<p>一、Composite组合节点：</p>
+<p>1、Selector</p>
+<p>　　要求比较低：只要有一个子节点成功就可以了。</p>
+<p>　　只要子节点有一个返回true，则停止执行其它子节点，并且Selector返回true。如果所有子节点都返回false，则Selector返回false。</p>
+<p>2、Sequence</p>
+<p>　　要求比较高：期望所有子节点都成功。</p>
+<p>　　只要有一个子节点返回false，则停止执行其它子节点，并且Sequence返回false。如果所有子节点都返回true，则Sequence返回true。</p>
+<p>二、Task叶子：</p>
+<p>　　实际执行操作，不含输出链接。</p>
+<p>三、Decorator装饰节点</p>
+<p>　　依附于其它节点，条件节点：如果返回true则执行位于“Decorator”下面的节点，否则就不执行。</p>
+<p>四、Services服务节点</p>
+<p>　　只能附加在Composite组合节点上，只要其附加的节点被执行，Services节点就会被执行，通常用来检查和更新黑板。</p>
+</blockquote>
+<img src='https://img-blog.csdnimg.cn/20201020223938437.png'>
+</li>
+<li><p>选取父类AIController，创建蓝图AIC_NPCController,进入蓝图，在EventBeginPlay添加BlackBoard [BB_Base]和BehaviorTree [BT_NPC];<img src='https://img-blog.csdnimg.cn/20201020214613446.png'></p>
+</li>
+<li><p>选择场景中的NPC，设置</p>
+<p>Animation Mode=Use Animaion Blueprint;</p>
+<p>Pawn&gt;Auto Possess AI = Placed in World or Spawned,AI Controller Class = AIC_NPCController;</p>
+</li>
+</ol>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102021303566.gif'>]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
 </search>
