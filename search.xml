@@ -331,4 +331,76 @@
         <tag>UE_4.22</tag>
       </tags>
   </entry>
+  <entry>
+    <title>RPG Game开发日志(六)</title>
+    <url>/2020/10/20/RPG-Dev-Log-6/</url>
+    <content><![CDATA[<p>涉及内容：创建NPC，骨骼重定向，任务互动发放等；</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
+<p>虚幻商城[Generic NPC Anim Pack]</p>
+<p>虚幻商城[Infinity Blade:Warriors]</p>
+<p>虚幻商城[Advanced Locomotion System]</p>
+<p>内置Package[Mannequin]添加组件S</p>
+<p>Adobe官网<a href="https://www.mixamo.com/">Mixamo</a></p>
+<p><a href="https://www.iconfont.cn/">阿里巴巴矢量图表库</a> [关键词：圆、问号]</p>
+<h2 id="创建NPC"><a href="#创建NPC" class="headerlink" title="创建NPC"></a>创建NPC</h2><ol>
+<li>打开BP_RPG_Character，删除组件MapArm及其附属组件ChildActor;</li>
+<li>以BP_RPG_Character为父类，创建蓝图BP_RPG_NPC;</li>
+<li>下载地图指示图标，右键Apply Paper2D Texture Settings,并Create Sprite。将圆形图标添加到NPC的PaperSprite；</li>
+<li>为BP_RPG_NPC添加组件SpringArm及其附属组件ChildActor,ChildActor Class选取MiniCapture;</li>
+<li>打开PaperSprite，取消勾选Owner No See。并打开事件图表，添加隐藏PaperSprite的相关蓝图；<img src='https://img-blog.csdnimg.cn/20201020140456848.png'></li>
+<li>以BP_RPG_NPC为父类，创建蓝图BP_NPC_Warriors,将SK_CharM_Pit导入进来；</li>
+</ol>
+<h2 id="NPC骨骼重定向"><a href="#NPC骨骼重定向" class="headerlink" title="NPC骨骼重定向"></a>NPC骨骼重定向</h2><h3 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h3><ol>
+<li>打开SK_CharM_Pit的Retarget Manager,在SetupRig项目选择引擎默认的Humanoid人形骨骼；</li>
+<li>点击AutoMap，自动匹配和建立骨骼映射，ShowBase/ShowAdvanced可用于查看基本骨骼和精细骨骼映射关系；</li>
+<li>打开UE4_Mannequin_Skeleton，同样选取rig为Humanoid人形骨骼，自动建立骨骼映射，在ManageRetargetSource项目Add重定向源SK_Mannequin;</li>
+<li>右键ThirdPerson_AnimBP,点击Retarget Anim Blueprints，Source为UE4_Mannequin_Skeleton，Target为SK_Mannequin_Skeleton，并确保base pose一致（Here is Apos)；<img src='https://img-blog.csdnimg.cn/20201020143635944.png'></li>
+<li>将重定向后生成的动画添加至NPC蓝图即可；</li>
+</ol>
+<h3 id="进阶篇（Mixamo"><a href="#进阶篇（Mixamo" class="headerlink" title="进阶篇（Mixamo)"></a>进阶篇（Mixamo)</h3><ol>
+<li>进入虚幻商城[Advanced Locomotion System]，可下载Tpos模型[ALS_Mannequin_T_Pose]；</li>
+<li>打开ALS_Mannequin_T_Pose，选取CurrentPose创建PoseAssets[UE4_PoseAsset];</li>
+<li>打开Apos的小白人骨骼模型，在Manage Retarget Base Pose项目，点击Modify,选择UE4_PoseAsset为当前pose,并import进来；</li>
+<li>打开Mixamo官网下载的模型，手动建立骨骼映射；</li>
+<li>右键ThirdPerson_AnimBP,点击Retarget Anim Blueprints，Source为UE4_Mannequin_Skeleton，Target为maria_j_j_ong_Skeleton，并确保base pose一致（Here is Tpos)；<img src='https://img-blog.csdnimg.cn/20201020150458513.png'></li>
+</ol>
+<h2 id="任务互动发放"><a href="#任务互动发放" class="headerlink" title="任务互动发放"></a>任务互动发放</h2><ol>
+<li><p>创建Widget[W_NameForNPC]，</p>
+<p>层级面板<img src='https://img-blog.csdnimg.cn/2020102015102250.png'>,</p>
+<p>预览效果<img src='https://img-blog.csdnimg.cn/20201020151116574.png'></p>
+</li>
+<li><p>打开父类BP_RPG_Character，添加组件Widget，并在子类BP_RPG_NPC中添加Widget Class为W_NameForNPC，设置Space=Screen;</p>
+</li>
+<li><p>添加Sphere碰撞组件，设置碰撞预设;<img src='https://img-blog.csdnimg.cn/20201020151809375.png'></p>
+</li>
+<li><p>添加NPC互动效果蓝图 <img src='https://img-blog.csdnimg.cn/20201020152018538.png'></p>
+</li>
+<li><p>打开Char_Shibi,创建事件调度OnInteract，将与E键盘事件关联；</p>
+</li>
+<li><p>打开BP_RPG_NPC,创建自定义事件OnInteract，用于判断角色与NPC交互时，NPC身上是否有未分发的任务<img src='https://img-blog.csdnimg.cn/20201020152724167.png'></p>
+</li>
+<li><p>打开Char_Shibi，创建事件调度UpdateLevelForQuest(Integer),在UpLevel之后调用；</p>
+</li>
+<li><p>打开BP_RPG_NPC,创建变量QuestInLevel(Map)，将Level映射到Quest类。创建自定义事件UpdateQuest(Integer),用于在角色升级后，判断NPC身上是否产生新的任务；<img src='https://img-blog.csdnimg.cn/20201020153139435.png'></p>
+</li>
+<li><p>复制BP_MasterQuest两份，命名为BP_FirstEventQuest和BP_FirstSideQuest，并修改任务信息；</p>
+</li>
+</ol>
+<h2 id="UI动画添加"><a href="#UI动画添加" class="headerlink" title="UI动画添加"></a>UI动画添加</h2><ol>
+<li>打开W_Quest，为Border创建HideAll动画；<img src='https://img-blog.csdnimg.cn/20201020154300252.png'></li>
+<li>为Text创建Text动画；<img src='https://img-blog.csdnimg.cn/20201020154331675.png'></li>
+<li>打开W_SubGoal，为Border创建Show动画；<img src='https://img-blog.csdnimg.cn/20201020154514839.png'></li>
+<li>打开W_Quest事件蓝图，添加宏[Exec] PlayHideAll(Exec,Boolean)，组织和关联HideAll、Text、Show动画执行时机<img src='https://img-blog.csdnimg.cn/20201020154615593.png'></li>
+<li>创建自定义事件PlayQuest调用PlayHideAll，并在UpdateQuest末尾添加调用;</li>
+</ol>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201020134241578.gif'>]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
 </search>
