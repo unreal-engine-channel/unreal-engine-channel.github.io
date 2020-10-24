@@ -21,40 +21,47 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="涉及内容：跳跃动作制作，创建任务系统（开篇）">
+  <meta name="description" content="涉及内容：任务完成的互动，混合骨骼动画，普通攻击三连制作等；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RPG Game开发日志(五)">
-<meta property="og:url" content="http://example.com/2020/10/18/RPG-Dev-Log-5/index.html">
+<meta property="og:title" content="RPG Game开发日志(九)">
+<meta property="og:url" content="http://example.com/2020/10/23/RPG-Dev-Log-9/index.html">
 <meta property="og:site_name" content="unreal-engine-channel">
-<meta property="og:description" content="涉及内容：跳跃动作制作，创建任务系统（开篇）">
+<meta property="og:description" content="涉及内容：任务完成的互动，混合骨骼动画，普通攻击三连制作等；">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018130500837.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018132339967.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018132440276.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018135432102.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018135750624.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018140354801.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018141429316.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018141521486.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018143047970.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018144005433.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018144100772.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018145035536.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018152129831.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/202010181515354.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018151930868.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018153733195.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018154325823.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018123029836.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201018123051461.png">
-<meta property="article:published_time" content="2020-10-18T04:23:00.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023182304187.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023182357341.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023183342627.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023183559104.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023184922881.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023190840946.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023190652645.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023191105631.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023193814396.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023194332860.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023194354363.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023195017556.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201023194602440.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024173918860.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020102417450352.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024174714903.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024174753486.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024174837728.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024175438930.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024175625435.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024175856577.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024180437185.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024181347328.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024180639713.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020102417301295.gif">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201024173043229.gif">
+<meta property="article:published_time" content="2020-10-23T10:13:57.000Z">
 <meta property="article:modified_time" content="2020-10-24T10:22:45.181Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201018130500837.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201023182304187.png">
 
-<link rel="canonical" href="http://example.com/2020/10/18/RPG-Dev-Log-5/">
+<link rel="canonical" href="http://example.com/2020/10/23/RPG-Dev-Log-9/">
 
 
 <script id="page-configurations">
@@ -67,7 +74,7 @@
   };
 </script>
 
-  <title>RPG Game开发日志(五) | unreal-engine-channel</title>
+  <title>RPG Game开发日志(九) | unreal-engine-channel</title>
   
 
 
@@ -216,7 +223,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/18/RPG-Dev-Log-5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/23/RPG-Dev-Log-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -229,7 +236,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RPG Game开发日志(五)
+          RPG Game开发日志(九)
         </h1>
 
         <div class="post-meta">
@@ -239,7 +246,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-10-18 12:23:00" itemprop="dateCreated datePublished" datetime="2020-10-18T12:23:00+08:00">2020-10-18</time>
+              <time title="Created: 2020-10-23 18:13:57" itemprop="dateCreated datePublished" datetime="2020-10-23T18:13:57+08:00">2020-10-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -264,7 +271,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.6k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -283,103 +290,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>涉及内容：跳跃动作制作，创建任务系统（开篇）</p>
+        <p>涉及内容：任务完成的互动，混合骨骼动画，普通攻击三连制作等；</p>
 <a id="more"></a>
 
-<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>虚幻商城[Advanced Mission And Notification System]</p>
-<h2 id="跳跃动作制作"><a href="#跳跃动作制作" class="headerlink" title="跳跃动作制作"></a>跳跃动作制作</h2><ol>
-<li>打开ABP_Shibi事件图表，将Is Falling返回值保存至变量IsInAir;</li>
-<li>进入状态机，添加Idle_Move&lt;=&gt;Jump状态过渡，并将过渡规则与IsInAir关联；</li>
-<li>进入Jump状态，新建状态机Jump，点击进入，设置Entry-&gt;JumpStart=&gt;Loop=&gt;JumpEnd状态过渡，并将过渡规则设置为自动；</li>
-<li>为JumpStart、Loop、JumpEnd添加Jump_Start、Jump_Apex、Jump_Land,并调整播放速率；</li>
-<li>打开Char_Shibi事件图表，添加Space Bar键盘事件，使得角色获得二段跳能力；<img src='https://img-blog.csdnimg.cn/20201018130500837.png'></li>
-<li>打开CharacterMovement细节面板，设置Character Movement:Jump/Falling，Jump Z Velocity=620，Air Control=0.5;</li>
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
+<p>虚幻商城[Infinity Blade:Adversaries]</p>
+<p>虚幻商城[Infinity Blade:Effects]</p>
+<h2 id="优化开箱互动"><a href="#优化开箱互动" class="headerlink" title="优化开箱互动"></a>优化开箱互动</h2><ol>
+<li>打开Object_Treasure事件图表，创建TimeLine [MoveToPlayer]，创建Float Track，作为金币移动至人物身上的Alpha通道（类指数曲线）;<img src='https://img-blog.csdnimg.cn/20201023182304187.png'></li>
+<li>扩展自定义事件Event On Interact With功能，实现金币被角色吸引——产生马里奥金币音效的效果；<img src='https://img-blog.csdnimg.cn/20201023182357341.png'></li>
 </ol>
-<h2 id="创建任务系统（开篇）"><a href="#创建任务系统（开篇）" class="headerlink" title="创建任务系统（开篇）"></a>创建任务系统（开篇）</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
-<li>创建枚举E_QuestCategories = {主线任务，支线任务，副本任务}；</li>
-<li>创建枚举E_Regions = {冰岛，洞穴，香格里拉}；</li>
-<li>创建枚举E_SubGoalType = {Custom,Hunt,Search,Talk};</li>
-<li>创建结构体S_QuestReward = {Money(Integer),Experience(Integer),Prestige(Integer)};</li>
-<li>创建结构体S_TargetLocation = {HasLocation?(Boolean),Location(Vector)};</li>
-<li>创建结构体S_SubGoalInfo;<img src='https://img-blog.csdnimg.cn/20201018132339967.png'></li>
-<li>创建结构体S_QuestInfo;<img src='https://img-blog.csdnimg.cn/20201018132440276.png'></li>
+<h2 id="创建移动平台"><a href="#创建移动平台" class="headerlink" title="创建移动平台"></a>创建移动平台</h2><ol>
+<li>创建Acotr [BP_MovePlane]，添加一个StaticMesh,添加SM_Env_Ice_Cliffs；</li>
+<li>打开事件图表，创建TimeLine[Move]，创建Float Track，作为平台移动的Alpha通道（类正弦曲线）,勾选Loop模式；<img src='https://img-blog.csdnimg.cn/20201023183342627.png'></li>
+<li>在Event BeginPlay实现平台相对于自身的偏移移动；<img src='https://img-blog.csdnimg.cn/20201023183559104.png'></li>
 </ol>
-<h3 id="创建任务实例的父类"><a href="#创建任务实例的父类" class="headerlink" title="创建任务实例的父类"></a>创建任务实例的父类</h3><h4 id="变量创建"><a href="#变量创建" class="headerlink" title="变量创建"></a>变量创建</h4><ol>
-<li>创建Actor BP_MasterQuest,作为创建任务实例的父类；</li>
-<li>创建变量QuestInfo(S_QuestInfo)，用于记录所有<strong>Quest</strong>信息；</li>
-<li>创建变量StartSubGoalIndices(Integer [])，用于记录开始<strong>Quest</strong>所有<strong>SubGoal</strong>索引；</li>
-<li>创建变量CurrentSubGoalIndices(Integer [])，用于记录当前<strong>Quest</strong>所有<strong>SubGoal</strong>索引；</li>
-<li>创建变量CurrentHuntedAmount(Integer[])，用于记录当前猎杀数量；</li>
-<li>创建变量CurrentSubGoalInfo(S_SubGoalInfo []),用于记录当前<strong>Quest</strong>所有<strong>SubGoal</strong>信息；</li>
-<li>创建变量SelectedSubGoalIndex(Integer)，用于记录当前选择的<strong>SubGoal</strong>索引；</li>
-</ol>
-<h4 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h4><ol>
-<li>创建函数void UpdateSubGoalInfo(),用于根据CurrentSubGoalIndices，更新CurrentSubGoalInfo；<img src='https://img-blog.csdnimg.cn/20201018135432102.png'></li>
-<li>创建函数void SetopStartingSubGoals()，用于设置CurrentSubGoalIndices,并调用UpdateSubGoalInfo;<img src='https://img-blog.csdnimg.cn/20201018135750624.png'></li>
-<li>创建函数Boolean GoToNextSubGoal()，用于判断当前Quest是否还有SubGoal，若有，则将NextIndex保存至CurrentSubGoalIndices，并返回true;<img src='https://img-blog.csdnimg.cn/20201018140354801.png'></li>
-</ol>
-<h3 id="创建UI"><a href="#创建UI" class="headerlink" title="创建UI"></a>创建UI</h3><h4 id="创建W-SubGoal"><a href="#创建W-SubGoal" class="headerlink" title="创建W_SubGoal"></a>创建W_SubGoal</h4><ol start="2">
-<li><p>创建Widget [W_SubGoal],</p>
-<p>层级面板如下<img src='https://img-blog.csdnimg.cn/20201018141429316.png'>,</p>
-<p>最终效果<img src='https://img-blog.csdnimg.cn/20201018141521486.png'>;</p>
+<h2 id="任务完成的互动"><a href="#任务完成的互动" class="headerlink" title="任务完成的互动"></a>任务完成的互动</h2><ol>
+<li><p>打开S_SubGoalInfo，添加成员HasFollowingIndex?(Boolean);</p>
 </li>
-<li><p>打开事件图表</p>
-<p><strong>创建变量</strong></p>
-<p>W_Quest_SubGoalInfo(S_SubGoalInfo)，</p>
-<p>W_Quest_AssignedQuest(BP_MasterQuest),</p>
-<p>W_Quest(W_Quest),</p>
-<p>SubGoalIndex(Integer),</p>
-<p>SubGoalInfo(Text);</p>
-<p><strong>创建函数</strong></p>
-<p>void Update(),用于根据W_Quest_SubGoalInfo从W_Quest_AssignedQuest中获取QuestInfo，并更新Text;<img src='https://img-blog.csdnimg.cn/20201018143047970.png'></p>
-<p><strong>函数调用</strong></p>
-<p>事件开始构造时调用Update()，点击SelectedButton时调用W_Quest中的SelectSubGoal()；</p>
+<li><p>打开W_SubGoal，创建函数DisableButton，用于SelectButton按钮的disable,Done图标和SubGoalText文本的高亮显示；<img src='https://img-blog.csdnimg.cn/20201023184922881.png'></p>
+</li>
+<li><p>打开W_Quest,创建宏AnimateSubGoalWidget(Exec，Boolean)，将宏PlayHideAll中有关SubGoal的显示动画（Show/Text）整合进来，并扩展功能，使其在Quest完成时播放隐藏动画；<img src='https://img-blog.csdnimg.cn/20201023190840946.png'><img src='https://img-blog.csdnimg.cn/20201023190652645.png'></p>
+</li>
+<li><p>打开EvenGraph，添加自定义事件PlaySubGoal(Boolean)，调用宏AnimateSubGoalWidget(Boolean)，修改自定义事件PlayQuest()为PlayQuest(Boolean)，调用宏PlayHideAll(Boolean);<img src='https://img-blog.csdnimg.cn/20201023191105631.png'></p>
+</li>
+<li><p>打开函数GenerateSubGoal，当SubGoal循环添加完成时,调用自定义事件PlaySubGoal，播放相关动画；</p>
+</li>
+<li><p>打开BP_MasterQuest，创建自定义事件UpdateCompleteSubGoal,创建变量CompletedSubGoalsInfo(S_SubGoalInfo)、CompletedSubGoalIndex(Integer),用于记录已完成的SubGoal信息和索引。当所有<strong>已显示</strong>的SubGoal都被标记为完成时，执行PlaySubGoal(false)动画，并判断是否仍有FollowingIndex。若有，则延迟1.5s后调用函数GenrateSubGoal和SelectSubGoal，再生SubGoal；<img src='https://img-blog.csdnimg.cn/20201023193814396.png'></p>
+</li>
+<li><p>创建函数CompletedSubGoal(Integer)，用于记录已完成的SubGoal信息和索引更新，并同步UI更新（调用函数DisableButton和自定义事件UpdateCompleteSubGoal)；<img src='https://img-blog.csdnimg.cn/20201023194332860.png'><img src='https://img-blog.csdnimg.cn/20201023194354363.png'></p>
+</li>
+<li><p>复制一份BP_FirstQuest，命名为BP_FirstQuestTest，修改index=3的SubGoal,勾选HasFollowingIndex?,添加FollowingSubGoalIndices;<img src='https://img-blog.csdnimg.cn/20201023195017556.png'></p>
+</li>
+<li><p>打开BP_Shibi事件图表，创建J键盘事件，测试任务完成时的互动效果；<img src='https://img-blog.csdnimg.cn/20201023194602440.png'></p>
 </li>
 </ol>
-<h4 id="创建W-Quest"><a href="#创建W-Quest" class="headerlink" title="创建W_Quest"></a>创建W_Quest</h4><ol>
-<li><p>创建Widget [W_Quest]，</p>
-<p>层级面板如下,<img src='https://img-blog.csdnimg.cn/20201018144005433.png'></p>
-<p>最终效果<img src='https://img-blog.csdnimg.cn/20201018144100772.png'>;</p>
-</li>
-<li><p>打开事件图表</p>
-<p><strong>创建变量</strong></p>
-<p>SubGoalWidgets(W_SubGoal),</p>
-<p>AssignedQuest(BP_MasterQuest),</p>
-<p>SelectedSubGoal(W_SubGoal);</p>
-<p><strong>创建函数</strong></p>
-<ol>
-<li><p>void GenerateSubGoal(),用于清空SubGolaVerticalBox，并从AssignedQuest中获取CurrentSubGoalInfo,循环添加至SubGolaVerticalBox;<img src='https://img-blog.csdnimg.cn/20201018145035536.png'></p>
-</li>
-<li><p>void UpdateCurrentSubGoal(),用于更新SubGoalIcon、SubGoalType、SubGoalInfo等控件信息；<img src='https://img-blog.csdnimg.cn/20201018152129831.png'></p>
-</li>
-<li><p>void SelectSubGoal(W_SubGoal)，用于激活SelectedButton,并调用UpdateCurrentSubGoal;<img src='https://img-blog.csdnimg.cn/202010181515354.png'></p>
-</li>
-<li><p>void UpdateQuest(Quest),用于从AssignedQuest中获取CurrentSubGoalInfo，根据任务Categories设置文本和任务图标样式，并调用GenerateSubGoal和UpdateCurrentSubGoal;<img src='https://img-blog.csdnimg.cn/20201018151930868.png'></p>
-</li>
+<h2 id="普通攻击三连制作"><a href="#普通攻击三连制作" class="headerlink" title="普通攻击三连制作"></a>普通攻击三连制作</h2><ol>
+<li>导入Shibi角色MeleeAttack动画（Air/B/C/D)，创建Montage，命名为Air_Melee、Melee_B、Melee_C、Melee_D；</li>
+<li>导入Shibi角色Attack音效（1/2/3/4）,创建Cue，命名为Shinbi_Effect_Attack，编辑蓝图实现4种攻击音效随机播放的效果；<img src='https://img-blog.csdnimg.cn/20201024173918860.png'></li>
+<li>打开Montage[Air_Melee],添加Notify [Play Sound]、Skeleton Notify [Reset]；<img src='https://img-blog.csdnimg.cn/2020102417450352.png'></li>
+<li>打开Montage[Melee_B],添加Notify [Play Sound]、Skeleton Notify [Save] [Reset],添加Curves [Body]；<img src='https://img-blog.csdnimg.cn/20201024174714903.png'></li>
+<li>打开Montage[Melee_C],添加Notify [Play Sound]、Skeleton Notify [Save] [Reset],添加Curves [Body]；<img src='https://img-blog.csdnimg.cn/20201024174753486.png'></li>
+<li>打开Montage[Melee_C],添加Notify [Play Sound]、Skeleton Notify [Save] [Reset],添加Curves [Body]；<img src='https://img-blog.csdnimg.cn/20201024174837728.png'></li>
+<li>打开BP_Shibi，创建自定义事件MeleeAttack、SaveAttack、ResetComb;</li>
+<li>打开ABP_Shibi事件图表，AnimNotify_Save调用SaveAttack事件，AnimNotify_Reset调用ResetComb事件；<img src='https://img-blog.csdnimg.cn/20201024175438930.png'></li>
+<li>返回BP_Shibi，完成自定义事件MeleeAttack、SaveAttack、ResetComb，SavaAttack用于记录当前普通攻击归属第几段，当角色停止普通攻击时，ResetComb将初始化Attack信息;<img src='https://img-blog.csdnimg.cn/20201024175625435.png'></li>
+<li>创建Q键盘事件，关联普通攻击，调用MeleeAttack事件，并根据角色是否滞空播放相应的蒙太奇动画；<img src='https://img-blog.csdnimg.cn/20201024175856577.png'></li>
 </ol>
+<h2 id="混合骨骼动画"><a href="#混合骨骼动画" class="headerlink" title="混合骨骼动画"></a>混合骨骼动画</h2><ol>
+<li><p>打开ABP_Shibi事件图表，完善动画更新事件，判断角色是否处于加速状态或FullBody状态；<img src='https://img-blog.csdnimg.cn/20201024180437185.png'></p>
 </li>
-</ol>
-<h3 id="创建QuestManager"><a href="#创建QuestManager" class="headerlink" title="创建QuestManager"></a>创建QuestManager</h3><ol>
-<li><p>创建Actor Componet [QuestManager]，并添加至Char_Shibi;</p>
-</li>
-<li><p>创建变量</p>
-<p>CurrentQuest(BP_MasterQuest),</p>
-<p>AllQuests(BP_MasterQuest[] Object reference),</p>
-<p>AllQuestClasses(BP_MasterQuest[] class reference),</p>
-<p>Shibi(Char_Shibi);</p>
-</li>
-<li><p>创建函数void AddQuest(BP_MasterQuest),用于从所有Quest class中添加、生成Quest Actor实例,并调用BP_MasterQuest.SetupStartingSubGoals和W_Quest.UpdateQuest;<img src='https://img-blog.csdnimg.cn/20201018153733195.png'></p>
-</li>
-</ol>
-<h3 id="绑定Q键盘事件"><a href="#绑定Q键盘事件" class="headerlink" title="绑定Q键盘事件"></a>绑定Q键盘事件</h3><img src='https://img-blog.csdnimg.cn/20201018154325823.png'>
+<li><p>打开ABP_Shibi动画图表，添加按骨骼分层混合，以及按布尔值混合姿势。当角色处于加速状态并且Body Curve返回值为0时，输出按骨骼分层混合姿势，否则输出UpBody姿势；<img src='https://img-blog.csdnimg.cn/20201024181347328.png'></p>
+<img src='https://img-blog.csdnimg.cn/20201024180639713.png'>
 
 
 
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201018123029836.png'>
+</li>
+</ol>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102417301295.gif'>
 
-<img src='https://img-blog.csdnimg.cn/20201018123051461.png'>
-
-
+<img src='https://img-blog.csdnimg.cn/20201024173043229.gif'>
     </div>
 
     
@@ -416,13 +386,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/10/14/RPG-Dev-Log-4/" rel="prev" title="RPG Game开发日志(四)">
-      <i class="fa fa-chevron-left"></i> RPG Game开发日志(四)
+    <a href="/2020/10/21/RPG-Dev-Log-8/" rel="prev" title="RPG Game开发日志(八)">
+      <i class="fa fa-chevron-left"></i> RPG Game开发日志(八)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/10/20/RPG-Dev-Log-6/" rel="next" title="RPG Game开发日志(六)">
-      RPG Game开发日志(六) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -481,7 +448,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%B7%83%E5%8A%A8%E4%BD%9C%E5%88%B6%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">跳跃动作制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%BC%80%E7%AF%87%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">创建任务系统（开篇）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%9A%84%E7%88%B6%E7%B1%BB"><span class="nav-number">1.2.2.</span> <span class="nav-text">创建任务实例的父类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">变量创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">函数创建</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAUI"><span class="nav-number">1.2.3.</span> <span class="nav-text">创建UI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAW-SubGoal"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">创建W_SubGoal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAW-Quest"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">创建W_Quest</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAQuestManager"><span class="nav-number">1.2.4.</span> <span class="nav-text">创建QuestManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%91%E5%AE%9AQ%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.2.5.</span> <span class="nav-text">绑定Q键盘事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%BC%80%E7%AE%B1%E4%BA%92%E5%8A%A8"><span class="nav-number">1.1.</span> <span class="nav-text">优化开箱互动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%8F%B0"><span class="nav-number">1.2.</span> <span class="nav-text">创建移动平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%AE%8C%E6%88%90%E7%9A%84%E4%BA%92%E5%8A%A8"><span class="nav-number">1.3.</span> <span class="nav-text">任务完成的互动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%94%BB%E5%87%BB%E4%B8%89%E8%BF%9E%E5%88%B6%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">普通攻击三连制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E9%AA%A8%E9%AA%BC%E5%8A%A8%E7%94%BB"><span class="nav-number">1.5.</span> <span class="nav-text">混合骨骼动画</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
