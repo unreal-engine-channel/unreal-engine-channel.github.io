@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-400x400-ue.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-400x400-ue.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="涉及内容：创建Enemy；创建战斗系统（开篇）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPG Game开发日志(十)">
+<meta property="og:url" content="http://example.com/2020/10/25/RPG-Dev-Log-10/index.html">
+<meta property="og:site_name" content="unreal-engine-channel">
+<meta property="og:description" content="涉及内容：创建Enemy；创建战斗系统（开篇）。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025201901720.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025202013508.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025203024776.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025C204213703.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025204659690.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025205105844.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020102520543750.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025210057184.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025211113194.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025211959614.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026163507753.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201025214715454.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026162705473.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026163212433.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020102616394518.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026164404943.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026165559988.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026165758704.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026174431299.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026171644771.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026173117268.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026173731535.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026174639179.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026175016824.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201026011936218.gif">
+<meta property="article:published_time" content="2020-10-25T11:58:21.000Z">
+<meta property="article:modified_time" content="2020-10-26T09:55:58.601Z">
+<meta property="article:author" content="Jocoboy">
+<meta property="article:tag" content="UE_4.22">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201025201901720.png">
+
+<link rel="canonical" href="http://example.com/2020/10/25/RPG-Dev-Log-10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>RPG Game开发日志(十) | unreal-engine-channel</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="unreal-engine-channel" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">unreal-engine-channel</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/25/RPG-Dev-Log-10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jocoboy">
+      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="unreal-engine-channel">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RPG Game开发日志(十)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-10-25 19:58:21" itemprop="dateCreated datePublished" datetime="2020-10-25T19:58:21+08:00">2020-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-26 17:55:58" itemprop="dateModified" datetime="2020-10-26T17:55:58+08:00">2020-10-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Logs/" itemprop="url" rel="index"><span itemprop="name">Logs</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>涉及内容：创建Enemy；创建战斗系统（开篇）。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
+<p>虚幻商城[InfinityBlade:Adversaries]</p>
+<p>虚幻商城[Action RPG]</p>
+<p>虚幻商城[User Interface Kit]</p>
+<h2 id="创建Enemy"><a href="#创建Enemy" class="headerlink" title="创建Enemy"></a>创建Enemy</h2><h3 id="创建敌人动画蓝图"><a href="#创建敌人动画蓝图" class="headerlink" title="创建敌人动画蓝图"></a>创建敌人动画蓝图</h3><ol>
+<li><p>以BP_RPG_Character为父类，创建BP_Enemy;</p>
+</li>
+<li><p>将InfinityBlade:Adversaries资源[Enemy_Grunting]导入，创建动画蓝图ABP_Grunting和一维混合空间BS_Grunting_Skeleton_BlendSpace1D;</p>
+</li>
+<li><p>打开项目Action RPG,将骨骼动画Idle_Grunting导出为fbx文件，随后添加至ContentBrowser；</p>
+</li>
+<li><p>打开BS_Grunting_Skeleton_BlendSpace1D，设置水平坐标为Speed，最大水平值为400。将骨骼动画Idle、Walk_Slow、Walk、Run添加至适当坐标，并勾选Walk_Slow、Walk、Run的ForceFontXAxis选项；</p>
+</li>
+<li><p>打开ABP_Grunting，添加蓝图获取PawnOwner的Speed;</p>
+</li>
+<li><p>进入动画图表，新建状态机，添加Start&lt;=&gt;Locomotion状态及过渡规则（此处省略状态动画的相关蓝图设置）；<img src='https://img-blog.csdnimg.cn/20201025201901720.png'><img src='https://img-blog.csdnimg.cn/20201025202013508.png'></p>
+</li>
+</ol>
+<h3 id="创建敌人蓝图"><a href="#创建敌人蓝图" class="headerlink" title="创建敌人蓝图"></a>创建敌人蓝图</h3><ol>
+<li><p>以BP_Enemy为父类，创建蓝图Enemy_Grunting，添加骨骼和骨骼动画，调整碰撞胶囊体大小；</p>
+</li>
+<li><p>打开BP_Enemy，修改PaperSprite样式，添加组件Widget,命名为NameAndHealthBar，并添加隐藏PaperSprite的相关蓝图；<img src='https://img-blog.csdnimg.cn/20201025203024776.png'></p>
+</li>
+</ol>
+<h3 id="创建武器蓝图"><a href="#创建武器蓝图" class="headerlink" title="创建武器蓝图"></a>创建武器蓝图</h3><ol>
+<li><p>创建BP_Weapon，添加组件Sphere、StaticMesh、SkeletalMesh、Capsule，设置相关参数；</p>
+</li>
+<li><p>以BP_Weapon为父类，创建Weapon_Grunting,添加Grunting武器模型，调整胶囊体和武器朝向；</p>
+</li>
+<li><p>打开Enemy_Grunting骨骼，添加Sockect[Weapon]至b_MF_Weapon_R,添加preview assets，设置预览动画，调整Socket位置;</p>
+</li>
+<li><p>打开事件图表，添加蓝图，将Weapon添加至敌人身上；<img src='https://img-blog.csdnimg.cn/20201025C204213703.png'></p>
+</li>
+</ol>
+<h3 id="创建敌人名称血量UI"><a href="#创建敌人名称血量UI" class="headerlink" title="创建敌人名称血量UI"></a>创建敌人名称血量UI</h3><ol>
+<li>创建Widget[W_Enemy]，层级面板和预览效果；<img src='https://img-blog.csdnimg.cn/20201025204659690.png'></li>
+<li>打开BP_Enemy，将W_Enemy添加至NameAndHealthBar，并调整其位置;</li>
+<li>创建结构体S_EnemyAttribute，添加敌人血量上限、物理攻击/法术攻击、物理防御/法术防御等属性；<img src='https://img-blog.csdnimg.cn/20201025205105844.png'></li>
+<li>打开BP_Enemy，创建函数[void] SetHealthPercent()，用于控制敌人血量百分比显示,在EventBegin添加调用；<img src='https://img-blog.csdnimg.cn/2020102520543750.png'></li>
+</ol>
+<h3 id="创建敌人AI行为——Random"><a href="#创建敌人AI行为——Random" class="headerlink" title="创建敌人AI行为——Random"></a>创建敌人AI行为——Random</h3><ol>
+<li><p>打开E_Behaviors，添加AI行为枚举[Random]；</p>
+</li>
+<li><p>创建Componet[Behavior创建Componet],创建事件调度OnBehaviorChanged(E_Behaviors);</p>
+</li>
+<li><p>创建函数[void] SetBehavior(E_Behaviors),用于Call事件调度；<img src='https://img-blog.csdnimg.cn/20201025210057184.png'></p>
+</li>
+<li><p>将BehaviorComponet添加至BP_RPG_Character；</p>
+</li>
+<li><p>打开行为树BT_NPC，打开服务BTS_UpdateBehaviorTree，删除重载函数ReceiveTickAI，添加重载函数ReveiveSearchStartAI,创建自定义事件OnBehaviorChanged(E_Behaviors),调用宏SetBehavior;<img src='https://img-blog.csdnimg.cn/20201025211113194.png'></p>
+</li>
+<li><p>打开之前创建的BP_RPG_NPC_Warriors巡逻NPC，通过Behavior组件调用宏SetBehavior，实现AI行为改变；</p>
+</li>
+<li><p>打开BB_Base，添加Key[Originl]、[Random]、[Target];</p>
+</li>
+<li><p>创建Task[BTTask_RandomLocation],重载ReceiveExecuteAI事件，控制AI随机半径巡逻;<img src='https://img-blog.csdnimg.cn/20201025211959614.png'></p>
+</li>
+<li><p>打开行为树BT_NPC，创建Sequence并添加Blackboard Decorator[RandomLocation],序列执行顺序为:Wait（5)—&gt;BTTask_RandomLocation(SelfActor,Random,2000)—&gt;MoveTo(Random)（then Loop);<img src='https://img-blog.csdnimg.cn/20201026163507753.png'></p>
+</li>
+<li><p>打开BP_Enemy，初始化Blackboard的Original值为ActorLocation,设置AI行为为Random;<img src='https://img-blog.csdnimg.cn/20201025214715454.png'></p>
+</li>
+<li><p>设置AI Controller Class为AIC_Controller。</p>
+</li>
+</ol>
+<h2 id="创建战斗系统（开篇）"><a href="#创建战斗系统（开篇）" class="headerlink" title="创建战斗系统（开篇）"></a>创建战斗系统（开篇）</h2><h3 id="创建敌人AI行为——HasSeenPlayer"><a href="#创建敌人AI行为——HasSeenPlayer" class="headerlink" title="创建敌人AI行为——HasSeenPlayer"></a>创建敌人AI行为——HasSeenPlayer</h3><ol>
+<li><p>打开BP_Enemy，添加组件PawnSensing，设置视野半径和周边视野角度；<img src='https://img-blog.csdnimg.cn/20201026162705473.png'></p>
+</li>
+<li><p>打开BB_Base，添加key[Target]，类型为Actor;添加IsInAttackRange，类型为Boolean。打开E_Behavior，添加枚举HasSeenPlayer；</p>
+</li>
+<li><p>打开BP_Enemy事件图表，添加OnSeePawn(PawnSensing)事件，当Enemy感知Player时，加速靠近Player并执行HasSeenPlayer行为；<img src='https://img-blog.csdnimg.cn/20201026163212433.png'></p>
+</li>
+<li><p>创建任务BTTask_Check，重载事件ReceiveExcuteAI，用于检测Player是否在AI视野范围内；<img src='https://img-blog.csdnimg.cn/2020102616394518.png'></p>
+</li>
+<li><p>创建任务BTTask_Attack，重载事件ReceiveExecuteAI,调用BP_Enemy的Attack事件。创建自定义事件FinalAttack，成功执行返回success；<img src='https://img-blog.csdnimg.cn/20201026164404943.png'></p>
+</li>
+</ol>
+<h3 id="创建敌人攻击动画"><a href="#创建敌人攻击动画" class="headerlink" title="创建敌人攻击动画"></a>创建敌人攻击动画</h3><ol>
+<li>将InfinityBlade:Adversaries资源[Enemy_Anim_Sword_Combat_Swing_Montage]导入，创建动画Montage;</li>
+<li>打开ABP_Grunting，状态Locomotion添加DefaultSlot，使动画Montage生效；</li>
+<li>打开BP_Enemy事件图表，创建自定义事件Attack,执行Attack蒙太奇动画，并调用BTTask_Attack中的自定义事件FinalAttack;<img src='https://img-blog.csdnimg.cn/20201026165559988.png'></li>
+<li>打开行为树BT_NPC,创建Selector并添加Blackboard Decorator[HasSeenPlayer],设置BlackboardKey=Behavior,KeyValue=HasSeenPlayer；创建Sequence，序列执行顺序为BTTask_Check(Target,IsInAttackRange,AttackRange)——&gt;MoveTo(Target)[CheckAttackRange(Target)]——&gt;BTTask_Attack(then loop);<img src='https://img-blog.csdnimg.cn/20201026165758704.png'></li>
+<li>创建AnimNotifyState[ANS_Weapon]，创建重载函数Reveived_NotifyBegin，Received_NotifyEnd，当敌人攻击角色时，临时关闭胶囊体碰撞；<img src='https://img-blog.csdnimg.cn/20201026174431299.png'></li>
+</ol>
+<h3 id="创建敌人攻击伤害显示"><a href="#创建敌人攻击伤害显示" class="headerlink" title="创建敌人攻击伤害显示"></a>创建敌人攻击伤害显示</h3><ol>
+<li><p>创建蓝图接口I_Damageable,创建接口函数[void] OnRecieveDamage(Float:PhysicalDamage,Float:MagicDamage,Float:CriticalChance,Float:CriticalDamage);</p>
+</li>
+<li><p>打开BP_Enemy，添加蓝图接口I_Damageable；</p>
+</li>
+<li><p>打开BP_RPG_Character，创建函数[Boolean:IsCritical?，Float:Damage] CalculateDamage(Float:PhysicalDamage,Float:MagicDamage,Float:CriticalChance,Float:CriticalDamage,Float:PhysicalDefence，Float:MagicDefence，Boolean:AbsoluteDefence);</p>
+</li>
+<li><p>函数CalculateDamage用于综合敌人攻击属性和玩家防御属性，计算最终伤害，计算公式为：</p>
+<p>Damage=</p>
+<p>[</p>
+<p>PhysicalDamage×random(0.9,1.1)-PhysicalDefence</p>
+<p>+</p>
+<p>MagicDamage×random(0.7,1.3)-MagicDefence</p>
+<p>]</p>
+<p>×</p>
+<p>(IsCritical ?  1 :  CriticalDamage)；<img src='https://img-blog.csdnimg.cn/20201026171644771.png'></p>
+</li>
+<li><p>打开Enemy_Grunting，整合BeginPlay事件至父类BP_Enemy中的自定义事件CreateWeapon，并修改为在BP_Enemy中的BeginPlay事件中调用；<img src='https://img-blog.csdnimg.cn/20201026173117268.png'></p>
+</li>
+<li><p>打开BP_Shibi，添加OnRecieveDamage函数实现，调用CalculateDamage和ModifyAttribute(新的参数Critical,用于暴击判定，最终传入SetDamageText)，实现敌人伤害计算并应用于玩家的血量变更；<img src='https://img-blog.csdnimg.cn/20201026173731535.png'></p>
+</li>
+<li><p>打开BP_Weapon，添加事件ActorBeginOverlap，当敌人追上玩家时，传入敌人属性，调用OnRecieveDamage事件；<img src='https://img-blog.csdnimg.cn/20201026174639179.png'></p>
+</li>
+<li><p>打开W_DamageText，扩展UpdateValue函数功能，添加新的传入参数[Critical]，用于暴击伤害时伤害数字的特殊显示；<img src='https://img-blog.csdnimg.cn/20201026175016824.png'></p>
+</li>
+</ol>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201026011936218.gif'>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UE-4-22/" rel="tag"># UE_4.22</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/23/RPG-Dev-Log-9/" rel="prev" title="RPG Game开发日志(九)">
+      <i class="fa fa-chevron-left"></i> RPG Game开发日志(九)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAEnemy"><span class="nav-number">1.1.</span> <span class="nav-text">创建Enemy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E4%BA%BA%E5%8A%A8%E7%94%BB%E8%93%9D%E5%9B%BE"><span class="nav-number">1.1.1.</span> <span class="nav-text">创建敌人动画蓝图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E4%BA%BA%E8%93%9D%E5%9B%BE"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建敌人蓝图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%AD%A6%E5%99%A8%E8%93%9D%E5%9B%BE"><span class="nav-number">1.1.3.</span> <span class="nav-text">创建武器蓝图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E4%BA%BA%E5%90%8D%E7%A7%B0%E8%A1%80%E9%87%8FUI"><span class="nav-number">1.1.4.</span> <span class="nav-text">创建敌人名称血量UI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E4%BA%BAAI%E8%A1%8C%E4%B8%BA%E2%80%94%E2%80%94Random"><span class="nav-number">1.1.5.</span> <span class="nav-text">创建敌人AI行为——Random</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%88%98%E6%96%97%E7%B3%BB%E7%BB%9F%EF%BC%88%E5%BC%80%E7%AF%87%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">创建战斗系统（开篇）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E4%BA%BAAI%E8%A1%8C%E4%B8%BA%E2%80%94%E2%80%94HasSeenPlayer"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建敌人AI行为——HasSeenPlayer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E4%BA%BA%E6%94%BB%E5%87%BB%E5%8A%A8%E7%94%BB"><span class="nav-number">1.2.2.</span> <span class="nav-text">创建敌人攻击动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E4%BA%BA%E6%94%BB%E5%87%BB%E4%BC%A4%E5%AE%B3%E6%98%BE%E7%A4%BA"><span class="nav-number">1.2.3.</span> <span class="nav-text">创建敌人攻击伤害显示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jocoboy</p>
+  <div class="site-description" itemprop="description">A website to share technologies for the latest version of Unreal Engine.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/unreal-engine-channel" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;unreal-engine-channel" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:unreal-engine-channel@outlook.com" title="E-Mail → mailto:unreal-engine-channel@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jocoboy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">21k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">19 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
