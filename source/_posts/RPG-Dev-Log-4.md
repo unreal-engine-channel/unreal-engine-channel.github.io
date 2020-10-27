@@ -25,9 +25,9 @@ UI素材来源：
 5. 打开W_Level事件图表，将GetXP事件后的结点折叠至图表LoopLevel;
 6. 打开W_PC_Main事件图表，删除Event Construct后有关获取W_Level等自定义组件的节点；
 7. 打开S_Attribute，添加RegenInterval[Float]（回复间隔）、MaxRegenTime[Float]（最大回复时间）、RegenFunctionName[String]（回复回调函数名）、RegenTimerHandle[TimerHandle]（回复TimerHandle);
-8. 打开Char_Shibi，设置Attributes，单次回复量=MaxValue/(RegenInterval*MaxRegenTime)，按照公式，设置数值，使得单次回复量耐力值>血量>灵力；
-9. 创建回调函数[void]HealthRegenTick()、[void]ManaRegenTick()、[void]StaminaRegenTick()回调函数，用于脱战状态和战斗状态回复数值计算，三个函数仅参数不同；<img src='https://img-blog.csdnimg.cn/20201014180132825.png'>
-10. 创建函数[void] HandleRegeneration(E_Attribute)，当状态回满时，使用TimerHandle中断回调函数;<img src='https://img-blog.csdnimg.cn/20201014180301780.png'>
+8. 打开Char_Shibi，设置Attributes，单次回复量=MaxValue*(RegenInterval/MaxRegenTime)，按照公式，设置数值，使得单次回复量耐力值>血量>灵力；
+9. 创建回调函数[void]HealthRegenTick()、[void]ManaRegenTick()、[void]StaminaRegenTick()回调函数，用于脱战状态和战斗状态回复数值计算，三个函数仅参数不同；<img src='https://img-blog.csdnimg.cn/20201027161819931.png'>
+10. 创建函数[void] HandleRegeneration(E_Attribute)，当状态回满时，使用TimerHandle中断回调函数;<img src='https://img-blog.csdnimg.cn/20201027214351835.png'>
 11. 创建自定义事件Regenerations,在Event BeginPlay调用，用于循环更新Health/Mana/Stamina相关值，事件末尾调用HandleRegeneration，启用和中止相关tick函数；<img src='https://img-blog.csdnimg.cn/20201014180647554.png'>
 12. 函数ModifyAttribute末尾也添加HandleRegeneration的调用，每次修改后都进行一次TimerHandle核对；
 
