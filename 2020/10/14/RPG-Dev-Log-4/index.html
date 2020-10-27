@@ -30,15 +30,15 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201014174148886.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201014174040200.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180132825.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180301780.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201027161819931.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201027214351835.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201014180647554.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2020101423132354.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201014232845269.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201014171750989.gif">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2020101417191758.png">
 <meta property="article:published_time" content="2020-10-14T09:04:18.000Z">
-<meta property="article:modified_time" content="2020-10-26T09:55:58.601Z">
+<meta property="article:modified_time" content="2020-10-27T15:27:33.629Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
@@ -236,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-26 17:55:58" itemprop="dateModified" datetime="2020-10-26T17:55:58+08:00">2020-10-26</time>
+                <time title="Modified: 2020-10-27 23:27:33" itemprop="dateModified" datetime="2020-10-27T23:27:33+08:00">2020-10-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -287,9 +287,9 @@
 <li>打开W_Level事件图表，将GetXP事件后的结点折叠至图表LoopLevel;</li>
 <li>打开W_PC_Main事件图表，删除Event Construct后有关获取W_Level等自定义组件的节点；</li>
 <li>打开S_Attribute，添加RegenInterval[Float]（回复间隔）、MaxRegenTime[Float]（最大回复时间）、RegenFunctionName[String]（回复回调函数名）、RegenTimerHandle[TimerHandle]（回复TimerHandle);</li>
-<li>打开Char_Shibi，设置Attributes，单次回复量=MaxValue/(RegenInterval*MaxRegenTime)，按照公式，设置数值，使得单次回复量耐力值&gt;血量&gt;灵力；</li>
-<li>创建回调函数[void]HealthRegenTick()、[void]ManaRegenTick()、[void]StaminaRegenTick()回调函数，用于脱战状态和战斗状态回复数值计算，三个函数仅参数不同；<img src='https://img-blog.csdnimg.cn/20201014180132825.png'></li>
-<li>创建函数[void] HandleRegeneration(E_Attribute)，当状态回满时，使用TimerHandle中断回调函数;<img src='https://img-blog.csdnimg.cn/20201014180301780.png'></li>
+<li>打开Char_Shibi，设置Attributes，单次回复量=MaxValue*(RegenInterval/MaxRegenTime)，按照公式，设置数值，使得单次回复量耐力值&gt;血量&gt;灵力；</li>
+<li>创建回调函数[void]HealthRegenTick()、[void]ManaRegenTick()、[void]StaminaRegenTick()回调函数，用于脱战状态和战斗状态回复数值计算，三个函数仅参数不同；<img src='https://img-blog.csdnimg.cn/20201027161819931.png'></li>
+<li>创建函数[void] HandleRegeneration(E_Attribute)，当状态回满时，使用TimerHandle中断回调函数;<img src='https://img-blog.csdnimg.cn/20201027214351835.png'></li>
 <li>创建自定义事件Regenerations,在Event BeginPlay调用，用于循环更新Health/Mana/Stamina相关值，事件末尾调用HandleRegeneration，启用和中止相关tick函数；<img src='https://img-blog.csdnimg.cn/20201014180647554.png'></li>
 <li>函数ModifyAttribute末尾也添加HandleRegeneration的调用，每次修改后都进行一次TimerHandle核对；</li>
 </ol>
@@ -427,7 +427,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -496,12 +496,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">21k</span>
+    <span title="Symbols count total">23k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">19 mins.</span>
+    <span title="Reading time total">21 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
