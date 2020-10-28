@@ -177,7 +177,7 @@
       </tags>
   </entry>
   <entry>
-    <title>RPG Game开发日志(十)</title>
+    <title>RPG Game开发日志(十一)</title>
     <url>/2020/10/27/RPG-Dev-Log-11/</url>
     <content><![CDATA[<p>涉及内容：战斗系统（续篇），AI设置，蒙太奇动画。</p>
 <a id="more"></a>
@@ -232,7 +232,9 @@
 <li>创建任务BTTask_Reset，用于判断敌人AI是否已经脱仇，并执行来自BP_Enemy的Reset事件；<img src='https://img-blog.csdnimg.cn/2020102722221863.png'><img src='https://img-blog.csdnimg.cn/20201027222301945.png'></li>
 <li>创建Sequence并添加Blackboard Decorator[RunBack],设置BlackboardKey=Behavior,KeyValue=RunBack，序列执行顺序为:MoveTo(Original)—&gt;BTTask_Reset（then Loop);<img src='https://img-blog.csdnimg.cn/20201027222635974.png'></li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201027232136150.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102813041126.gif'>
+
+<img src='https://img-blog.csdnimg.cn/20201028130602858.gif'>]]></content>
       <categories>
         <category>Logs</category>
       </categories>
