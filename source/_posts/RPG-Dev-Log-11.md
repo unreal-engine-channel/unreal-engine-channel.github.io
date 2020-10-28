@@ -1,5 +1,5 @@
 ---
-title: RPG Game开发日志(十)
+title: RPG Game开发日志(十一)
 date: 2020-10-27 18:21:00
 categories: Logs
 tags: UE_4.22 
@@ -78,4 +78,6 @@ tags: UE_4.22
 
 # 最终效果展示
 
-<img src='https://img-blog.csdnimg.cn/20201027232136150.gif'>
+<img src='https://img-blog.csdnimg.cn/2020102813041126.gif'>
+
+<img src='https://img-blog.csdnimg.cn/20201028130602858.gif'>
