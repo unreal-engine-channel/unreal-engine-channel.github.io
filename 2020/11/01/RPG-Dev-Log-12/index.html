@@ -21,34 +21,48 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="涉及内容：UI血条创建；绑定角色属性等。">
+  <meta name="description" content="涉及内容：制作简单的粒子特效，获得经验金币，重生Enemy。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RPG Game开发日志(二)">
-<meta property="og:url" content="http://example.com/2020/10/12/RPG-Dev-Log-2/index.html">
+<meta property="og:title" content="RPG Game开发日志(十二)">
+<meta property="og:url" content="http://example.com/2020/11/01/RPG-Dev-Log-12/index.html">
 <meta property="og:site_name" content="unreal-engine-channel">
-<meta property="og:description" content="涉及内容：UI血条创建；绑定角色属性等。">
+<meta property="og:description" content="涉及内容：制作简单的粒子特效，获得经验金币，重生Enemy。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012182956977.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012183538901.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012184100410.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012181046997.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012185331871.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012195017253.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012195137455.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012195223773.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012195331529.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012195518275.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020101219394440.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012175955500.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201012180028750.png">
-<meta property="article:published_time" content="2020-10-12T09:33:57.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110116235018.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101162845368.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101164744129.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101165355339.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101165816602.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101170341930.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101172623580.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101173214860.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101174006324.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101174735841.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101174658471.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101175450907.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101175712965.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101180333637.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110118043023.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101181026191.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101181416558.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101181603620.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101182318659.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101184746163.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101184831482.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101184908545.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110118502269.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110118562015.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101185829997.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201101190150116.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110116105649.gif">
+<meta property="article:published_time" content="2020-11-01T08:01:47.000Z">
 <meta property="article:modified_time" content="2020-11-01T11:16:29.200Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201012182956977.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020110116235018.png">
 
-<link rel="canonical" href="http://example.com/2020/10/12/RPG-Dev-Log-2/">
+<link rel="canonical" href="http://example.com/2020/11/01/RPG-Dev-Log-12/">
 
 
 <script id="page-configurations">
@@ -61,7 +75,7 @@
   };
 </script>
 
-  <title>RPG Game开发日志(二) | unreal-engine-channel</title>
+  <title>RPG Game开发日志(十二) | unreal-engine-channel</title>
   
 
 
@@ -210,7 +224,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/12/RPG-Dev-Log-2/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/01/RPG-Dev-Log-12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -223,7 +237,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RPG Game开发日志(二)
+          RPG Game开发日志(十二)
         </h1>
 
         <div class="post-meta">
@@ -232,16 +246,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-10-12 17:33:57" itemprop="dateCreated datePublished" datetime="2020-10-12T17:33:57+08:00">2020-10-12</time>
+              <time title="Created: 2020-11-01 16:01:47 / Modified: 19:16:29" itemprop="dateCreated datePublished" datetime="2020-11-01T16:01:47+08:00">2020-11-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-01 19:16:29" itemprop="dateModified" datetime="2020-11-01T19:16:29+08:00">2020-11-01</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -258,7 +266,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.7k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -277,48 +285,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>涉及内容：UI血条创建；绑定角色属性等。</p>
+        <p>涉及内容：制作简单的粒子特效，获得经验金币，重生Enemy。</p>
 <a id="more"></a>
 
-<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="UI血条创建"><a href="#UI血条创建" class="headerlink" title="UI血条创建"></a>UI血条创建</h2><p>UI素材来源：虚幻商城[User Interface Kit]</p>
-<h3 id="材质球制作"><a href="#材质球制作" class="headerlink" title="材质球制作"></a>材质球制作</h3><ol>
-<li>创建Material [M_GlassBall]，将gb（T5,include frame,gloss,over) 拖拽进材质球蓝图;</li>
-<li>创建Material Function [MF_Vertical]，用于处理血球垂直方向的颜色线性渐变，此处Clamp限制Alpha(0~1)，减少性能消耗；<img src='https://img-blog.csdnimg.cn/20201012182956977.png'></li>
-<li>打开[M_GlassBall]，完成第一部分蓝图，涉及UV平衡器（Panner）、图像混合模式（Blend Overlay)、插值计算等,完成Fill (V3)参数传递<img src='https://img-blog.csdnimg.cn/20201012183538901.png'></li>
-<li>完成第二部分蓝图，MF_Vertical—&gt;M_GlassBall，这部分主要设计血球的框架和形状，Ceil用于向上取整<img src='https://img-blog.csdnimg.cn/20201012184100410.png'></li>
-<li>创建材质实例Inst_GlassBall,设置Color、Intensity（强度）、Percentage（血量百分比）等参数</li>
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="敌人死后消亡特效"><a href="#敌人死后消亡特效" class="headerlink" title="敌人死后消亡特效"></a>敌人死后消亡特效</h2><ol>
+<li>创建MaterialFunction[MF_DissolveEffect]，添加Input[Visibility]，Type=Function Input Scalar；<img src='https://img-blog.csdnimg.cn/2020110116235018.png'></li>
+<li>打开Enemy材质球，调用MF_DissolveEffect，添加OnHit和Visibility参数，设置EmissiveColor和OpacityMask；<img src='https://img-blog.csdnimg.cn/20201101162845368.png'></li>
+<li>创建Enemy材质球实例，选择PreviewMesh，设置EffectColor，调整OnHit和Visibility的值可预览Enemy被攻击时、消亡时的材质效果；<img src='https://img-blog.csdnimg.cn/20201101164744129.png'></li>
+<li>创建AnimationNotify[ANS_DissolveEffect]，添加重载函数Received_NotifyTick，根据动画曲线[Dissolve_Spawn]渐变Visibility的值；<img src='https://img-blog.csdnimg.cn/20201101165355339.png'></li>
+<li>为Enemy的七种随机死亡动画添加Notify[ANS_DissolveEffect]和Curve[Dissolve_Spawn];<img src='https://img-blog.csdnimg.cn/20201101165816602.png'></li>
 </ol>
-<h3 id="控件蓝图设计"><a href="#控件蓝图设计" class="headerlink" title="控件蓝图设计"></a>控件蓝图设计</h3><ol>
-<li>创建Widget Blueprint [W_ActionBar]，删除默认的canvas panel，设置为custom模式，添加Scale Box,组件结构如下<img src='https://img-blog.csdnimg.cn/20201012181046997.png'>Textures涉及:actionbar frame(T3,include L ,R,Center);</li>
-<li>创建Widget Blueprint [W_GlassBall]，同上，从User Created分类下，在Scale Box内添加预设的Inst_GlassBall，添加Event Construct事件，用于设置血球颜色以便于灵力球的添加和血量动态颜色；<img src='https://img-blog.csdnimg.cn/20201012185331871.png'></li>
-<li>创建Widget Blueprint [W_PC_Main]，添加预设的Action Bar以及Glass Ball，并调整anchors,Size,Alignment,etc;</li>
-<li>打开Char_Shibi人物蓝图，在Event Graph添加W_PC_Main控件即可。</li>
+<h2 id="击杀敌人获得战利品"><a href="#击杀敌人获得战利品" class="headerlink" title="击杀敌人获得战利品"></a>击杀敌人获得战利品</h2><h3 id="获取经验值"><a href="#获取经验值" class="headerlink" title="获取经验值"></a>获取经验值</h3><h4 id="创建粒子特效"><a href="#创建粒子特效" class="headerlink" title="创建粒子特效"></a>创建粒子特效</h4><ol>
+<li><p>创建材质球[P_Base]，添加Input[ParticleColor]，设置EmissiveColor和Opacity;<img src='https://img-blog.csdnimg.cn/20201101170341930.png'></p>
+</li>
+<li><p>创建材质球实例[P_Base_Inst];</p>
+</li>
+<li><p>打开初学者内容包里的P_Teleport_Tell_Source粒子特效，重命名为P_SoulXP，并打开;</p>
+</li>
+<li><p>对于第一个ParticleEmitter，将Emitter Duration设置为0，添加DirectLocation;</p>
+</li>
+<li><p>对于第二个ParticleEmitter，直接关闭;</p>
+</li>
+<li><p>对于第三个ParticleEmitter，将Emitter Duration设置为0，略微调大InitialSize，调整Sphere StartLocation的Z轴；</p>
+</li>
+<li><p>新建一个ParticleEmitter，将Material设置为P_Base_Inst，Spawn Rate设置为0，Burst Count设置为1，删除InitVelocity，调整ColorOverLife，添加Direct Location；</p>
+</li>
+<li><p>新建一个ParticleEmitter,TypeData设置为GPU Sprites,设置Spawn Distribution为Distribution Float Constant,添加Sphere并设置颜色;<img src='https://img-blog.csdnimg.cn/20201101172623580.png'></p>
+</li>
 </ol>
-<h2 id="绑定角色属性"><a href="#绑定角色属性" class="headerlink" title="绑定角色属性"></a>绑定角色属性</h2><h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><ol>
-<li>准备工作：创建枚举[E_Attribute]=[None,Health,Mana,Stamain],创建结构体[S_Attribute]=[CurrentValue(Float),MinValue(Float),MaxValue(Float),ClassBallWidget(W Glass Ball)];</li>
-<li>核心数据结构：E_Attribute 到 S_Attribute Map 映射关系；</li>
-<li>函数[S_Attribute] GetAttribute(E_Attribute),用于根据键值对获取某一属性的相关值；</li>
-<li>函数[void] SetAttribute(E_Attribute,S_Attribute),用于添加新的属性键值对；</li>
-<li>函数[void] SetupAttributeBars()，实装Health&amp;Mana等属性绑定；</li>
-<li>函数[S_Attribute] UpdateAttribute(E_Attribute),用于计算和更新血球百分比，动态颜色；</li>
-<li>函数[void] ModifyAttribute(E_Attribute,Float),用于伤害显示，同时调用4、6。</li>
+<h4 id="创建BP-XP"><a href="#创建BP-XP" class="headerlink" title="创建BP_XP"></a>创建BP_XP</h4><ol>
+<li><p>创建Actor[BP_XP]，添加组件Sphere Collision，设置半径，应用物理属性，设置重量为3kg，更改碰撞预设为Custom;<img src='https://img-blog.csdnimg.cn/20201101173214860.png'></p>
+</li>
+<li><p>添加组件ParticleSystem，将Particle Template设置为P_SoulXP;</p>
+</li>
+<li><p>打开BP_Player事件图表，创建自定义事件AddXP(XP);<img src='https://img-blog.csdnimg.cn/20201101174006324.png'></p>
+</li>
+<li><p>打开事件图表，设置物理模拟，添加TimeLine[MoveToPlayer],实现玩家击杀敌人后吸收经验的效果。创建自定义事件FinishCollect，调用自定义事件AddXP；<img src='https://img-blog.csdnimg.cn/20201101174735841.png'><img src='https://img-blog.csdnimg.cn/20201101174658471.png'></p>
+</li>
 </ol>
-<h3 id="受伤-回血实装"><a href="#受伤-回血实装" class="headerlink" title="受伤/回血实装"></a>受伤/回血实装</h3><ol>
-<li>GetAttribute<img src='https://img-blog.csdnimg.cn/20201012195017253.png'></li>
-<li>SetAttribute<img src='https://img-blog.csdnimg.cn/20201012195137455.png'></li>
-<li>SetupAttributeBars<img src='https://img-blog.csdnimg.cn/20201012195223773.png'></li>
-<li>UpdateAttribute<img src='https://img-blog.csdnimg.cn/20201012195331529.png'></li>
-<li>ModiftAttribute<img src='https://img-blog.csdnimg.cn/20201012195518275.png'></li>
+<h4 id="设置EnemyXP"><a href="#设置EnemyXP" class="headerlink" title="设置EnemyXP"></a>设置EnemyXP</h4><ol>
+<li><p>打开BP_Enemy,打开函数SetNameAndLevel，创建变量XP_Points，扩展函数功能，可通过敌人和玩家的等级差设置XP_Points(默认为10)，具体为：</p>
+<p>XP_Points = 10 + 2*(EnemyLevel-1) + MAX(0,EnemyLevel-PlayerLevel);<img src='https://img-blog.csdnimg.cn/20201101175450907.png'></p>
+</li>
+<li><p>接上，函数UpdateAttribute中的修改；<img src='https://img-blog.csdnimg.cn/20201101175712965.png'></p>
+</li>
+<li><p>创建函数[Void]SpawnXPAndMoney(FirstIndex),用于经验球和金币的生成,并在自定义事件OnDeath中调用；<img src='https://img-blog.csdnimg.cn/20201101180333637.png'><img src='https://img-blog.csdnimg.cn/2020110118043023.png'></p>
+</li>
 </ol>
-<h3 id="受伤-回血数字显示"><a href="#受伤-回血数字显示" class="headerlink" title="受伤/回血数字显示"></a>受伤/回血数字显示</h3><ol>
-<li>创建Widget [W_DamageText]，添加FadeOut动画，用于伤害数字浮动显示并消失；<img src='https://img-blog.csdnimg.cn/2020101219394440.png'></li>
-<li>打开W_DamageText 事件图表，事件开始构造时播放1s的Fadeout动画,添加自定义事件UpdateValue，用于受伤/回血时不同的文字内容&amp;颜色显示；</li>
-<li>创建Widget Component [WC_OnDamaged],创建自定义事件SetDamageText,内部调用UpdateValue事件；</li>
-<li>打开函数ModifyAttribute，在Health值被修改前将WC_OnDamaged控件调出,并调用自定义事件SetDamageText，将会自动播放FadeOut动画。</li>
+<h3 id="获取金币"><a href="#获取金币" class="headerlink" title="获取金币"></a>获取金币</h3><h4 id="创建BP-SpawnMoney"><a href="#创建BP-SpawnMoney" class="headerlink" title="创建BP_SpawnMoney"></a>创建BP_SpawnMoney</h4><ol>
+<li>复制BP_XP,重命名为BP_SpawnMoney，删除ParticleSystem，添加StaticMesh和RotatingMovement；</li>
+<li>设置StaticMesh为SM_Coin_Small，编辑材质球，调整EmissiveColor,提高亮度;</li>
+<li>修改自定义事件FinishCollect，调用玩家蓝图中的自定义事件GetMoney;<img src='https://img-blog.csdnimg.cn/20201101181026191.png'></li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201012175955500.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201012180028750.png'>
+<h4 id="设置EnemyMoney"><a href="#设置EnemyMoney" class="headerlink" title="设置EnemyMoney"></a>设置EnemyMoney</h4><ol>
+<li><p>函数UpdateAttribute中的修改；<img src='https://img-blog.csdnimg.cn/20201101181416558.png'></p>
+</li>
+<li><p>函数SpawnXPAndMoney中关于金币生成的部分，在OnDeath中调用；<img src='https://img-blog.csdnimg.cn/20201101181603620.png'></p>
+</li>
+</ol>
+<h2 id="重生Enemy"><a href="#重生Enemy" class="headerlink" title="重生Enemy"></a>重生Enemy</h2><ol>
+<li>创建结构体S_RespawnEnemy;<img src='https://img-blog.csdnimg.cn/20201101182318659.png'></li>
+<li>创建Actor[BP_SpawnEnemy]，添加组件SpehreCollison，碰撞预设为NoCollison;</li>
+<li>打开事件图表，创建变量EnemyList(S_RespawnEnemy),SpawnTimer(TimerHandle),IndicesToSpawn(Integer[]);</li>
+<li>创建自定义事件RespawnEnemy(S_RespawnEnemy)，将死亡的敌人记录到EnemtList中，并用SpawnTimer控制自定义事件RespawnTick的调用，IndicesToSpawn数组用于记录敌人重生的索引顺序；<img src='https://img-blog.csdnimg.cn/20201101184746163.png'><img src='https://img-blog.csdnimg.cn/20201101184831482.png'><img src='https://img-blog.csdnimg.cn/20201101184908545.png'></li>
+<li>打开BP_Enemy，在OnDeath中调用RespawnEnemy;<img src='https://img-blog.csdnimg.cn/2020110118502269.png'></li>
+<li>打开BehaviorComponent，修改函数SetBehavior，对传入的AI行为进行判断,若与当前的AI行为不同，则将传入的AI行为设置为当前行为；<img src='https://img-blog.csdnimg.cn/2020110118562015.png'></li>
+<li>打开BTS_UpdateBehaviorTree，添加重载事件Recieve Tick AI；<img src='https://img-blog.csdnimg.cn/20201101185829997.png'></li>
+<li>设置BP_Enemy,Auto Prossess AI = Placed in World or Spawned；</li>
+<li>设置Enemy_Grunting，Auto Prossess AI = Placed in World or Spawned，并设置默认属性值，敌人等级的随机生成；<img src='https://img-blog.csdnimg.cn/20201101190150116.png'></li>
+<li>将BP_SpawnSphere添加到场景，并指定场景中的Enemy的RespawnActor为BP_SpawnSphere;</li>
+</ol>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020110116105649.gif'>
     </div>
 
     
@@ -355,13 +392,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/10/11/RPG-Dev-Log-1/" rel="prev" title="RPG Game开发日志(一)">
-      <i class="fa fa-chevron-left"></i> RPG Game开发日志(一)
+    <a href="/2020/10/27/RPG-Dev-Log-11/" rel="prev" title="RPG Game开发日志(十一)">
+      <i class="fa fa-chevron-left"></i> RPG Game开发日志(十一)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/10/13/RPG-Dev-Log-3/" rel="next" title="RPG Game开发日志(三)">
-      RPG Game开发日志(三) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -420,7 +454,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UI%E8%A1%80%E6%9D%A1%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">UI血条创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%90%E8%B4%A8%E7%90%83%E5%88%B6%E4%BD%9C"><span class="nav-number">1.1.1.</span> <span class="nav-text">材质球制作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E4%BB%B6%E8%93%9D%E5%9B%BE%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.2.</span> <span class="nav-text">控件蓝图设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E8%A7%92%E8%89%B2%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">绑定角色属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">设计思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%97%E4%BC%A4-%E5%9B%9E%E8%A1%80%E5%AE%9E%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">受伤&#x2F;回血实装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%97%E4%BC%A4-%E5%9B%9E%E8%A1%80%E6%95%B0%E5%AD%97%E6%98%BE%E7%A4%BA"><span class="nav-number">1.2.3.</span> <span class="nav-text">受伤&#x2F;回血数字显示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%8C%E4%BA%BA%E6%AD%BB%E5%90%8E%E6%B6%88%E4%BA%A1%E7%89%B9%E6%95%88"><span class="nav-number">1.1.</span> <span class="nav-text">敌人死后消亡特效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BB%E6%9D%80%E6%95%8C%E4%BA%BA%E8%8E%B7%E5%BE%97%E6%88%98%E5%88%A9%E5%93%81"><span class="nav-number">1.2.</span> <span class="nav-text">击杀敌人获得战利品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%8F%E9%AA%8C%E5%80%BC"><span class="nav-number">1.2.1.</span> <span class="nav-text">获取经验值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">创建粒子特效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BABP-XP"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">创建BP_XP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEEnemyXP"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">设置EnemyXP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E9%87%91%E5%B8%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">获取金币</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BABP-SpawnMoney"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">创建BP_SpawnMoney</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEEnemyMoney"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">设置EnemyMoney</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%94%9FEnemy"><span class="nav-number">1.3.</span> <span class="nav-text">重生Enemy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
