@@ -2,7 +2,10 @@
 title: 游戏人工智能:从FSM到Behavior Tree
 date: 2020-11-01 21:34:44
 categories: Theories
-tags: AI BehaviorTree FSM
+tags: 
+- Artificial Intelligence 
+- Behavior Tree 
+- Finite State Machine
 ---
 
 > A behavior tree is to express the behavior of artificial intelligence. The behavior tree has a characteristic that is easy to change state transitions than FSM(Finite State Machine).
