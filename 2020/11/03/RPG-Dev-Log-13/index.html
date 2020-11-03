@@ -21,37 +21,34 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="涉及内容：任务坐标，Money互动等;">
+  <meta name="description" content="涉及内容：大任务系统创建（进阶），UI设计应用细讲。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RPG Game开发日志(八)">
-<meta property="og:url" content="http://example.com/2020/10/21/RPG-Dev-Log-8/index.html">
+<meta property="og:title" content="RPG Game开发日志(十三)">
+<meta property="og:url" content="http://example.com/2020/11/03/RPG-Dev-Log-13/index.html">
 <meta property="og:site_name" content="unreal-engine-channel">
-<meta property="og:description" content="涉及内容：任务坐标，Money互动等;">
+<meta property="og:description" content="涉及内容：大任务系统创建（进阶），UI设计应用细讲。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021171021322.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021171350706.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021171832273.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021172214999.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021173246323.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021173324992.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021173858989.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021174021728.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021174336258.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020102117461731.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021175129176.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021175154953.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/202010211755540.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021213916456.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021214258222.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021165022723.gif">
-<meta property="article:published_time" content="2020-10-21T08:47:22.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103114016404.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103114544272.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103120349278.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103121441665.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103114907317.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103114943124.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103115323410.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110311543341.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103120105457.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103120130439.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103121909957.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110311322945.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201103113402801.png">
+<meta property="article:published_time" content="2020-11-03T03:31:15.000Z">
 <meta property="article:modified_time" content="2020-11-03T04:35:35.757Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201021171021322.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201103114016404.png">
 
-<link rel="canonical" href="http://example.com/2020/10/21/RPG-Dev-Log-8/">
+<link rel="canonical" href="http://example.com/2020/11/03/RPG-Dev-Log-13/">
 
 
 <script id="page-configurations">
@@ -64,7 +61,7 @@
   };
 </script>
 
-  <title>RPG Game开发日志(八) | unreal-engine-channel</title>
+  <title>RPG Game开发日志(十三) | unreal-engine-channel</title>
   
 
 
@@ -213,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/21/RPG-Dev-Log-8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/03/RPG-Dev-Log-13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -226,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RPG Game开发日志(八)
+          RPG Game开发日志(十三)
         </h1>
 
         <div class="post-meta">
@@ -235,16 +232,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-10-21 16:47:22" itemprop="dateCreated datePublished" datetime="2020-10-21T16:47:22+08:00">2020-10-21</time>
+              <time title="Created: 2020-11-03 11:31:15 / Modified: 12:35:35" itemprop="dateCreated datePublished" datetime="2020-11-03T11:31:15+08:00">2020-11-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-03 12:35:35" itemprop="dateModified" datetime="2020-11-03T12:35:35+08:00">2020-11-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -261,7 +252,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.5k</span>
+              <span>798</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -280,58 +271,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>涉及内容：任务坐标，Money互动等;</p>
+        <p>涉及内容：大任务系统创建（进阶），UI设计应用细讲。</p>
 <a id="more"></a>
 
-<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
-<p>虚幻商城[Content Examples]</p>
-<p><a target="_blank" rel="noopener" href="https://www.iconfont.cn/">阿里巴巴矢量图表库</a> [关键词：脚印、钱包]</p>
-<h2 id="创建搜寻目标"><a href="#创建搜寻目标" class="headerlink" title="创建搜寻目标"></a>创建搜寻目标</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
-<li><p>创建Interface [I_Interaction],添加函数BeginOverlapTargetObject、EndOverlapTargetObject、OnInteractWith(Char_Shibi);</p>
-</li>
-<li><p>创建Actor [BP_TargetObject]，添加组件StaticMesh、Widget、PaperSprite，并在事件开始时隐藏PaperSprite;</p>
-</li>
-<li><p>将I_Interaction蓝图接口添加至BP_TargetObject;</p>
-</li>
-<li><p>打开S_SubGoalInfo，添加属性TargetClass(Actor)、TargetClassID(Integer);</p>
-</li>
-<li><p>打开Char_Shibi,添加Box碰撞体，并添加碰撞事件，调用I_Interaction接口函数；<img src='https://img-blog.csdnimg.cn/20201021171021322.png'></p>
-</li>
-<li><p>为E键盘事件扩展功能，使其借助蓝图接口实现互动；<img src='https://img-blog.csdnimg.cn/20201021171350706.png'></p>
-</li>
-<li><p>重命名W_NameForNPC为W_Interaction，并添加到BP_TargetObject的Widget上，在事件开始运行时设置W_Interaction的Name和Interact的文本；<img src='https://img-blog.csdnimg.cn/20201021171832273.png'></p>
-</li>
-<li><p>打开BP_TargetObject事件蓝图，实现蓝图接口中三个接口函数;<img src='https://img-blog.csdnimg.cn/20201021172214999.png'></p>
-</li>
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="任务系统主界面W-Mission"><a href="#任务系统主界面W-Mission" class="headerlink" title="任务系统主界面W_Mission"></a>任务系统主界面W_Mission</h2><h3 id="任务类型侧边栏"><a href="#任务类型侧边栏" class="headerlink" title="任务类型侧边栏"></a>任务类型侧边栏</h3><p>涉及组件：</p>
+<ul>
+<li>Panel: [Size Box]、[Horizontal Box]、[Vertical Box]、[Overlay]</li>
+<li>Common: [Border]、[Button]、[Text]</li>
+</ul>
+<h4 id="层级面板"><a href="#层级面板" class="headerlink" title="层级面板"></a>层级面板</h4><img src='https://img-blog.csdnimg.cn/20201103114016404.png'>
+
+<h4 id="实装效果"><a href="#实装效果" class="headerlink" title="实装效果"></a>实装效果</h4><img src='https://img-blog.csdnimg.cn/20201103114544272.png'>
+
+<h4 id="组件动画"><a href="#组件动画" class="headerlink" title="组件动画"></a>组件动画</h4><p>Widget可视性：</p>
+<blockquote>
+<p>**Visible(可视)**： 可见、可点击<br>**Collapsed(已折叠)**： 不可见、不占用布局空间（性能优于 Hidden）<br>**Hidden(隐藏)**： 不可见、占用布局空间<br>**HitTestInvisible(非可命中测试（自身和所有子项）)**： 可见、当前 Widget 不可点击、所有 Child Widget 不可点击<br>**SelfHitTestInvisible(非可命中测试（仅自身）)**： 可见、当前 Widget 不可点击、不影响 Child Widget</p>
+</blockquote>
+<ol>
+<li>打开W_Mission,添加组件动画OpenMission;<img src='https://img-blog.csdnimg.cn/20201103120349278.png'></li>
+<li>创建宏ShowMission(Visible);<img src='https://img-blog.csdnimg.cn/20201103121441665.png'></li>
+<li>创建自定义事件PlayMission(Visible)，调用宏ShowMission(Visible)；</li>
 </ol>
-<h3 id="创建目标实例-藏宝箱"><a href="#创建目标实例-藏宝箱" class="headerlink" title="创建目标实例(藏宝箱)"></a>创建目标实例(藏宝箱)</h3><ol>
-<li>以BP_TargetObject为父类，创建子类Object_Treasure；</li>
-<li>将[Content Examples]资源包中的StaticMesh [SM_Chest_Bottom、SM_Chest_Lid、SM_Coin_Small]添加进来，调整Transform;</li>
-<li>实现蓝图接口I_Interaction中的接口函数OnInteractWith，使用TimeLine实现宝箱打开、金币弹出并旋转的交互动画;<img src='https://img-blog.csdnimg.cn/20201021173246323.png'><img src='https://img-blog.csdnimg.cn/20201021173324992.png'></li>
-</ol>
-<h3 id="创建目标小地图指示"><a href="#创建目标小地图指示" class="headerlink" title="创建目标小地图指示"></a>创建目标小地图指示</h3><ol>
-<li><p>打开W_MiniMap，扩展Widget显示内容，注意<strong>TargetDirection</strong>属性<strong>Pivot</strong>的设置，需要根据Angle作调整,使其无论如何旋转，都能正确显示位置，层级面板作如下修改<img src='https://img-blog.csdnimg.cn/20201021173858989.png'>预览效果<img src='https://img-blog.csdnimg.cn/20201021174021728.png'></p>
-</li>
-<li><p>打开QuestManager，创建纯函数[void] DistanceToTarget(Integer),用于计算角色到目标的空间距离；<img src='https://img-blog.csdnimg.cn/20201021174336258.png'></p>
-</li>
-<li><p>创建函数[void] UpdateTargetDirection()，用于更新目标相对于角色的所在方位；<img src='https://img-blog.csdnimg.cn/2020102117461731.png'></p>
-</li>
-<li><p>打开函数AddQuest,在末尾设置CurrentQuest=LocalQuest;</p>
-</li>
-<li><p>创建自定义事件OnSwitchSubGoalInfo，用于点击子任务列表时，根据当前选择的子任务（是否为Search任务），显示和隐藏目标距离和方位；<img src='https://img-blog.csdnimg.cn/20201021175129176.png'><img src='https://img-blog.csdnimg.cn/20201021175154953.png'></p>
-</li>
-<li><p>创建自定义事件OnPlayerMove，用于角色移动时更新搜寻目标距离和方位信息；<img src='https://img-blog.csdnimg.cn/202010211755540.png'></p>
-</li>
-<li><p>打开RPG_PlayerController，在移动事件末尾添加OnPlayerMove事件的调用；</p>
-</li>
-</ol>
-<h2 id="Money互动"><a href="#Money互动" class="headerlink" title="Money互动"></a>Money互动</h2><ol>
-<li>打开W_CharacterBorder，添加一个Horizatal Box，添加Money图标和文本；</li>
-<li>打开Char_Shibi，创建函数[void]CountMoney()，用于更新Money文本；<img src='https://img-blog.csdnimg.cn/20201021213916456.png'></li>
-<li>创建自定义事件[void] GetMoney(Integer)，使用TimerHandle控制CountMoney函数的循环调用；<img src='https://img-blog.csdnimg.cn/20201021214258222.png'></li>
-<li>打开Object_Treasure事件图表，在Event OnInteractWith末尾添加GetMoney事件的调用，可实现宝箱打开金币旋转动画结束后，自动增加Money的值；</li>
-</ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201021165022723.gif'>
+<h3 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h3><p>设计组件：</p>
+<ul>
+<li>Panel: [Size Box]、[Vertical Box]、[Overlay]、[Scroll Box]</li>
+<li>Common: [Border]、[Text]</li>
+</ul>
+<h4 id="层级面板-1"><a href="#层级面板-1" class="headerlink" title="层级面板"></a>层级面板</h4><img src='https://img-blog.csdnimg.cn/20201103114907317.png'>
+
+<h4 id="实装效果-1"><a href="#实装效果-1" class="headerlink" title="实装效果"></a>实装效果</h4><img src='https://img-blog.csdnimg.cn/20201103114943124.png'>
+
+<h3 id="任务详情"><a href="#任务详情" class="headerlink" title="任务详情"></a>任务详情</h3><p>涉及组件：</p>
+<ul>
+<li>Panel: [Size Box]、[Horizontal Box]、[Vertical Box]、[Overlay]、[Scroll Box]</li>
+<li>Common: [Border]、[Button]、[Text]、[Image]</li>
+</ul>
+<h4 id="层级面板-2"><a href="#层级面板-2" class="headerlink" title="层级面板"></a>层级面板</h4><img src='https://img-blog.csdnimg.cn/20201103115323410.png'>
+
+<h4 id="实装效果-2"><a href="#实装效果-2" class="headerlink" title="实装效果"></a>实装效果</h4><img src='https://img-blog.csdnimg.cn/2020110311543341.png'>
+
+<h2 id="任务提示界面W-QuestBorder"><a href="#任务提示界面W-QuestBorder" class="headerlink" title="任务提示界面W_QuestBorder"></a>任务提示界面W_QuestBorder</h2><h3 id="层级面板-3"><a href="#层级面板-3" class="headerlink" title="层级面板"></a>层级面板</h3><img src='https://img-blog.csdnimg.cn/20201103120105457.png'>
+
+<h3 id="实装效果-3"><a href="#实装效果-3" class="headerlink" title="实装效果"></a>实装效果</h3><img src='https://img-blog.csdnimg.cn/20201103120130439.png'>
+
+<h2 id="热键测试"><a href="#热键测试" class="headerlink" title="热键测试"></a>热键测试</h2><p>打开RPG_PlayerController，添加热键Tab响应事件，切入和切出任务系统主界面；<br><img src='https://img-blog.csdnimg.cn/20201103121909957.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020110311322945.png'><img src='https://img-blog.csdnimg.cn/20201103113402801.png'></p>
+
     </div>
 
     
@@ -368,13 +353,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/10/20/RPG-Dev-Log-7/" rel="prev" title="RPG Game开发日志(七)">
-      <i class="fa fa-chevron-left"></i> RPG Game开发日志(七)
+    <a href="/2020/11/01/AI-BehaviorTree/" rel="prev" title="游戏人工智能:从FSM到Behavior Tree">
+      <i class="fa fa-chevron-left"></i> 游戏人工智能:从FSM到Behavior Tree
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/10/23/RPG-Dev-Log-9/" rel="next" title="RPG Game开发日志(九)">
-      RPG Game开发日志(九) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -433,7 +415,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%90%9C%E5%AF%BB%E7%9B%AE%E6%A0%87"><span class="nav-number">1.1.</span> <span class="nav-text">创建搜寻目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E6%A0%87%E5%AE%9E%E4%BE%8B-%E8%97%8F%E5%AE%9D%E7%AE%B1"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建目标实例(藏宝箱)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E6%A0%87%E5%B0%8F%E5%9C%B0%E5%9B%BE%E6%8C%87%E7%A4%BA"><span class="nav-number">1.1.3.</span> <span class="nav-text">创建目标小地图指示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Money%E4%BA%92%E5%8A%A8"><span class="nav-number">1.2.</span> <span class="nav-text">Money互动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%B3%BB%E7%BB%9F%E4%B8%BB%E7%95%8C%E9%9D%A2W-Mission"><span class="nav-number">1.1.</span> <span class="nav-text">任务系统主界面W_Mission</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%B1%BB%E5%9E%8B%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">任务类型侧边栏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%82%E7%BA%A7%E9%9D%A2%E6%9D%BF"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">层级面板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E8%A3%85%E6%95%88%E6%9E%9C"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">实装效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%8A%A8%E7%94%BB"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">组件动画</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">任务列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%82%E7%BA%A7%E9%9D%A2%E6%9D%BF-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">层级面板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E8%A3%85%E6%95%88%E6%9E%9C-1"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">实装效果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E8%AF%A6%E6%83%85"><span class="nav-number">1.1.3.</span> <span class="nav-text">任务详情</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%82%E7%BA%A7%E9%9D%A2%E6%9D%BF-2"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">层级面板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E8%A3%85%E6%95%88%E6%9E%9C-2"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">实装效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%90%E7%A4%BA%E7%95%8C%E9%9D%A2W-QuestBorder"><span class="nav-number">1.2.</span> <span class="nav-text">任务提示界面W_QuestBorder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%82%E7%BA%A7%E9%9D%A2%E6%9D%BF-3"><span class="nav-number">1.2.1.</span> <span class="nav-text">层级面板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E8%A3%85%E6%95%88%E6%9E%9C-3"><span class="nav-number">1.2.2.</span> <span class="nav-text">实装效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E9%94%AE%E6%B5%8B%E8%AF%95"><span class="nav-number">1.3.</span> <span class="nav-text">热键测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
