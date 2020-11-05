@@ -475,6 +475,59 @@
       </tags>
   </entry>
   <entry>
+    <title>RPG Game开发日志(十四)</title>
+    <url>/2020/11/04/RPG-Dev-Log-14/</url>
+    <content><![CDATA[<p>涉及内容：大任务系统创建(续篇),蓝图UI任务数据绑定。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="创建W-MissionSubGoal"><a href="#创建W-MissionSubGoal" class="headerlink" title="创建W_MissionSubGoal"></a>创建W_MissionSubGoal</h2><ol>
+<li>创建控件W_MissionSubGoal，作为W_Mission中任务分支信息SubGoalInfoVerticalBox的子控件；<br><img src='https://img-blog.csdnimg.cn/20201105072242910.png'><img src='https://img-blog.csdnimg.cn/20201105072311908.png'></li>
+<li>创建函数Update，用于更新SubGoalText的文本内容(这部分蓝图可从W_SubGoal中的Update函数迁移过来)，并根据任务状态设置CurrentImage、SuccessImage、FailedImage的可视性，并在事件开始构造时调用；<img src='https://img-blog.csdnimg.cn/20201105072948473.png'></li>
+</ol>
+<h2 id="任务列表项W-QuestBorder"><a href="#任务列表项W-QuestBorder" class="headerlink" title="任务列表项W_QuestBorder"></a>任务列表项W_QuestBorder</h2><ol>
+<li>打开S_QuestInfo，添加属性SuggestedLevel(Integer)；</li>
+<li>打开W_QuestBorder，创建函数[void] Update()，用于绑定W_QuestBorder相关任务数据，包括QuestName、Frame、RegionText、LevelText、QuestTypeIcon等控件的文本、颜色、图标等，并且对QuestName控件的文本进行长度检测（任务名过长时缩略显示）；<img src='https://img-blog.csdnimg.cn/20201104232620180.png'></li>
+<li>创建自定义事件UpdateSuggestedLevelColor(PlayerLevel)并绑定至事件调度UpdateLevelQuest。每当角色升级时，调用此事件，更新任务推荐等级的文本颜色，为游戏玩家提供更好的视觉效果（具体方法与Enemy的头衔颜色更新类似，通过PlayerLevel/Suggested的值设置Alpha的值，从而设置颜色过渡）。最后调用Update函数，完成任务列表所有数据项的显示更新;<img src='https://img-blog.csdnimg.cn/20201104233806488.png'></li>
+</ol>
+<h2 id="任务系统主界面W-Mission"><a href="#任务系统主界面W-Mission" class="headerlink" title="任务系统主界面W_Mission"></a>任务系统主界面W_Mission</h2><ol>
+<li>打开W_QuestBorder，为AnimBorder创建划入(AddQuestBorder)和划出(RemoveQuestBorder)动画；<img src='https://img-blog.csdnimg.cn/20201104234440454.png'><img src='https://img-blog.csdnimg.cn/20201104234537409.png'></li>
+<li>创建宏ShowQuestBorder(Visible)，用于根据当前控件的可视性播放划入或划出动画；<img src='https://img-blog.csdnimg.cn/20201104234832171.png'></li>
+<li>为CurrentQuestButton、CompletedQuestButton、FailedQuestButton、HasQuestButton添加绑定事件：以CurrentQuestButton为例，当点击按钮时，隐藏CompletedScrollBox、FailedScrollBox、HasQuestScrollBox三个滚动框，并显示CurrentScrollBox（其余三个按钮同理）；<img src='https://img-blog.csdnimg.cn/2020110423525363.png'></li>
+<li>创建自定义事件UpdateSuggestedLevel(PlayerLevel)，用于设置任务详情中推荐等级的文本颜色（设置方法同上）,并将此自定义事件绑定至事件调度UpdateLevelForQuest；<img src='https://img-blog.csdnimg.cn/2020110500005662.png'><img src='https://img-blog.csdnimg.cn/20201105000436852.png'></li>
+<li>创建函数UpdateDescription，用于更新任务的具体描述，相关控件为DescriptionText，这里需要注意文本换行符的转义方式;<img src='https://img-blog.csdnimg.cn/2020110500113572.png'></li>
+<li>创建函数UpdateDetailWindow，用于绑定W_Mission任务详情的相关任务数据，包括QuestName、TypeText、QuestTypeImage、RegionText、SuggestedLevel、MoneyText、ExpText、PrestigeText等控件的文本、颜色和图标等，数据源为SelectedQuest(BP_MasterQuest，所有Quest的父类)中的QuestInfo，并调用函数UpdateSuggestedLevel(PlayerLevel)，UpdateDescription，GenerateSubGoals；<img src='https://img-blog.csdnimg.cn/20201105064907715.png'><img src='https://img-blog.csdnimg.cn/20201105065000665.png'><img src='https://img-blog.csdnimg.cn/20201105065053167.png'><img src='https://img-blog.csdnimg.cn/2020110506512638.png'></li>
+<li>创建函数GenerateSubGoals，用于更新SubGoalVerticalBox控件，绑定任务分支信息的相关数据，数据源为SelectedQuest(BP_MasterQuest)中的CompleteSubGoalInfo和CurrentSubGoalInfo;<img src='https://img-blog.csdnimg.cn/20201105071813592.png'></li>
+<li>创建枚举E_QuestState；<img src='https://img-blog.csdnimg.cn/20201105073933672.png'></li>
+<li>创建函数AddQuestBorder(Quest)，用于任务列表项W_QuestBorder(CurrentScrollBox等滚动框的子控件)的添加；<img src='https://img-blog.csdnimg.cn/20201105073719617.png'></li>
+<li>创建自定义事件OnQuestBorderClicked(QuestBorder)，绑定至W_QuestBorder中的按钮QuestBorderButton。当任务列表项被点击时，禁用该列表项按钮，并调用函数UpdateDetailWindow，完成任务详情的更新；<img src='https://img-blog.csdnimg.cn/20201105074414237.png'><img src='https://img-blog.csdnimg.cn/20201105074646874.png'></li>
+</ol>
+<h2 id="任务组件QuestManager"><a href="#任务组件QuestManager" class="headerlink" title="任务组件QuestManager"></a>任务组件QuestManager</h2><ol>
+<li>创建结构体S_CompletedSubGoalInfo；<img src='https://img-blog.csdnimg.cn/20201105065535758.png'></li>
+<li>创建枚举E_SubGoalState；<img src='https://img-blog.csdnimg.cn/20201105065701141.png'></li>
+</ol>
+<h2 id="任务父类BP-MasterQuest"><a href="#任务父类BP-MasterQuest" class="headerlink" title="任务父类BP_MasterQuest"></a>任务父类BP_MasterQuest</h2><ol>
+<li>打开BP_MasterQuest，重新设置CompletedSubGoalsInfo变量类型为S_CompletedSubGoalInfo（原来为S_SubGoalInfo，即扩展SubGoalIndex、Succesful两个引脚);</li>
+<li>函数功能扩展：函数CompleteSubGoal(SubGoalIndex)变更为CompleteSubGoal(SubGoalIndex,Success?)，传入任务是否成功完成的参数，以便于CompletedSubGoalsInfo变量的更新;</li>
+<li>函数功能扩展：函数SetupStartingSubGoals新增Description的数据更新，数据源为QuestInfo;</li>
+<li>函数功能扩展：函数AddQuest(QuestClass)变更为AddQuest(QuestClass,DirectlyStart)，根据当前任务数量和DirectlyStart的布尔值判断是否自动接取任务。若自动接取任务，则播放动画PlayQuest和PlaySubGoal(来着W_Quest)；</li>
+<li>关联事件修改：打开事件图表，修改自定义事件UpdateCompletedSubGoal；</li>
+</ol>
+<h2 id="任务实例设置"><a href="#任务实例设置" class="headerlink" title="任务实例设置"></a>任务实例设置</h2><h3 id="主线任务"><a href="#主线任务" class="headerlink" title="主线任务"></a>主线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080724734.png'>
+
+<h3 id="支线任务"><a href="#支线任务" class="headerlink" title="支线任务"></a>支线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080758220.png'>
+
+<h3 id="副本任务"><a href="#副本任务" class="headerlink" title="副本任务"></a>副本任务</h3><img src='https://img-blog.csdnimg.cn/20201105080823342.png'>
+
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201105082833827.png'><img src='https://img-blog.csdnimg.cn/20201105082916789.png'><img src='https://img-blog.csdnimg.cn/20201105083011449.png'><img src='https://img-blog.csdnimg.cn/20201105082938769.png'></p>
+]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RPG Game开发日志(二)</title>
     <url>/2020/10/12/RPG-Dev-Log-2/</url>
     <content><![CDATA[<p>涉及内容：UI血条创建；绑定角色属性等。</p>
