@@ -43,8 +43,8 @@ tags: UE_4.22
 ## W_SubGoal相关
 
 1. 控件添加：添加FailedImage，对应SuccessImage;<img src='https://img-blog.csdnimg.cn/20201108020420640.png'>
-2. 函数功能扩展：修改函数[void]DisableButton()为[void]DisableButton(Success?)，当任务完成时显示SuccessImage，任务失败时显示FailedImage;<img src='https://img-blog.csdnimg.cn/2020110802054174.png'>
-3. 函数功能扩展：修改函数Update，添加CurrentSubGoal索引查询，并设置为HuntedIndex;<img src='https://img-blog.csdnimg.cn/20201108023744297.png'><img src='https://img-blog.csdnimg.cn/20201108032659829.png'>
+2. 函数功能扩展：修改函数[void]DisableButton()为[void]DisableButton(Success?)，当任务完成时显示SuccessImage，任务失败时显示FailedImage;<img src='https://img-blog.csdnimg.cn/2020110916482665.png'>
+3. 函数功能扩展：修改函数Update，添加CurrentSubGoal索引查询，并设置为HuntedIndex。添加SubGoalState，并对其作一个Select，以更新SubGoal信息（注意，如果此处不作select，SubGoal当前击杀/寻找数会循环0,1,2）;<img src='https://img-blog.csdnimg.cn/20201108023744297.png'><img src='https://img-blog.csdnimg.cn/20201109164737918.png'>
 
 
 
@@ -52,7 +52,7 @@ tags: UE_4.22
 
 1. 创建函数[Boolean]SelectInMission()，用于判断SelectedQuest是否为CurrentQuest；<img src='https://img-blog.csdnimg.cn/20201108014943318.png'>
 2. 修改函数SetupStartingSubGoals，根据StartSubGoalIndices的数组长度对CurrentHuntedAmount数组进行Resize;<img src='https://img-blog.csdnimg.cn/20201108015344389.png'>
-3. 修改函数[void]CompleteSubGoal(SubGoalIndex，Success?)，将传入参数Success提升为本地变量，并传入函数DisableButton(Success?)；<img src='https://img-blog.csdnimg.cn/20201108230809793.png'><img src='https://img-blog.csdnimg.cn/20201108230832816.png'><img src='https://img-blog.csdnimg.cn/20201108230916791.png'>
+3. 修改函数[void]CompleteSubGoal(SubGoalIndex，Success?)，将传入参数Success提升为本地变量，并传入函数DisableButton(Success?)；<img src='https://img-blog.csdnimg.cn/20201109165028882.png'><img src='https://img-blog.csdnimg.cn/20201109165053562.png'><img src='https://img-blog.csdnimg.cn/20201109165133515.png'><img src='https://img-blog.csdnimg.cn/20201109165224466.png'>
 4. 修改自定义事件UpdateCompletedSubGoal，初始化CurrentHuntedAmout数组为0，修改SubGoal的延迟更新条件;<img src='https://img-blog.csdnimg.cn/2020110802323032.png'><img src='https://img-blog.csdnimg.cn/20201108023250768.png'>
 
 
@@ -92,16 +92,22 @@ tags: UE_4.22
 
 # 最终效果展示
 
-<img src='https://img-blog.csdnimg.cn/20201108230013575.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201108230045246.png'>
-
 ## 【子任务】狩猎小鬼完成效果
 
-（Bug尚未解决，后续补上）
+<img src='https://img-blog.csdnimg.cn/20201109160208908.png'><img src='https://img-blog.csdnimg.cn/202011091641213.png'>
 
 ## 【子任务】寻找小麦完成效果
 
 <img src='https://img-blog.csdnimg.cn/20201108230246514.png'>
 
 <img src='https://img-blog.csdnimg.cn/20201108230310157.png'>
+
+## 【子任务】完成前后对比
+
+<img src='https://img-blog.csdnimg.cn/20201108230013575.png'>
+
+<img src='https://img-blog.csdnimg.cn/20201108230045246.png'>
+
+<img src='https://img-blog.csdnimg.cn/2020110916421358.png'>
+
+<img src='https://img-blog.csdnimg.cn/20201109164242272.png'>
