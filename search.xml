@@ -844,6 +844,92 @@
       </tags>
   </entry>
   <entry>
+    <title>RPG Game开发日志(十八)</title>
+    <url>/2020/11/16/RPG-Dev-Log-18/</url>
+    <content><![CDATA[<p>涉及内容：脚部IK制作。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="脚部IK制作"><a href="#脚部IK制作" class="headerlink" title="脚部IK制作"></a>脚部IK制作</h2><h3 id="事件图表"><a href="#事件图表" class="headerlink" title="事件图表"></a>事件图表</h3><h4 id="相关宏"><a href="#相关宏" class="headerlink" title="相关宏"></a>相关宏</h4><ol>
+<li><p>创建宏</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Start(Vector),End(Vector)]TraceStart&#x2F;End(X(Float),Y(Float),Z(Float))</span><br></pre></td></tr></table></figure>
+
+<p>用于计算射线检测的起点和终点位置;<img src='https://img-blog.csdnimg.cn/20201116155309202.png'></p>
+</li>
+<li><p>创建宏</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[ClampedOffset(Vector)]ClampOffset(Roll(Float),Pitch(Float),Z(Float))</span><br></pre></td></tr></table></figure>
+
+<p>用于限制X,Y,Z轴的偏移距离；<img src='https://img-blog.csdnimg.cn/20201116161451526.png'></p>
+</li>
+<li><p>创建宏</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Return(Vector)]InterpOffsets(Current(Vector),Target(Vector))</span><br></pre></td></tr></table></figure>
+<p>用于从Current到Target插值计算X,Y,Z轴偏移量;<img src='https://img-blog.csdnimg.cn/20201116164750110.png'></p>
+<blockquote>
+<p><strong><a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/Math/FMath/Vector2DInterpTo/index.html">Vector2DInterpTo</a></strong></p>
+<p>Interpolate vector2D from Current to Target.</p>
+<p><strong><a href="https://docs.unrealengine.com/en-US/API/Runtime/Core/Math/FMath/FInterpTo/index.html">FInterpTo</a></strong></p>
+<p>Interpolate float from Current to Target.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">CORE_API <span class="keyword">float</span> <span class="title">FMath::FInterpTo</span><span class="params">( <span class="keyword">float</span> Current, <span class="keyword">float</span> Target, <span class="keyword">float</span> DeltaTime, <span class="keyword">float</span> InterpSpeed )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// If no interp speed, jump to target value</span></span><br><span class="line">    <span class="keyword">if</span>( InterpSpeed &lt;= <span class="number">0.f</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Distance to reach</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">float</span> Dist = Target - Current;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If distance is too small, just set the desired location</span></span><br><span class="line">    <span class="keyword">if</span>( FMath::Square(Dist) &lt; SMALL_NUMBER )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Delta Move, Clamp so we do not over shoot.</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">float</span> DeltaMove = Dist * FMath::Clamp&lt;<span class="keyword">float</span>&gt;(DeltaTime * InterpSpeed, <span class="number">0.f</span>, <span class="number">1.f</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Current + DeltaMove;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h4><ol>
+<li><p>折叠函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[OutHit_bBlockingHit(Boolean),ClampedOffset(Vector)]TraceFootIK(A_Z(Float),B_X(Float),B_Y(Float))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong><a href="https://docs.unrealengine.com/en-US/BlueprintAPI/Collision/LineTraceByChannel/index.html">LineTraceByChannel</a></strong></p>
+<p>Does a collision trace along the given line and returns the first blocking hit encountered. This trace finds the objects that RESPONDS to the given TraceChannel</p>
+</blockquote>
+<p>调用宏TraceStart/End和函数LineTraceByChannel，计算脚部Roll,Pitch轴的Rotation偏移量和Z轴偏移量，并调用宏ClampOffset，限制偏移范围。具体计算方式为：</p>
+<p>Roll = arctan(OutHitNormal.y/OutHitNormal.z)</p>
+<p>Pitch = arctan(OutHitNormal.x/OutHitNormal.z)</p>
+<p>z = WorldLoaction.z - OutHitLocation.z；<img src='https://img-blog.csdnimg.cn/20201116163019606.png'></p>
+</li>
+<li><p>函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[void]FootIK()</span><br></pre></td></tr></table></figure>
+
+<p>脚部IK数值计算汇总（此函数在EventBlueprintUpdateAnimation中调用）：当角色不在跳跃状态时，获取foot_l和foot_r的骨骼位置，调用函数TraceFootIK，根据Hit布尔值设置LeftFootOffsetsTarget的值(ClampedOffset or Zero)。循环调用宏InterpOffsets实现脚部偏移过渡效果，并设置Pelvis.z=Min(LeftFootOffset.z,RightFootOffset.z);</p>
+<img src='https://img-blog.csdnimg.cn/2020111617001856.png'>
+
+<img src='https://img-blog.csdnimg.cn/2020111616594744.png'>
+
+<img src='https://img-blog.csdnimg.cn/20201116165832569.png'>
+
+</li>
+</ol>
+<h3 id="动画图表"><a href="#动画图表" class="headerlink" title="动画图表"></a>动画图表</h3><ol>
+<li>现有Pose：Base—&gt;UpBody—&gt;LocalPose;<img src='https://img-blog.csdnimg.cn/20201116170745543.png'></li>
+<li>打开骨骼树，添加虚拟骨骼VB thigh_l_calf_l和VB thigh_r_calf_r；<img src='https://img-blog.csdnimg.cn/20201116171006740.png'></li>
+<li>添加Pose：LocalPose—&gt;FootIKPose</li>
+</ol>
+<ul>
+<li><p>pelvis</p>
+<img src='https://img-blog.csdnimg.cn/20201116172111319.png'>
+</li>
+<li><p>ik_foot_l &amp; VB thigh_l_calf_l</p>
+<p><img src='https://img-blog.csdnimg.cn/20201116172150724.png'><img src='https://img-blog.csdnimg.cn/20201116172216387.png'></p>
+</li>
+<li><p>ik_foot_r &amp; VB thigh_r_calf_r</p>
+<p><img src='https://img-blog.csdnimg.cn/20201116172256840.png'><img src='https://img-blog.csdnimg.cn/2020111617232282.png'></p>
+</li>
+</ul>
+<img src='https://img-blog.csdnimg.cn/20201116172648890.png'>
+
+<ol start="4">
+<li>最后按布尔输出混合姿势<img src='https://img-blog.csdnimg.cn/20201116172617594.png'>  
+
+</li>
+</ol>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="添加前Shinbi右脚悬空"><a href="#添加前Shinbi右脚悬空" class="headerlink" title="添加前Shinbi右脚悬空"></a>添加前Shinbi右脚悬空</h2><img src='https://img-blog.csdnimg.cn/20201116152721533.png'>
+
+<h2 id="添加后Shinbi右脚落地"><a href="#添加后Shinbi右脚落地" class="headerlink" title="添加后Shinbi右脚落地"></a>添加后Shinbi右脚落地</h2><img src='https://img-blog.csdnimg.cn/20201116160346496.png'>]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RPG Game开发日志(二)</title>
     <url>/2020/10/12/RPG-Dev-Log-2/</url>
     <content><![CDATA[<p>涉及内容：UI血条创建；绑定角色属性等。</p>
