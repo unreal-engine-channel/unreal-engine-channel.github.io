@@ -930,6 +930,80 @@
       </tags>
   </entry>
   <entry>
+    <title>RPG Game开发日志(十九)</title>
+    <url>/2020/11/17/RPG-Dev-Log-19/</url>
+    <content><![CDATA[<p>涉及内容：背包系统数据绑定，服务端客户端初讲，RPC。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="背包系统数据绑定"><a href="#背包系统数据绑定" class="headerlink" title="背包系统数据绑定"></a>背包系统数据绑定</h2><h3 id="相关枚举"><a href="#相关枚举" class="headerlink" title="相关枚举"></a>相关枚举</h3><ol>
+<li>创建枚举E_ItemType [其他物品,武器装备,消耗物品,任务物品]，用于设置物品类别；</li>
+<li>创建枚举E_QualityType [Poor,Common,Uncommon,Rare,Epic,Legendary]，用于设置物品品级；</li>
+</ol>
+<h3 id="相关结构体"><a href="#相关结构体" class="headerlink" title="相关结构体"></a>相关结构体</h3><ol>
+<li><p>创建结构体S_InventoryItem，用于设置物品的ID、图标、名字、描述、品级、类别、数量、价值、是否可堆叠、堆叠上限、是否可拖拽等信息；<img src='https://img-blog.csdnimg.cn/2020111716025619.png'></p>
+</li>
+<li><p>创建结构体S_InventoryID，用于设置物品ID等从服务端发送过来的简单字符串；<img src='https://img-blog.csdnimg.cn/20201117171747606.png'></p>
+</li>
+<li><p>创建结构体S_QualityColor，用于设置不同品级的物品颜色；<img src='https://img-blog.csdnimg.cn/20201117181151413.png'></p>
+</li>
+</ol>
+<h3 id="创建数据表ItemList"><a href="#创建数据表ItemList" class="headerlink" title="创建数据表ItemList"></a>创建数据表ItemList</h3><ol>
+<li>选择S_InventoryItem，创建数据表ItemList;<img src='https://img-blog.csdnimg.cn/20201117161557370.png'><img src='https://img-blog.csdnimg.cn/20201117161720162.png'></li>
+<li>创建任务物品Food_Grain；<img src='https://img-blog.csdnimg.cn/20201117161014212.png'></li>
+<li>创建其他物品Rock；<img src='https://img-blog.csdnimg.cn/20201117161122363.png'></li>
+<li>创建消耗物品Food_Cupcake;<img src='https://img-blog.csdnimg.cn/2020111716124483.png'></li>
+<li>创建消耗物品Bush;<img src='https://img-blog.csdnimg.cn/20201117161320380.png'></li>
+</ol>
+<h3 id="创建组件C-Inventory"><a href="#创建组件C-Inventory" class="headerlink" title="创建组件C_Inventory"></a>创建组件C_Inventory</h3><ol>
+<li>创建函数[Success(Boolean)] InitializeInventory(InventorySize(Integer))，用于初始化Inventory(S_InventoryItem[])数组;<img src='https://img-blog.csdnimg.cn/20201117162452567.png'></li>
+<li>创建函数[Inventory(S_InventoryItem[])] GetInventoryItem()，用于获取Inventory数组；<img src='https://img-blog.csdnimg.cn/20201117163625345.png'></li>
+<li>创建函数[Success(Boolean)] SetInventoryItem(Index(Integer),Item(S_InventoryItem))，用于设置Inventory[Index]物品属性；<img src='https://img-blog.csdnimg.cn/20201117162831113.png'></li>
+<li>创建函数[Success(Boolean)]LoadInventoryItem (InventorySize(Integer),TargetArray(S_InventoryItem[]))，调用函数InitializeInventory和SetInventoryItem，加载所有物品属性；<img src='https://img-blog.csdnimg.cn/20201117164028913.png'></li>
+</ol>
+<h3 id="创建组件C-InventoryManager"><a href="#创建组件C-InventoryManager" class="headerlink" title="创建组件C_InventoryManager"></a>创建组件C_InventoryManager</h3><ol>
+<li>创建函数[Void]Initialize_UI_PC_Main()，用于初始化PC_Main(W_PC_Main)；<img src='https://img-blog.csdnimg.cn/20201117172454711.png'></li>
+<li>创建函数[Void]InitializePlayerInventoryComponent，用于初始化PlayerInventory(C_Inventory)；<img src='https://img-blog.csdnimg.cn/20201117172848864.png'></li>
+<li>创建函数[Void]LoadInventory(),用于根据背包物品属性创建W_InventorySlot实例，并添加到W_InventoryWindow内的InventorySlotWrapBox内，创建的实例个数由InventorySize决定。最后调用服务端事件Server_RefreshInventory；<img src='https://img-blog.csdnimg.cn/20201117174722222.png'></li>
+<li>创建函数[Void]ClearInventorySlotItem()，用于初始化W_InventorySlot中的变量ItemInformation；<img src='https://img-blog.csdnimg.cn/20201117180831721.png'></li>
+<li>创建函数[Void]SetInventorySlotItem()，用于设置InventorySlot[SlotIndex]的ItemInformation属性;<img src='https://img-blog.csdnimg.cn/20201117182259271.png'></li>
+<li>创建函数[Void]RefreshInventorySlots()，调用客户端事件Client_SetInventorySlotItem和Client_SetInventorySlotItem，刷新背包数据并更新Slot；<img src='https://img-blog.csdnimg.cn/20201117182927647.png'><img src='https://img-blog.csdnimg.cn/20201117182532491.png'></li>
+<li>创建函数[Void]OpenInventoryWindow()，用于显示背包窗口；<img src='https://img-blog.csdnimg.cn/20201117183626422.png'></li>
+<li>创建函数[Void]CloseInventoryWindow()，用于隐藏背包窗口；<img src='https://img-blog.csdnimg.cn/20201117183710298.png'></li>
+</ol>
+<h3 id="W-InventorySlot属性绑定"><a href="#W-InventorySlot属性绑定" class="headerlink" title="W_InventorySlot属性绑定"></a>W_InventorySlot属性绑定</h3><ol>
+<li>物品边框BrushColor属性绑定；<img src='https://img-blog.csdnimg.cn/20201117181452720.png'></li>
+<li>物品图表BrushImage属性绑定；<img src='https://img-blog.csdnimg.cn/20201117181717696.png'></li>
+<li>物品数量Text属性绑定；<img src='https://img-blog.csdnimg.cn/20201117181817509.png'></li>
+</ol>
+<h2 id="RPC-Remote-Procedure-Call"><a href="#RPC-Remote-Procedure-Call" class="headerlink" title="RPC(Remote Procedure Call)"></a>RPC(Remote Procedure Call)</h2><h3 id="RPG-PlayerController"><a href="#RPG-PlayerController" class="headerlink" title="RPG_PlayerController"></a>RPG_PlayerController</h3><ol>
+<li><p>添加组件C_Inventory和C_InventoryManager；</p>
+</li>
+<li><p>勾选Replication&gt;Replicates，将自身复制到服务端；</p>
+</li>
+<li><p>创建函数Server_LoadPlayerItem，限制事件执行位置位于服务端，本地创建InventoryID数组模拟解包后的数据（此处省略了服务端向客户端发送数据包的过程）。根据从服务器获取的InventoryID，从本地ItemList加载物品属性，并存入本地变量LocalInventory。添加完成后，调用C_Inventory的函数LoadInventoryItem加载背包物品，传入的参数InventorySize来自C_InventoryManager的变量InventorySlot(Replicated)；</p>
+<p><img src='https://img-blog.csdnimg.cn/20201117171957372.png'><img src='https://img-blog.csdnimg.cn/20201117171456274.png'></p>
+</li>
+<li><p>在EventBeginPlay中调用函数InitializePlayerInventoryComponent初始化C_Inventory，随后调用ServerLoadPlayerItem从服务端加载（简单）数据，然后调用函数Initialize_UI_PC_Main初始化W_PC_Main，最后调用事件Client_LoadInventory，从客户端加载（更为详细的）数据;<img src='https://img-blog.csdnimg.cn/2020111717564280.png'></p>
+</li>
+<li><p>删除BP_Player中的热键I事件，更改为在RPG_PlayerController中调用，根据InventoryManager中的IsInventoryOpen布尔值，判断是调用客户端事件Client_OpenInventory，还是调用Client_ClosenInventory；<img src='https://img-blog.csdnimg.cn/2020111718430680.png'></p>
+</li>
+</ol>
+<h3 id="Run-on-Server-Reliable"><a href="#Run-on-Server-Reliable" class="headerlink" title="Run on Server(Reliable)"></a>Run on Server(Reliable)</h3><h4 id="Server-InitializeInventory"><a href="#Server-InitializeInventory" class="headerlink" title="Server_InitializeInventory"></a>Server_InitializeInventory</h4><p>在C_Inventory事件图表中创建，调用函数InitializeInventory；<img src='https://img-blog.csdnimg.cn/20201117164840990.png'></p>
+<h4 id="Server-RefreshInventory"><a href="#Server-RefreshInventory" class="headerlink" title="Server_RefreshInventory"></a>Server_RefreshInventory</h4><p>在C_InventoryManager事件图表中创建，调用函数RefreshInventorySlots；<img src='https://img-blog.csdnimg.cn/20201117180225333.png'></p>
+<h3 id="Run-on-owning-Client-Reliable"><a href="#Run-on-owning-Client-Reliable" class="headerlink" title="Run on owning Client(Reliable)"></a>Run on owning Client(Reliable)</h3><h4 id="Client-LoadInventory"><a href="#Client-LoadInventory" class="headerlink" title="Client_LoadInventory"></a>Client_LoadInventory</h4><p>在C_InventoryManager事件图表中创建，调用函数LoadInventory;<img src='https://img-blog.csdnimg.cn/20201117173447637.png'></p>
+<h4 id="Client-ClearInventorySlotItem"><a href="#Client-ClearInventorySlotItem" class="headerlink" title="Client_ClearInventorySlotItem"></a>Client_ClearInventorySlotItem</h4><p>在C_InventoryManager事件图表中创建，调用函数ClearInventorySlotItem;<img src='https://img-blog.csdnimg.cn/2020111718045423.png'></p>
+<h4 id="Client-SetInventorySlotItem"><a href="#Client-SetInventorySlotItem" class="headerlink" title="Client_SetInventorySlotItem"></a>Client_SetInventorySlotItem</h4><p>在C_InventoryManager事件图表中创建，调用函数SetInventorySlotItem;<img src='https://img-blog.csdnimg.cn/20201117182358410.png'></p>
+<h4 id="Client-OpenInventory"><a href="#Client-OpenInventory" class="headerlink" title="Client_OpenInventory"></a>Client_OpenInventory</h4><p>在C_InventoryManager事件图表中创建，调用函数OpenInventoryWindow;<img src='https://img-blog.csdnimg.cn/20201117183848642.png'></p>
+<h4 id="Client-CloseInventory"><a href="#Client-CloseInventory" class="headerlink" title="Client_CloseInventory"></a>Client_CloseInventory</h4><p>在C_InventoryManager事件图表中创建，调用函数CloseInventoryWindow;<img src='https://img-blog.csdnimg.cn/20201117183911582.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201117155229532.png'>]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RPG Game开发日志(二)</title>
     <url>/2020/10/12/RPG-Dev-Log-2/</url>
     <content><![CDATA[<p>涉及内容：UI血条创建；绑定角色属性等。</p>
