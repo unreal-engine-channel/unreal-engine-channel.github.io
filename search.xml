@@ -1056,6 +1056,82 @@
       </tags>
   </entry>
   <entry>
+    <title>RPG Game开发日志(二十)</title>
+    <url>/2020/11/18/RPG-Dev-Log-20/</url>
+    <content><![CDATA[<p>涉及内容：ToolTip，拖拽功能，RPC。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="修复W-Window关闭按钮"><a href="#修复W-Window关闭按钮" class="headerlink" title="修复W_Window关闭按钮"></a>修复W_Window关闭按钮</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>创建蓝图接口BPI_HUDInterface;</li>
+<li>创建接口函数[Void]UICloseInventoryWindow();</li>
+</ol>
+<h3 id="W-Window相关"><a href="#W-Window相关" class="headerlink" title="W_Window相关"></a>W_Window相关</h3><ol>
+<li>修改CloseButton点击事件，更改为调用RPG_PlayerController中的接口事件UICloseInventoryWindow;<img src='https://img-blog.csdnimg.cn/20201118172800898.png'></li>
+</ol>
+<h3 id="RPG-PlayerController相关"><a href="#RPG-PlayerController相关" class="headerlink" title="RPG_PlayerController相关"></a>RPG_PlayerController相关</h3><ol>
+<li>实现接口函数事件EventUICloseInventoryWindow，调用服务端事件Client_CloseInventory；<img src='https://img-blog.csdnimg.cn/20201118172537733.png'></li>
+</ol>
+<h2 id="使用ToolTip添加物品描述"><a href="#使用ToolTip添加物品描述" class="headerlink" title="使用ToolTip添加物品描述"></a>使用ToolTip添加物品描述</h2><h3 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>创建结构体E_UseType [Health,Mana,HealthAndMana]；</li>
+<li>打开结构体S_InventoryItem，新增Health、Mana、Duration、UseType物品属性；<img src='https://img-blog.csdnimg.cn/20201118153607658.png'></li>
+<li>打开蓝图接口BPI_HUDInterface创建接口函数，[InventoryInformation(S_InventoryItem)]GetToolTip(ID(Name));</li>
+<li>打开ItemList，新增物品Health_Red和Mana_Blue，用于测试ToolTip；<img src='https://img-blog.csdnimg.cn/20201118155809237.png'><img src='https://img-blog.csdnimg.cn/20201118155834342.png'></li>
+</ol>
+<h3 id="W-ToolTip相关"><a href="#W-ToolTip相关" class="headerlink" title="W_ToolTip相关"></a>W_ToolTip相关</h3><ol>
+<li>创建控件W_ToolTip，添加物品名称、类别、使用信息、描述信息、价格；<img src='https://img-blog.csdnimg.cn/2020111815241557.png'></li>
+<li>对NameText控件添加文本内容和颜色的绑定函数；<img src='https://img-blog.csdnimg.cn/20201118152520842.png'><img src='https://img-blog.csdnimg.cn/20201118153029489.png'></li>
+<li>对ItemType控件添加文本内容的绑定函数；<img src='https://img-blog.csdnimg.cn/20201118153142211.png'></li>
+<li>对UseInfo控件添加文本内容的绑定函数；<img src='https://img-blog.csdnimg.cn/20201118153928751.png'></li>
+<li>对Description控件添加文本内容的绑定函数；<img src='https://img-blog.csdnimg.cn/2020111815414278.png'></li>
+<li>对ValueText控件添加文本内容的绑定函数；<img src='https://img-blog.csdnimg.cn/20201118154310493.png'></li>
+</ol>
+<h3 id="W-InventorySlot相关"><a href="#W-InventorySlot相关" class="headerlink" title="W_InventorySlot相关"></a>W_InventorySlot相关</h3><ol>
+<li>为SizeBox的ToolTipWidget添加绑定函数；<img src='https://img-blog.csdnimg.cn/20201118155639966.png'></li>
+</ol>
+<h3 id="RPG-PlayerController相关-1"><a href="#RPG-PlayerController相关-1" class="headerlink" title="RPG_PlayerController相关"></a>RPG_PlayerController相关</h3><ol>
+<li>点击ClassSettings，将蓝图接口BPI_HUDInterface添加进来；</li>
+<li>实现接口函数GetToolTip，根据物品ID从ItemList中获取物品信息；<img src='https://img-blog.csdnimg.cn/20201118155108526.png'></li>
+<li>修改变量InventoryID，将新增的物品Health_Red和Mana_Blue添加进来；<img src='https://img-blog.csdnimg.cn/20201118160116361.png'></li>
+</ol>
+<h2 id="拖拽功能"><a href="#拖拽功能" class="headerlink" title="拖拽功能"></a>拖拽功能</h2><h3 id="准备工作-2"><a href="#准备工作-2" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>打开蓝图接口BPI_HUDInterface，创建接口函数[Void]UIMoveInventoryItem(FromInventoryIndex(Integer),ToInventoryIndex(Integer));</li>
+</ol>
+<h3 id="W-DragItem相关"><a href="#W-DragItem相关" class="headerlink" title="W_DragItem相关"></a>W_DragItem相关</h3><ol>
+<li>创建控件W_DragItem，用于拖拽物品时生成的图标；<img src='https://img-blog.csdnimg.cn/20201118160913939.png'></li>
+<li>对Icon控件的BurshImage添加绑定函数；<img src='https://img-blog.csdnimg.cn/20201118161148857.png'></li>
+<li>对Text控件的文本内容添加绑定函数；<img src='https://img-blog.csdnimg.cn/20201118161259306.png'></li>
+</ol>
+<h3 id="W-InventorySlot相关-1"><a href="#W-InventorySlot相关-1" class="headerlink" title="W_InventorySlot相关"></a>W_InventorySlot相关</h3><ol>
+<li>为UseButton内的Border添加OnMouseButtonDown绑定事件，监控鼠标左键；<img src='https://img-blog.csdnimg.cn/20201118160454867.png'></li>
+<li>创建蓝图BP_DragDrop，选取父类为DragDropOperation，并创建变量InventoryItem(S_InventoryItem)和InventoryIndex(Integer)；</li>
+<li>创建重载函数OnDragDetected，当鼠标左键拖拽物品时生成相应的拖拽图标(W_DragItem)实例，并创建拖拽Operation实例(BP_DragDrop)，将物品信息和物品索引保存在BP_DragDrop中；<img src='https://img-blog.csdnimg.cn/20201118162311682.png'></li>
+<li>创建重载函数OnDrop，当拖拽后鼠标左键释放后，从BP_DragDrop中获取InventoryIndex(FromInventoryIndex)和InventorySlotIndex(ToInventoryIndex)，并调用接口函数UIMoveInventoryItem；<img src='https://img-blog.csdnimg.cn/2020111816420391.png'></li>
+</ol>
+<h3 id="C-Inventory相关"><a href="#C-Inventory相关" class="headerlink" title="C_Inventory相关"></a>C_Inventory相关</h3><ol>
+<li>创建函数[Output(S_InventoryItem)]GetInventoryItem(InventoryIndex(Integer))，根据物品索引获取物品信息；<img src='https://img-blog.csdnimg.cn/2020111816541335.png'></li>
+</ol>
+<h3 id="C-InventoryManager相关"><a href="#C-InventoryManager相关" class="headerlink" title="C_InventoryManager相关"></a>C_InventoryManager相关</h3><ol>
+<li>创建函数[Void]ClearInventoryIndexItem(ToInventoryIndex(Integer))，用于根据索引删除对应插槽处的物品；<img src='https://img-blog.csdnimg.cn/20201118170944877.png'></li>
+<li>创建函数[Void]AddItem(Inventory(C_Inventory),ToInventoryIndex(Integer),InventoryItem(S_InventoryItem))，调用客户端事件Client_SetInventorySlotItem；<img src='https://img-blog.csdnimg.cn/20201118170440602.png'></li>
+<li>创建函数[Void]RemoveItem(Inventory(C_Inventory),FromInventoryIndex(Integer))，调用客户端事件Client_ClearInventoryIndexItem；<img src='https://img-blog.csdnimg.cn/20201118171358351.png'></li>
+<li>创建函数[Void]MoveItem(FromInventoryIndex(Integer),ToInventoryIndex(Integer))，调用C_Inventory的GetInventoryItem获取From和To插槽处的物品信息（可能为空）。若为空，则调用AddItem和RemoveItem函数，实现物品拖拽后背包UI更新；<img src='https://img-blog.csdnimg.cn/20201118165913588.png'><img src='https://img-blog.csdnimg.cn/20201118165939535.png'></li>
+</ol>
+<h3 id="RPG-PlayerController相关-2"><a href="#RPG-PlayerController相关-2" class="headerlink" title="RPG_PlayerController相关"></a>RPG_PlayerController相关</h3><ol>
+<li>实现接口函数事件EventUIMoveInventoryItem，调用服务端事件Server_MoveInventoryItem；<img src='https://img-blog.csdnimg.cn/20201118172144413.png'></li>
+</ol>
+<h2 id="RPC-Remote-Procedure-Call"><a href="#RPC-Remote-Procedure-Call" class="headerlink" title="RPC(Remote Procedure Call)"></a>RPC(Remote Procedure Call)</h2><h3 id="Run-on-Server-Reliable"><a href="#Run-on-Server-Reliable" class="headerlink" title="Run on Server(Reliable)"></a>Run on Server(Reliable)</h3><h4 id="Server-MoveInventoryItem"><a href="#Server-MoveInventoryItem" class="headerlink" title="Server_MoveInventoryItem"></a>Server_MoveInventoryItem</h4><p>在C_InventoryManager事件图表中创建，调用函数MoveItem；<img src='https://img-blog.csdnimg.cn/20201118164516806.png'></p>
+<h3 id="Run-on-owning-Client-Reliable"><a href="#Run-on-owning-Client-Reliable" class="headerlink" title="Run on owning Client(Reliable)"></a>Run on owning Client(Reliable)</h3><h4 id="Client-ClearInventoryIndexItem"><a href="#Client-ClearInventoryIndexItem" class="headerlink" title="Client_ClearInventoryIndexItem"></a>Client_ClearInventoryIndexItem</h4><p>在C_InventoryManager事件图表中创建，调用函数ClearInventoryIndexItem；<img src='https://img-blog.csdnimg.cn/20201118170841858.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="物品描述"><a href="#物品描述" class="headerlink" title="物品描述"></a>物品描述</h2><img src='https://img-blog.csdnimg.cn/20201118151239939.png'>
+
+<h2 id="拖拽效果"><a href="#拖拽效果" class="headerlink" title="拖拽效果"></a>拖拽效果</h2><img src='https://img-blog.csdnimg.cn/20201118151448629.png'>]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RPG Game开发日志(三)</title>
     <url>/2020/10/13/RPG-Dev-Log-3/</url>
     <content><![CDATA[<p>涉及内容：人物等级属性绑定，经验条动画效果等。</p>
