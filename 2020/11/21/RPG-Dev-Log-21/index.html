@@ -21,51 +21,42 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="涉及内容：大任务系统创建(续篇),蓝图UI任务数据绑定。">
+  <meta name="description" content="涉及内容：创建NPC交易窗口，RPC。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RPG Game开发日志(十四)">
-<meta property="og:url" content="http://example.com/2020/11/04/RPG-Dev-Log-14/index.html">
+<meta property="og:title" content="RPG Game开发日志()">
+<meta property="og:url" content="http://example.com/2020/11/21/RPG-Dev-Log-21/index.html">
 <meta property="og:site_name" content="unreal-engine-channel">
-<meta property="og:description" content="涉及内容：大任务系统创建(续篇),蓝图UI任务数据绑定。">
+<meta property="og:description" content="涉及内容：创建NPC交易窗口，RPC。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105072242910.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105072311908.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105072948473.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104232620180.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104233806488.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104234440454.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104234537409.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201104234832171.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110423525363.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110500005662.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105000436852.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110500113572.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105064907715.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105065000665.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105065053167.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020110506512638.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105071813592.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105073933672.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105073719617.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105074414237.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105074646874.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105065535758.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105065701141.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105080724734.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105080758220.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105080823342.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105082833827.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105082916789.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105083011449.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20201105082938769.png">
-<meta property="article:published_time" content="2020-11-04T15:01:43.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121180731205.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121190422457.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121182921756.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121165624322.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121170545847.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121171623894.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202011211719312.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121173006831.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121173047376.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112118591311.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121183836481.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121184312962.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121184626593.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121185413105.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121185439139.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121181311172.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112118024116.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121175646264.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121174630228.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201121175304205.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201122145956711.png">
+<meta property="article:published_time" content="2020-11-21T08:41:36.000Z">
 <meta property="article:modified_time" content="2020-11-25T16:07:36.504Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201105072242910.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201121180731205.png">
 
-<link rel="canonical" href="http://example.com/2020/11/04/RPG-Dev-Log-14/">
+<link rel="canonical" href="http://example.com/2020/11/21/RPG-Dev-Log-21/">
 
 
 <script id="page-configurations">
@@ -78,7 +69,7 @@
   };
 </script>
 
-  <title>RPG Game开发日志(十四) | unreal-engine-channel</title>
+  <title>RPG Game开发日志() | unreal-engine-channel</title>
   
 
 
@@ -227,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/04/RPG-Dev-Log-14/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/21/RPG-Dev-Log-21/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -240,7 +231,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          RPG Game开发日志(十四)
+          RPG Game开发日志()
         </h1>
 
         <div class="post-meta">
@@ -250,7 +241,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-11-04 23:01:43" itemprop="dateCreated datePublished" datetime="2020-11-04T23:01:43+08:00">2020-11-04</time>
+              <time title="Created: 2020-11-21 16:41:36" itemprop="dateCreated datePublished" datetime="2020-11-21T16:41:36+08:00">2020-11-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -275,7 +266,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.4k</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -294,48 +285,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>涉及内容：大任务系统创建(续篇),蓝图UI任务数据绑定。</p>
+        <p>涉及内容：创建NPC交易窗口，RPC。</p>
 <a id="more"></a>
 
-<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="创建W-MissionSubGoal"><a href="#创建W-MissionSubGoal" class="headerlink" title="创建W_MissionSubGoal"></a>创建W_MissionSubGoal</h2><ol>
-<li>创建控件W_MissionSubGoal，作为W_Mission中任务分支信息SubGoalInfoVerticalBox的子控件；<br><img src='https://img-blog.csdnimg.cn/20201105072242910.png'><img src='https://img-blog.csdnimg.cn/20201105072311908.png'></li>
-<li>创建函数Update，用于更新SubGoalText的文本内容(这部分蓝图可从W_SubGoal中的Update函数迁移过来)，并根据任务状态设置CurrentImage、SuccessImage、FailedImage的可视性，并在事件开始构造时调用；<img src='https://img-blog.csdnimg.cn/20201105072948473.png'></li>
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="创建NPC交易窗口"><a href="#创建NPC交易窗口" class="headerlink" title="创建NPC交易窗口"></a>创建NPC交易窗口</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>打开E_ItemType，新增枚举[恢复物品]；</li>
+<li>打开ItemList，将Mana_Blue和Health_Red的ItemType更改为恢复物品；</li>
+<li>创建结构体S_ActorContainerInfo，包含商店名字和商店格子数信息；<img src='https://img-blog.csdnimg.cn/20201121180731205.png'></li>
 </ol>
-<h2 id="任务列表项W-QuestBorder"><a href="#任务列表项W-QuestBorder" class="headerlink" title="任务列表项W_QuestBorder"></a>任务列表项W_QuestBorder</h2><ol>
-<li>打开S_QuestInfo，添加属性SuggestedLevel(Integer)；</li>
-<li>打开W_QuestBorder，创建函数[void] Update()，用于绑定W_QuestBorder相关任务数据，包括QuestName、Frame、RegionText、LevelText、QuestTypeIcon等控件的文本、颜色、图标等，并且对QuestName控件的文本进行长度检测（任务名过长时缩略显示）；<img src='https://img-blog.csdnimg.cn/20201104232620180.png'></li>
-<li>创建自定义事件UpdateSuggestedLevelColor(PlayerLevel)并绑定至事件调度UpdateLevelQuest。每当角色升级时，调用此事件，更新任务推荐等级的文本颜色，为游戏玩家提供更好的视觉效果（具体方法与Enemy的头衔颜色更新类似，通过PlayerLevel/Suggested的值设置Alpha的值，从而设置颜色过渡）。最后调用Update函数，完成任务列表所有数据项的显示更新;<img src='https://img-blog.csdnimg.cn/20201104233806488.png'></li>
+<h3 id="BPI-InventoryInterface相关"><a href="#BPI-InventoryInterface相关" class="headerlink" title="BPI_InventoryInterface相关"></a>BPI_InventoryInterface相关</h3><ol>
+<li>创建接口函数[Name(Text),InventorySize(Integer)]GetContainerProperties()；</li>
+<li>创建接口函数[InventoryComponent(C_Inventory)]GetContainerInventory()：</li>
 </ol>
-<h2 id="任务系统主界面W-Mission"><a href="#任务系统主界面W-Mission" class="headerlink" title="任务系统主界面W_Mission"></a>任务系统主界面W_Mission</h2><ol>
-<li>打开W_QuestBorder，为AnimBorder创建划入(AddQuestBorder)和划出(RemoveQuestBorder)动画；<img src='https://img-blog.csdnimg.cn/20201104234440454.png'><img src='https://img-blog.csdnimg.cn/20201104234537409.png'></li>
-<li>创建宏ShowQuestBorder(Visible)，用于根据当前控件的可视性播放划入或划出动画；<img src='https://img-blog.csdnimg.cn/20201104234832171.png'></li>
-<li>为CurrentQuestButton、CompletedQuestButton、FailedQuestButton、HasQuestButton添加绑定事件：以CurrentQuestButton为例，当点击按钮时，隐藏CompletedScrollBox、FailedScrollBox、HasQuestScrollBox三个滚动框，并显示CurrentScrollBox（其余三个按钮同理）；<img src='https://img-blog.csdnimg.cn/2020110423525363.png'></li>
-<li>创建自定义事件UpdateSuggestedLevel(PlayerLevel)，用于设置任务详情中推荐等级的文本颜色（设置方法同上）,并将此自定义事件绑定至事件调度UpdateLevelForQuest；<img src='https://img-blog.csdnimg.cn/2020110500005662.png'><img src='https://img-blog.csdnimg.cn/20201105000436852.png'></li>
-<li>创建函数UpdateDescription，用于更新任务的具体描述，相关控件为DescriptionText，这里需要注意文本换行符的转义方式;<img src='https://img-blog.csdnimg.cn/2020110500113572.png'></li>
-<li>创建函数UpdateDetailWindow，用于绑定W_Mission任务详情的相关任务数据，包括QuestName、TypeText、QuestTypeImage、RegionText、SuggestedLevel、MoneyText、ExpText、PrestigeText等控件的文本、颜色和图标等，数据源为SelectedQuest(BP_MasterQuest，所有Quest的父类)中的QuestInfo，并调用函数UpdateSuggestedLevel(PlayerLevel)，UpdateDescription，GenerateSubGoals；<img src='https://img-blog.csdnimg.cn/20201105064907715.png'><img src='https://img-blog.csdnimg.cn/20201105065000665.png'><img src='https://img-blog.csdnimg.cn/20201105065053167.png'><img src='https://img-blog.csdnimg.cn/2020110506512638.png'></li>
-<li>创建函数GenerateSubGoals，用于更新SubGoalVerticalBox控件，绑定任务分支信息的相关数据，数据源为SelectedQuest(BP_MasterQuest)中的CompleteSubGoalInfo和CurrentSubGoalInfo;<img src='https://img-blog.csdnimg.cn/20201105071813592.png'></li>
-<li>创建枚举E_QuestState；<img src='https://img-blog.csdnimg.cn/20201105073933672.png'></li>
-<li>创建函数AddQuestBorder(Quest)，用于任务列表项W_QuestBorder(CurrentScrollBox等滚动框的子控件)的添加；<img src='https://img-blog.csdnimg.cn/20201105073719617.png'></li>
-<li>创建自定义事件OnQuestBorderClicked(QuestBorder)，绑定至W_QuestBorder中的按钮QuestBorderButton。当任务列表项被点击时，禁用该列表项按钮，并调用函数UpdateDetailWindow，完成任务详情的更新；<img src='https://img-blog.csdnimg.cn/20201105074414237.png'><img src='https://img-blog.csdnimg.cn/20201105074646874.png'></li>
+<h3 id="BPI-HUDInterface相关"><a href="#BPI-HUDInterface相关" class="headerlink" title="BPI_HUDInterface相关"></a>BPI_HUDInterface相关</h3><ol>
+<li>新增接口函数[void]UIOpenDrugStore(NPCActor(Actor))；</li>
 </ol>
-<h2 id="任务组件QuestManager"><a href="#任务组件QuestManager" class="headerlink" title="任务组件QuestManager"></a>任务组件QuestManager</h2><ol>
-<li>创建结构体S_CompletedSubGoalInfo；<img src='https://img-blog.csdnimg.cn/20201105065535758.png'></li>
-<li>创建枚举E_SubGoalState；<img src='https://img-blog.csdnimg.cn/20201105065701141.png'></li>
+<h3 id="W-TransactionWindow相关"><a href="#W-TransactionWindow相关" class="headerlink" title="W_TransactionWindow相关"></a>W_TransactionWindow相关</h3><ol>
+<li>创建控件W_TransActionWindow，作为玩家与NPC交易的窗口；<img src='https://img-blog.csdnimg.cn/20201121190422457.png'></li>
 </ol>
-<h2 id="任务父类BP-MasterQuest"><a href="#任务父类BP-MasterQuest" class="headerlink" title="任务父类BP_MasterQuest"></a>任务父类BP_MasterQuest</h2><ol>
-<li>打开BP_MasterQuest，重新设置CompletedSubGoalsInfo变量类型为S_CompletedSubGoalInfo（原来为S_SubGoalInfo，即扩展SubGoalIndex、Succesful两个引脚);</li>
-<li>函数功能扩展：函数CompleteSubGoal(SubGoalIndex)变更为CompleteSubGoal(SubGoalIndex,Success?)，传入任务是否成功完成的参数，以便于CompletedSubGoalsInfo变量的更新;</li>
-<li>函数功能扩展：函数SetupStartingSubGoals新增Description的数据更新，数据源为QuestInfo;</li>
-<li>函数功能扩展：函数AddQuest(QuestClass)变更为AddQuest(QuestClass,DirectlyStart)，根据当前任务数量和DirectlyStart的布尔值判断是否自动接取任务。若自动接取任务，则播放动画PlayQuest和PlaySubGoal(来着W_Quest)；</li>
-<li>关联事件修改：打开事件图表，修改自定义事件UpdateCompletedSubGoal；</li>
+<h3 id="W-Window相关"><a href="#W-Window相关" class="headerlink" title="W_Window相关"></a>W_Window相关</h3><ol>
+<li>创建函数[void]InitializeWindow()，用于初始化窗口大小，并根据是否为玩家背包设置与背包有关的UI控件的可视性。此函数在EventPreConstruct中调用；<img src='https://img-blog.csdnimg.cn/20201121182921756.png'></li>
 </ol>
-<h2 id="任务实例设置"><a href="#任务实例设置" class="headerlink" title="任务实例设置"></a>任务实例设置</h2><h3 id="主线任务"><a href="#主线任务" class="headerlink" title="主线任务"></a>主线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080724734.png'>
-
-<h3 id="支线任务"><a href="#支线任务" class="headerlink" title="支线任务"></a>支线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080758220.png'>
-
-<h3 id="副本任务"><a href="#副本任务" class="headerlink" title="副本任务"></a>副本任务</h3><img src='https://img-blog.csdnimg.cn/20201105080823342.png'>
-
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201105082833827.png'><img src='https://img-blog.csdnimg.cn/20201105082916789.png'><img src='https://img-blog.csdnimg.cn/20201105083011449.png'><img src='https://img-blog.csdnimg.cn/20201105082938769.png'></p>
+<h3 id="W-PC-Main相关"><a href="#W-PC-Main相关" class="headerlink" title="W_PC_Main相关"></a>W_PC_Main相关</h3><ol>
+<li>复制W_InventoryWindow并重命名为W_StoreWindow，作为商店窗口，并修改默认属性；</li>
+</ol>
+<h3 id="BP-RPG-NPC相关"><a href="#BP-RPG-NPC相关" class="headerlink" title="BP_RPG_NPC相关"></a>BP_RPG_NPC相关</h3><ol>
+<li>添加组件C_Inventory，初始化构造函数中调用服务端事件ServerInitializeInventory，初始化商店格数InventorySize为40；<img src='https://img-blog.csdnimg.cn/20201121165624322.png'></li>
+<li>创建函数[LocalInventoryItems(S_InventoryItem[])]GetDrugStoreList()，用于返回ItemList中类型为恢复物品的物品；<img src='https://img-blog.csdnimg.cn/20201121170545847.png'></li>
+<li>创建函数[Success(Boolean)]LoadingInventoryItems(InventorySize(Integer),InventoryItems(S_InventoryItem[]))，调用C_Inventory中的LoadInventoryItem，将InventoryItems中的物品信息加载到C_Inventory；<img src='https://img-blog.csdnimg.cn/20201121171623894.png'></li>
+<li>创建函数[Success(Boolean)]InitializeInventory()，调用函数GetDrugStoreList和LoadingInventoryItems完成药品商店初始化。此函数在事件图表EventBeginPlay中调用；<img src='https://img-blog.csdnimg.cn/202011211719312.png'></li>
+<li>打开ClassSettings，将蓝图接口BPI_InventoryInterface添加进来，并实现接口函数GetContainerProperties和GetContainerInventory；<img src='https://img-blog.csdnimg.cn/20201121173006831.png'><img src='https://img-blog.csdnimg.cn/20201121173047376.png'></li>
+<li>实现自定义事件OnClickedDrugStore，调用接口函数UIOpenDrugStore，并调用OnClickedEndTalk，打开商店窗口时结束对话；<img src='https://img-blog.csdnimg.cn/2020112118591311.png'></li>
+</ol>
+<h3 id="C-InventoryManager相关"><a href="#C-InventoryManager相关" class="headerlink" title="C_InventoryManager相关"></a>C_InventoryManager相关</h3><ol>
+<li>创建函数[void]ClearActorContainerSize()，用于初始化W_Window中的变量AcotrContainerSlots并清空InventorySlotWrapBox中的子控件；<img src='https://img-blog.csdnimg.cn/20201121183836481.png'></li>
+<li>创建函数[void]CreateContainerSize(ContainerSize(Interger))，调用函数ClearActorContainerSize，并根据AcotrContainerSlots创建W_InventorySlot的控件实例，并添加至InventorySlotWrapBox中；<img src='https://img-blog.csdnimg.cn/20201121184312962.png'></li>
+<li>创建函数[void]SetStoreInventorySlot(StoreContainerIndex(Integer),ItemInformation(S_InventoryItem))，根据商店物品索引从ActorContainerSlots中获取ItemInformation；<img src='https://img-blog.csdnimg.cn/20201121184626593.png'></li>
+<li>创建函数[void]OpenStoreContainerWindow()和[void]CloseStoreContainerWindow()，控制商店的显示和隐藏；<img src='https://img-blog.csdnimg.cn/20201121185413105.png'><img src='https://img-blog.csdnimg.cn/20201121185439139.png'></li>
+<li>创建函数[void]LocalContainerSlots(ItemInformation(S_InventoryItem),ActorContainerProperties(S_ActorContainerInfo))，调用函数CreateContainerSize和SetStoreInventorySlot，循环添加商店物品，循环结束调用函数OpenStoreContainerWindow，打开商店窗口；<img src='https://img-blog.csdnimg.cn/20201121181311172.png'></li>
+<li>创建函数[void]OpenContainer(ActorContainer(Actor))，调用接口函数GetContainerProperties和GetContainerInventory，并调用客户端事件Client_OpenContainer;<img src='https://img-blog.csdnimg.cn/2020112118024116.png'></li>
+<li>创建函数[void]UseContainer(ActorContainer(Actor))，调用函数OpenContainer；<img src='https://img-blog.csdnimg.cn/20201121175646264.png'></li>
+</ol>
+<h3 id="RPG-PlayerController相关"><a href="#RPG-PlayerController相关" class="headerlink" title="RPG_PlayerController相关"></a>RPG_PlayerController相关</h3><ol>
+<li>调用蓝图接口事件EventUIOpenDrugStore，调用服务端事件ServerUseContainer和ClientOpenInventory；<img src='https://img-blog.csdnimg.cn/20201121174630228.png'></li>
+</ol>
+<h2 id="RPC-Remote-Procedure-Call"><a href="#RPC-Remote-Procedure-Call" class="headerlink" title="RPC(Remote Procedure Call)"></a>RPC(Remote Procedure Call)</h2><h3 id="Run-on-Server-Reliable"><a href="#Run-on-Server-Reliable" class="headerlink" title="Run on Server(Reliable)"></a>Run on Server(Reliable)</h3><h4 id="Server-UseContainer"><a href="#Server-UseContainer" class="headerlink" title="Server_UseContainer"></a>Server_UseContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数UseContainer；<img src='https://img-blog.csdnimg.cn/20201121175304205.png'></p>
+<h3 id="Run-on-owning-Client-Reliable"><a href="#Run-on-owning-Client-Reliable" class="headerlink" title="Run on owning Client(Reliable)"></a>Run on owning Client(Reliable)</h3><h4 id="Client-OpenContainer"><a href="#Client-OpenContainer" class="headerlink" title="Client_OpenContainer"></a>Client_OpenContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数LocalContainerSlots；<img src='https://img-blog.csdnimg.cn/20201122145956711.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p>(Bug尚未解决，后续补上)</p>
 
     </div>
 
@@ -373,12 +369,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/03/RPG-Dev-Log-13/" rel="prev" title="RPG Game开发日志(十三)">
-      <i class="fa fa-chevron-left"></i> RPG Game开发日志(十三)
+    <a href="/2020/11/18/RPG-Dev-Log-20/" rel="prev" title="RPG Game开发日志(二十)">
+      <i class="fa fa-chevron-left"></i> RPG Game开发日志(二十)
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/11/07/RPG-Dev-Log-15/" rel="next" title="RPG Game开发日志(十五)">
-      RPG Game开发日志(十五) <i class="fa fa-chevron-right"></i>
+    <a href="/2020/11/22/RPG-Dev-Log-22/" rel="next" title="RPG Game开发日志(二十二)">
+      RPG Game开发日志(二十二) <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -438,7 +434,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAW-MissionSubGoal"><span class="nav-number">1.1.</span> <span class="nav-text">创建W_MissionSubGoal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8%E9%A1%B9W-QuestBorder"><span class="nav-number">1.2.</span> <span class="nav-text">任务列表项W_QuestBorder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%B3%BB%E7%BB%9F%E4%B8%BB%E7%95%8C%E9%9D%A2W-Mission"><span class="nav-number">1.3.</span> <span class="nav-text">任务系统主界面W_Mission</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%BB%84%E4%BB%B6QuestManager"><span class="nav-number">1.4.</span> <span class="nav-text">任务组件QuestManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%88%B6%E7%B1%BBBP-MasterQuest"><span class="nav-number">1.5.</span> <span class="nav-text">任务父类BP_MasterQuest</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%AE%9E%E4%BE%8B%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.6.</span> <span class="nav-text">任务实例设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E7%BA%BF%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.6.1.</span> <span class="nav-text">主线任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%AF%E7%BA%BF%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.6.2.</span> <span class="nav-text">支线任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AF%E6%9C%AC%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.6.3.</span> <span class="nav-text">副本任务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BANPC%E4%BA%A4%E6%98%93%E7%AA%97%E5%8F%A3"><span class="nav-number">1.1.</span> <span class="nav-text">创建NPC交易窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BPI-InventoryInterface%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.2.</span> <span class="nav-text">BPI_InventoryInterface相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BPI-HUDInterface%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.3.</span> <span class="nav-text">BPI_HUDInterface相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#W-TransactionWindow%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.4.</span> <span class="nav-text">W_TransactionWindow相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#W-Window%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.5.</span> <span class="nav-text">W_Window相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#W-PC-Main%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.6.</span> <span class="nav-text">W_PC_Main相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BP-RPG-NPC%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.7.</span> <span class="nav-text">BP_RPG_NPC相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-InventoryManager%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.8.</span> <span class="nav-text">C_InventoryManager相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPG-PlayerController%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.9.</span> <span class="nav-text">RPG_PlayerController相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPC-Remote-Procedure-Call"><span class="nav-number">1.2.</span> <span class="nav-text">RPC(Remote Procedure Call)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-on-Server-Reliable"><span class="nav-number">1.2.1.</span> <span class="nav-text">Run on Server(Reliable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-UseContainer"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Server_UseContainer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-on-owning-Client-Reliable"><span class="nav-number">1.2.2.</span> <span class="nav-text">Run on owning Client(Reliable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-OpenContainer"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Client_OpenContainer</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

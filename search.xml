@@ -1132,6 +1132,201 @@
       </tags>
   </entry>
   <entry>
+    <title>RPG Game开发日志()</title>
+    <url>/2020/11/21/RPG-Dev-Log-21/</url>
+    <content><![CDATA[<p>涉及内容：创建NPC交易窗口，RPC。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="创建NPC交易窗口"><a href="#创建NPC交易窗口" class="headerlink" title="创建NPC交易窗口"></a>创建NPC交易窗口</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>打开E_ItemType，新增枚举[恢复物品]；</li>
+<li>打开ItemList，将Mana_Blue和Health_Red的ItemType更改为恢复物品；</li>
+<li>创建结构体S_ActorContainerInfo，包含商店名字和商店格子数信息；<img src='https://img-blog.csdnimg.cn/20201121180731205.png'></li>
+</ol>
+<h3 id="BPI-InventoryInterface相关"><a href="#BPI-InventoryInterface相关" class="headerlink" title="BPI_InventoryInterface相关"></a>BPI_InventoryInterface相关</h3><ol>
+<li>创建接口函数[Name(Text),InventorySize(Integer)]GetContainerProperties()；</li>
+<li>创建接口函数[InventoryComponent(C_Inventory)]GetContainerInventory()：</li>
+</ol>
+<h3 id="BPI-HUDInterface相关"><a href="#BPI-HUDInterface相关" class="headerlink" title="BPI_HUDInterface相关"></a>BPI_HUDInterface相关</h3><ol>
+<li>新增接口函数[void]UIOpenDrugStore(NPCActor(Actor))；</li>
+</ol>
+<h3 id="W-TransactionWindow相关"><a href="#W-TransactionWindow相关" class="headerlink" title="W_TransactionWindow相关"></a>W_TransactionWindow相关</h3><ol>
+<li>创建控件W_TransActionWindow，作为玩家与NPC交易的窗口；<img src='https://img-blog.csdnimg.cn/20201121190422457.png'></li>
+</ol>
+<h3 id="W-Window相关"><a href="#W-Window相关" class="headerlink" title="W_Window相关"></a>W_Window相关</h3><ol>
+<li>创建函数[void]InitializeWindow()，用于初始化窗口大小，并根据是否为玩家背包设置与背包有关的UI控件的可视性。此函数在EventPreConstruct中调用；<img src='https://img-blog.csdnimg.cn/20201121182921756.png'></li>
+</ol>
+<h3 id="W-PC-Main相关"><a href="#W-PC-Main相关" class="headerlink" title="W_PC_Main相关"></a>W_PC_Main相关</h3><ol>
+<li>复制W_InventoryWindow并重命名为W_StoreWindow，作为商店窗口，并修改默认属性；</li>
+</ol>
+<h3 id="BP-RPG-NPC相关"><a href="#BP-RPG-NPC相关" class="headerlink" title="BP_RPG_NPC相关"></a>BP_RPG_NPC相关</h3><ol>
+<li>添加组件C_Inventory，初始化构造函数中调用服务端事件ServerInitializeInventory，初始化商店格数InventorySize为40；<img src='https://img-blog.csdnimg.cn/20201121165624322.png'></li>
+<li>创建函数[LocalInventoryItems(S_InventoryItem[])]GetDrugStoreList()，用于返回ItemList中类型为恢复物品的物品；<img src='https://img-blog.csdnimg.cn/20201121170545847.png'></li>
+<li>创建函数[Success(Boolean)]LoadingInventoryItems(InventorySize(Integer),InventoryItems(S_InventoryItem[]))，调用C_Inventory中的LoadInventoryItem，将InventoryItems中的物品信息加载到C_Inventory；<img src='https://img-blog.csdnimg.cn/20201121171623894.png'></li>
+<li>创建函数[Success(Boolean)]InitializeInventory()，调用函数GetDrugStoreList和LoadingInventoryItems完成药品商店初始化。此函数在事件图表EventBeginPlay中调用；<img src='https://img-blog.csdnimg.cn/202011211719312.png'></li>
+<li>打开ClassSettings，将蓝图接口BPI_InventoryInterface添加进来，并实现接口函数GetContainerProperties和GetContainerInventory；<img src='https://img-blog.csdnimg.cn/20201121173006831.png'><img src='https://img-blog.csdnimg.cn/20201121173047376.png'></li>
+<li>实现自定义事件OnClickedDrugStore，调用接口函数UIOpenDrugStore，并调用OnClickedEndTalk，打开商店窗口时结束对话；<img src='https://img-blog.csdnimg.cn/2020112118591311.png'></li>
+</ol>
+<h3 id="C-InventoryManager相关"><a href="#C-InventoryManager相关" class="headerlink" title="C_InventoryManager相关"></a>C_InventoryManager相关</h3><ol>
+<li>创建函数[void]ClearActorContainerSize()，用于初始化W_Window中的变量AcotrContainerSlots并清空InventorySlotWrapBox中的子控件；<img src='https://img-blog.csdnimg.cn/20201121183836481.png'></li>
+<li>创建函数[void]CreateContainerSize(ContainerSize(Interger))，调用函数ClearActorContainerSize，并根据AcotrContainerSlots创建W_InventorySlot的控件实例，并添加至InventorySlotWrapBox中；<img src='https://img-blog.csdnimg.cn/20201121184312962.png'></li>
+<li>创建函数[void]SetStoreInventorySlot(StoreContainerIndex(Integer),ItemInformation(S_InventoryItem))，根据商店物品索引从ActorContainerSlots中获取ItemInformation；<img src='https://img-blog.csdnimg.cn/20201121184626593.png'></li>
+<li>创建函数[void]OpenStoreContainerWindow()和[void]CloseStoreContainerWindow()，控制商店的显示和隐藏；<img src='https://img-blog.csdnimg.cn/20201121185413105.png'><img src='https://img-blog.csdnimg.cn/20201121185439139.png'></li>
+<li>创建函数[void]LocalContainerSlots(ItemInformation(S_InventoryItem),ActorContainerProperties(S_ActorContainerInfo))，调用函数CreateContainerSize和SetStoreInventorySlot，循环添加商店物品，循环结束调用函数OpenStoreContainerWindow，打开商店窗口；<img src='https://img-blog.csdnimg.cn/20201121181311172.png'></li>
+<li>创建函数[void]OpenContainer(ActorContainer(Actor))，调用接口函数GetContainerProperties和GetContainerInventory，并调用客户端事件Client_OpenContainer;<img src='https://img-blog.csdnimg.cn/2020112118024116.png'></li>
+<li>创建函数[void]UseContainer(ActorContainer(Actor))，调用函数OpenContainer；<img src='https://img-blog.csdnimg.cn/20201121175646264.png'></li>
+</ol>
+<h3 id="RPG-PlayerController相关"><a href="#RPG-PlayerController相关" class="headerlink" title="RPG_PlayerController相关"></a>RPG_PlayerController相关</h3><ol>
+<li>调用蓝图接口事件EventUIOpenDrugStore，调用服务端事件ServerUseContainer和ClientOpenInventory；<img src='https://img-blog.csdnimg.cn/20201121174630228.png'></li>
+</ol>
+<h2 id="RPC-Remote-Procedure-Call"><a href="#RPC-Remote-Procedure-Call" class="headerlink" title="RPC(Remote Procedure Call)"></a>RPC(Remote Procedure Call)</h2><h3 id="Run-on-Server-Reliable"><a href="#Run-on-Server-Reliable" class="headerlink" title="Run on Server(Reliable)"></a>Run on Server(Reliable)</h3><h4 id="Server-UseContainer"><a href="#Server-UseContainer" class="headerlink" title="Server_UseContainer"></a>Server_UseContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数UseContainer；<img src='https://img-blog.csdnimg.cn/20201121175304205.png'></p>
+<h3 id="Run-on-owning-Client-Reliable"><a href="#Run-on-owning-Client-Reliable" class="headerlink" title="Run on owning Client(Reliable)"></a>Run on owning Client(Reliable)</h3><h4 id="Client-OpenContainer"><a href="#Client-OpenContainer" class="headerlink" title="Client_OpenContainer"></a>Client_OpenContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数LocalContainerSlots；<img src='https://img-blog.csdnimg.cn/20201122145956711.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p>(Bug尚未解决，后续补上)</p>
+]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RPG Game开发日志(二十二)</title>
+    <url>/2020/11/22/RPG-Dev-Log-22/</url>
+    <content><![CDATA[<p>涉及内容：联网测试交易物品，RPC。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>说明：</p>
+<p>为了描述方便，定义<strong>SWAP_SLOT_INFO</strong> =(FromInventoryIndex(Integer),ToInventoryIndex(Integer),FromInventorySlotType(E_InventorySlotType),ToInventoryType(E_InventorySlotType)）</p>
+<h2 id="联网测试交易物品"><a href="#联网测试交易物品" class="headerlink" title="联网测试交易物品"></a>联网测试交易物品</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="相关枚举及结构体"><a href="#相关枚举及结构体" class="headerlink" title="相关枚举及结构体"></a>相关枚举及结构体</h4><ol>
+<li>创建枚举E_InventorySlotType[PlayerInventory,DrugStore]；</li>
+<li>打开S_ActorContainerInfo，新增成员InventorySlotType(E_InventorySlotType)；</li>
+</ol>
+<h4 id="相关蓝图接口"><a href="#相关蓝图接口" class="headerlink" title="相关蓝图接口"></a>相关蓝图接口</h4><h5 id="BPI-InventoryInterface相关"><a href="#BPI-InventoryInterface相关" class="headerlink" title="BPI_InventoryInterface相关"></a>BPI_InventoryInterface相关</h5><ol>
+<li>接口函数功能扩展：将GetContainerProperties返回值[Name,InventorySize]扩展至[Name,InventorySize,InventorySlotType]；</li>
+<li>创建接口函数[PlayersViewing(PlayerState[])GetPlayersViewing();</li>
+</ol>
+<h5 id="BPI-HUDInterface相关"><a href="#BPI-HUDInterface相关" class="headerlink" title="BPI_HUDInterface相关"></a>BPI_HUDInterface相关</h5><ol>
+<li>创建接口函数[void]UIOpenTransactionWindow(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))；</li>
+<li>创建接口函数[Level(Integer),Moneny(Integer)]GetPlayerStatus()；</li>
+<li>创建接口函数[void]AddMoney(Money)；</li>
+<li>创建接口函数[void]UISplitInventoryItem(<strong>SWAP_SLOT_INFO</strong>,Amount(Integer));</li>
+</ol>
+<h5 id="BPI-UsableActorContainer相关"><a href="#BPI-UsableActorContainer相关" class="headerlink" title="BPI_UsableActorContainer相关"></a>BPI_UsableActorContainer相关</h5><ol>
+<li>创建接口函数[Success(Boolean)]OnActorUsed(Controller(PlayerController))；</li>
+</ol>
+<h3 id="BP-DragDrop相关"><a href="#BP-DragDrop相关" class="headerlink" title="BP_DragDrop相关"></a>BP_DragDrop相关</h3><ol>
+<li>新增变量InventorySlotType(E_InventorySlotType)；</li>
+</ol>
+<h3 id="W-InventorySlot相关"><a href="#W-InventorySlot相关" class="headerlink" title="W_InventorySlot相关"></a>W_InventorySlot相关</h3><ol>
+<li>函数功能扩展：对拽取物品的来源和去向InventorySlotType类型进行判断。若相同=&gt;若为玩家背包，则可直接拖拽；否则不执行任何动作。若不相同=&gt;调用蓝图接口事件UIOpenTransactionWindow，完成物品交易；<img src='https://img-blog.csdnimg.cn/2020112414060153.png'></li>
+</ol>
+<h3 id="W-TransactionWindow相关"><a href="#W-TransactionWindow相关" class="headerlink" title="W_TransactionWindow相关"></a>W_TransactionWindow相关</h3><ol>
+<li>创建函数[void]Update(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))，完成交易物品信息的更新；<img src='https://img-blog.csdnimg.cn/20201124142235157.png'></li>
+<li>创建函数[Value(Integer),Success(Boolean)]CheckMoneyforShopping()，调用蓝图接口函数GetPlayerStatus获取玩家Money信息，用于检查玩家是否有足够的金额完成物品交易；<img src='https://img-blog.csdnimg.cn/20201124144439936.png'></li>
+<li>为标题Text文本内容绑定函数；<img src='https://img-blog.csdnimg.cn/20201124142437710.png'></li>
+<li>为交易物品Text文本内容及文本颜色绑定函数；<img src='https://img-blog.csdnimg.cn/20201124142522849.png'><img src='https://img-blog.csdnimg.cn/20201124142703490.png'></li>
+<li>为交易数量EditableTextBox文本输入内容绑定函数，并添加OnTextCommitted事件；<img src='https://img-blog.csdnimg.cn/20201124142703490.png'><img src='https://img-blog.csdnimg.cn/20201124143142740.png'></li>
+<li>为交易金额Text文本内容绑定函数。买入是全额，卖出将收取40%税收；<img src='https://img-blog.csdnimg.cn/20201124143451360.png'></li>
+<li>为TextToolTip添加文本内容和文本颜色绑定函数；<img src='https://img-blog.csdnimg.cn/2020112419420578.png'><img src='https://img-blog.csdnimg.cn/20201124194330426.png'></li>
+<li>为Minus和Plus按钮添加绑定事件；<img src='https://img-blog.csdnimg.cn/20201124194820238.png'></li>
+<li>为Min和Max按钮添加绑定事件；<img src='https://img-blog.csdnimg.cn/20201124194928322.png'></li>
+<li>为CancelButton和ConfirmButton添加绑定事件；<img src='https://img-blog.csdnimg.cn/20201124194629484.png'></li>
+</ol>
+<h3 id="C-Inventory相关"><a href="#C-Inventory相关" class="headerlink" title="C_Inventory相关"></a>C_Inventory相关</h3><ol>
+<li>创建函数[Index(Integer),Success(Boolean)]GetEmptyInventorySpace()，用于背包空闲slot的寻找；<img src='https://img-blog.csdnimg.cn/20201124182952573.png'></li>
+</ol>
+<h3 id="C-InventoryManager相关"><a href="#C-InventoryManager相关" class="headerlink" title="C_InventoryManager相关"></a>C_InventoryManager相关</h3><ol>
+<li><p>创建函数[void]OpenTransactionWindow(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))，调用函数[void]Update(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))；<img src='https://img-blog.csdnimg.cn/20201124144935982.png'></p>
+</li>
+<li><p>创建函数[void]CountMoney()，将BP_Player中的CountMoney函数迁移过来；<img src='https://img-blog.csdnimg.cn/20201124145309889.png'></p>
+</li>
+<li><p>创建函数[StructOut(S_InventoryItem)]AddToItemAmount(ItemInformation(S_InventoryItem),AmountToAdd(Integer))，将修改后的ItemInformation导出；<img src='https://img-blog.csdnimg.cn/20201124163958914.png'></p>
+</li>
+<li><p>创建函数[void]SetActorContainerSlotItem(ActorContainerIndex)；<img src='https://img-blog.csdnimg.cn/20201124181438471.png'></p>
+</li>
+<li><p>创建函数[void]SetViewersActorContainerSlot(ActorContainerSlot(Integer),ItemInformation(S_InventoryItem))，，调用客户端事件ClientSetActorContainerSlotItem，用于同步客户端交易信息；<img src='https://img-blog.csdnimg.cn/20201124180507375.png'></p>
+</li>
+<li><p>函数功能扩展：为函数AddItem添加Inventory判断，若为PlayerInventory则正常移动，否则调用函数SetViewersActorContainerSlot;<img src='https://img-blog.csdnimg.cn/20201124164936346.png'></p>
+</li>
+<li><p>创建函数[RemainingAmount(Integer)]AddItemToStack(InventoryComponent(C_Inventory),InventoryIndex(Integer),Amount(Integer))，根据叠加上限MaxStackSize减去叠加数目Amount计算出剩余生成数量RemainingAmount，调用函数AddToItemAmount完成InventoryItem信息修改，并返回RemainingAmount；<img src='https://img-blog.csdnimg.cn/20201124164315887.png'><img src='https://img-blog.csdnimg.cn/2020112416440786.png'><img src='https://img-blog.csdnimg.cn/20201124164435782.png'></p>
+</li>
+<li><p>创建函数[Struct(S_InventoryItem)]SetItemAmount(InventoryItem(S_InventoryItem),Amount(Integer))，用于物品数量的修改；<img src='https://img-blog.csdnimg.cn/20201124182550508.png'></p>
+</li>
+<li><p>创建函数[Output_Get(Integer),WasFullAmountRemove(Boolean),StructOut(S_InventoryItem)]RemoveFromItemAmount(InventoryItem(S_InventoryItem),AmountToRemove(Integer))；<img src='https://img-blog.csdnimg.cn/20201124191915761.png'></p>
+</li>
+<li><p>函数功能扩展：为函数MoveItem添加两个新的传入参数FromInventoryComponent和ToComponent</p>
+<ul>
+<li><p>判断是否为有效移动，若为有效移动，将传入参数创建为本地变量<img src='https://img-blog.csdnimg.cn/20201124184819754.png'></p>
+</li>
+<li><p>判断移动到另一物品上还是空白位置<img src='https://img-blog.csdnimg.cn/20201124184927617.png'></p>
+<ul>
+<li><p>移动到空白位置<img src='https://img-blog.csdnimg.cn/20201124185055331.png'></p>
+</li>
+<li><p>移动到另一物品上，判断是否为相同物品<img src='https://img-blog.csdnimg.cn/2020112418501065.png'></p>
+<ul>
+<li>为相同物品，判断是否超出堆叠上限<img src='https://img-blog.csdnimg.cn/20201124185330475.png'><ul>
+<li>未超出，直接进行叠加<img src='https://img-blog.csdnimg.cn/20201124185413385.png'></li>
+<li>超出，需要寻找空白位置并额外创建物品<img src='https://img-blog.csdnimg.cn/20201124185603858.png'></li>
+</ul>
+</li>
+<li>不是相同物品，判断是否为玩家背包<img src='https://img-blog.csdnimg.cn/20201124185747664.png'><ul>
+<li>若为玩家背包，直接进行物品对调<img src='https://img-blog.csdnimg.cn/20201124185836885.png'></li>
+<li>若为商店背包<img src='https://img-blog.csdnimg.cn/20201124195641468.png'></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建函数[void]SplitItem(FromInventory(C_Inventory),ToInventory(C_Inventory),FromInventoryIndex(Integer),ToInventoryIndex(Integer),Amount(Integer))，具体思路同MoveItem函数；<img src='https://img-blog.csdnimg.cn/20201124193737972.png'></p>
+</li>
+<li><p>创建函数[void]CloseActorContainer()，调用接口函数GetPlayersViewing和客户端事件Client_CloseActorContainer；<img src='https://img-blog.csdnimg.cn/20201124172748143.png'></p>
+</li>
+<li><p>创建函数[void]ClearContainerSlotItem(ContainerSlot(Integer))；<img src='https://img-blog.csdnimg.cn/20201124200200108.png'></p>
+</li>
+<li><p>创建函数[void]ClearViewersActorContainer(ActorContainerSlot(Integer))，调用客户端事件Client_ClearActorContainerSlotItems；<img src='https://img-blog.csdnimg.cn/2020112420035559.png'></p>
+</li>
+</ol>
+<h3 id="BP-RPG-NPC相关"><a href="#BP-RPG-NPC相关" class="headerlink" title="BP_RPG_NPC相关"></a>BP_RPG_NPC相关</h3><ol>
+<li>实现接口函数GetPlayersViewing，将PlayerState信息导出；<img src='https://img-blog.csdnimg.cn/20201124165756372.png'></li>
+<li>将蓝图接口BPI_UsableActorContainer添加进来，并实现接口函数OnActorUsed，调用服务端事件ServerUseContainer；<img src='https://img-blog.csdnimg.cn/20201124170731704.png'></li>
+</ol>
+<h3 id="RPG-PlayerController相关"><a href="#RPG-PlayerController相关" class="headerlink" title="RPG_PlayerController相关"></a>RPG_PlayerController相关</h3><ol>
+<li><p>实现蓝图接口事件EventUIOpenTransactionWindow，调用客户端事件Client_OpenTransactionWindow；<img src='https://img-blog.csdnimg.cn/20201124141309624.png'></p>
+</li>
+<li><p>实现蓝图接口事件EventAddMoney，调用客户端事件Client_AddMoney；<img src='https://img-blog.csdnimg.cn/20201124152053403.png'></p>
+</li>
+<li><p>实现蓝图接口事件EventUISplitInventoryItem，调用客户端事件ServerSplitInventoryItem；<img src='https://img-blog.csdnimg.cn/2020112415291059.png'></p>
+</li>
+<li><p>实现接口函数[Level(Integer),Moneny(Integer)]GetPlayerStatus()，将服务端Replicated到客户端的变量Level和Money信息导出；<img src='https://img-blog.csdnimg.cn/20201124150829781.png'></p>
+</li>
+<li><p>创建函数[HitActor(Actor)]GetUsableActor()，HitActor在BP_Player中完成设置；</p>
+<p><img src='https://img-blog.csdnimg.cn/20201124171800115.png'><img src='https://img-blog.csdnimg.cn/202011241715382.png'></p>
+</li>
+<li><p>创建函数[void]OnActorUsed()，调用函数GetUsableActor和接口函数OnActorUsed；<img src='https://img-blog.csdnimg.cn/20201124172200596.png'></p>
+</li>
+</ol>
+<h2 id="RPC-Remote-Procedure-Call"><a href="#RPC-Remote-Procedure-Call" class="headerlink" title="RPC(Remote Procedure Call)"></a>RPC(Remote Procedure Call)</h2><h3 id="Run-on-Server-Reliable"><a href="#Run-on-Server-Reliable" class="headerlink" title="Run on Server(Reliable)"></a>Run on Server(Reliable)</h3><h4 id="Server-SplitInventoryItem"><a href="#Server-SplitInventoryItem" class="headerlink" title="Server_SplitInventoryItem"></a>Server_SplitInventoryItem</h4><p>在C_InventoryManager事件图表中创建，调用函数SplitItem；<img src='https://img-blog.csdnimg.cn/20201124153530678.png'></p>
+<h4 id="Server-OnActorUsed"><a href="#Server-OnActorUsed" class="headerlink" title="Server_OnActorUsed"></a>Server_OnActorUsed</h4><p>在RPG_PlayerController事件图表中创建，调用函数OnActorUsed和客户端事件Client_OpenInventory；<img src='https://img-blog.csdnimg.cn/20201124171333609.png'></p>
+<h4 id="Server-CloseActorContainer"><a href="#Server-CloseActorContainer" class="headerlink" title="Server_CloseActorContainer"></a>Server_CloseActorContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数CloseActorContainer；<img src='https://img-blog.csdnimg.cn/20201124195158920.png'></p>
+<h4 id="Server-TransactionItem"><a href="#Server-TransactionItem" class="headerlink" title="Server_TransactionItem"></a>Server_TransactionItem</h4><p>在W_TransactionWindow事件图表中创建；<img src='https://img-blog.csdnimg.cn/20201124195108141.png'></p>
+<h3 id="Run-on-owning-Client-Reliable"><a href="#Run-on-owning-Client-Reliable" class="headerlink" title="Run on owning Client(Reliable)"></a>Run on owning Client(Reliable)</h3><h4 id="Client-OpenTransactionWindow"><a href="#Client-OpenTransactionWindow" class="headerlink" title="Client_OpenTransactionWindow"></a>Client_OpenTransactionWindow</h4><p>在C_InventoryManager事件图表中创建，调用函数OpenTransactionWindow；<img src='https://img-blog.csdnimg.cn/20201124140959167.png'></p>
+<h4 id="Client-AddMoney"><a href="#Client-AddMoney" class="headerlink" title="Client_AddMoney"></a>Client_AddMoney</h4><p>在C_InventoryManager事件图表中创建，将BP_Player中的自定义事件GetMoney迁移过来；<img src='https://img-blog.csdnimg.cn/20201124145658353.png'></p>
+<h4 id="Client-CloseActorContainer"><a href="#Client-CloseActorContainer" class="headerlink" title="Client_CloseActorContainer"></a>Client_CloseActorContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数CloseActorContainerWindow;<img src='https://img-blog.csdnimg.cn/20201124173309109.png'></p>
+<h4 id="Client-SetActorContainerSlotItem"><a href="#Client-SetActorContainerSlotItem" class="headerlink" title="Client_SetActorContainerSlotItem"></a>Client_SetActorContainerSlotItem</h4><p>在C_InventoryManager事件图表中创建，调用函数SetActorContainerSlotItem;<img src='https://img-blog.csdnimg.cn/20201124181051489.png'></p>
+<h4 id="Client-ClearActorContainerSlotItems"><a href="#Client-ClearActorContainerSlotItems" class="headerlink" title="Client_ClearActorContainerSlotItems"></a>Client_ClearActorContainerSlotItems</h4><p>在C_InventoryManager事件图表中创建，调用函数ClearContainerSlotItem;<img src='https://img-blog.csdnimg.cn/20201124195950691.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p>(Bug尚未解决，后续补上)</p>
+]]></content>
+      <categories>
+        <category>Logs</category>
+      </categories>
+      <tags>
+        <tag>UE_4.22</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RPG Game开发日志(三)</title>
     <url>/2020/10/13/RPG-Dev-Log-3/</url>
     <content><![CDATA[<p>涉及内容：人物等级属性绑定，经验条动画效果等。</p>

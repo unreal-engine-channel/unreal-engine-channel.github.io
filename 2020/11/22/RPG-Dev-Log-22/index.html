@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-400x400-ue.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-400x400-ue.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="涉及内容：联网测试交易物品，RPC。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPG Game开发日志(二十二)">
+<meta property="og:url" content="http://example.com/2020/11/22/RPG-Dev-Log-22/index.html">
+<meta property="og:site_name" content="unreal-engine-channel">
+<meta property="og:description" content="涉及内容：联网测试交易物品，RPC。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112414060153.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124142235157.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124144439936.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124142437710.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124142522849.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124142703490.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124142703490.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124143142740.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124143451360.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112419420578.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124194330426.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124194820238.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124194928322.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124194629484.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124182952573.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124144935982.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124145309889.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124163958914.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124181438471.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124180507375.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124164936346.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124164315887.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112416440786.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124164435782.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124182550508.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124191915761.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124184819754.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124184927617.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124185055331.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112418501065.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124185330475.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124185413385.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124185603858.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124185747664.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124185836885.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124195641468.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124193737972.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124172748143.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124200200108.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112420035559.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124165756372.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124170731704.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124141309624.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124152053403.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112415291059.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124150829781.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124171800115.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202011241715382.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124172200596.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124153530678.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124171333609.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124195158920.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124195108141.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124140959167.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124145658353.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124173309109.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124181051489.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201124195950691.png">
+<meta property="article:published_time" content="2020-11-22T07:14:25.000Z">
+<meta property="article:modified_time" content="2020-11-25T16:07:36.504Z">
+<meta property="article:author" content="Jocoboy">
+<meta property="article:tag" content="UE_4.22">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020112414060153.png">
+
+<link rel="canonical" href="http://example.com/2020/11/22/RPG-Dev-Log-22/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>RPG Game开发日志(二十二) | unreal-engine-channel</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="unreal-engine-channel" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">unreal-engine-channel</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/22/RPG-Dev-Log-22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jocoboy">
+      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="unreal-engine-channel">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RPG Game开发日志(二十二)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-11-22 15:14:25" itemprop="dateCreated datePublished" datetime="2020-11-22T15:14:25+08:00">2020-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-26 00:07:36" itemprop="dateModified" datetime="2020-11-26T00:07:36+08:00">2020-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Logs/" itemprop="url" rel="index"><span itemprop="name">Logs</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>涉及内容：联网测试交易物品，RPC。</p>
+<a id="more"></a>
+
+<h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>说明：</p>
+<p>为了描述方便，定义<strong>SWAP_SLOT_INFO</strong> =(FromInventoryIndex(Integer),ToInventoryIndex(Integer),FromInventorySlotType(E_InventorySlotType),ToInventoryType(E_InventorySlotType)）</p>
+<h2 id="联网测试交易物品"><a href="#联网测试交易物品" class="headerlink" title="联网测试交易物品"></a>联网测试交易物品</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="相关枚举及结构体"><a href="#相关枚举及结构体" class="headerlink" title="相关枚举及结构体"></a>相关枚举及结构体</h4><ol>
+<li>创建枚举E_InventorySlotType[PlayerInventory,DrugStore]；</li>
+<li>打开S_ActorContainerInfo，新增成员InventorySlotType(E_InventorySlotType)；</li>
+</ol>
+<h4 id="相关蓝图接口"><a href="#相关蓝图接口" class="headerlink" title="相关蓝图接口"></a>相关蓝图接口</h4><h5 id="BPI-InventoryInterface相关"><a href="#BPI-InventoryInterface相关" class="headerlink" title="BPI_InventoryInterface相关"></a>BPI_InventoryInterface相关</h5><ol>
+<li>接口函数功能扩展：将GetContainerProperties返回值[Name,InventorySize]扩展至[Name,InventorySize,InventorySlotType]；</li>
+<li>创建接口函数[PlayersViewing(PlayerState[])GetPlayersViewing();</li>
+</ol>
+<h5 id="BPI-HUDInterface相关"><a href="#BPI-HUDInterface相关" class="headerlink" title="BPI_HUDInterface相关"></a>BPI_HUDInterface相关</h5><ol>
+<li>创建接口函数[void]UIOpenTransactionWindow(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))；</li>
+<li>创建接口函数[Level(Integer),Moneny(Integer)]GetPlayerStatus()；</li>
+<li>创建接口函数[void]AddMoney(Money)；</li>
+<li>创建接口函数[void]UISplitInventoryItem(<strong>SWAP_SLOT_INFO</strong>,Amount(Integer));</li>
+</ol>
+<h5 id="BPI-UsableActorContainer相关"><a href="#BPI-UsableActorContainer相关" class="headerlink" title="BPI_UsableActorContainer相关"></a>BPI_UsableActorContainer相关</h5><ol>
+<li>创建接口函数[Success(Boolean)]OnActorUsed(Controller(PlayerController))；</li>
+</ol>
+<h3 id="BP-DragDrop相关"><a href="#BP-DragDrop相关" class="headerlink" title="BP_DragDrop相关"></a>BP_DragDrop相关</h3><ol>
+<li>新增变量InventorySlotType(E_InventorySlotType)；</li>
+</ol>
+<h3 id="W-InventorySlot相关"><a href="#W-InventorySlot相关" class="headerlink" title="W_InventorySlot相关"></a>W_InventorySlot相关</h3><ol>
+<li>函数功能扩展：对拽取物品的来源和去向InventorySlotType类型进行判断。若相同=&gt;若为玩家背包，则可直接拖拽；否则不执行任何动作。若不相同=&gt;调用蓝图接口事件UIOpenTransactionWindow，完成物品交易；<img src='https://img-blog.csdnimg.cn/2020112414060153.png'></li>
+</ol>
+<h3 id="W-TransactionWindow相关"><a href="#W-TransactionWindow相关" class="headerlink" title="W_TransactionWindow相关"></a>W_TransactionWindow相关</h3><ol>
+<li>创建函数[void]Update(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))，完成交易物品信息的更新；<img src='https://img-blog.csdnimg.cn/20201124142235157.png'></li>
+<li>创建函数[Value(Integer),Success(Boolean)]CheckMoneyforShopping()，调用蓝图接口函数GetPlayerStatus获取玩家Money信息，用于检查玩家是否有足够的金额完成物品交易；<img src='https://img-blog.csdnimg.cn/20201124144439936.png'></li>
+<li>为标题Text文本内容绑定函数；<img src='https://img-blog.csdnimg.cn/20201124142437710.png'></li>
+<li>为交易物品Text文本内容及文本颜色绑定函数；<img src='https://img-blog.csdnimg.cn/20201124142522849.png'><img src='https://img-blog.csdnimg.cn/20201124142703490.png'></li>
+<li>为交易数量EditableTextBox文本输入内容绑定函数，并添加OnTextCommitted事件；<img src='https://img-blog.csdnimg.cn/20201124142703490.png'><img src='https://img-blog.csdnimg.cn/20201124143142740.png'></li>
+<li>为交易金额Text文本内容绑定函数。买入是全额，卖出将收取40%税收；<img src='https://img-blog.csdnimg.cn/20201124143451360.png'></li>
+<li>为TextToolTip添加文本内容和文本颜色绑定函数；<img src='https://img-blog.csdnimg.cn/2020112419420578.png'><img src='https://img-blog.csdnimg.cn/20201124194330426.png'></li>
+<li>为Minus和Plus按钮添加绑定事件；<img src='https://img-blog.csdnimg.cn/20201124194820238.png'></li>
+<li>为Min和Max按钮添加绑定事件；<img src='https://img-blog.csdnimg.cn/20201124194928322.png'></li>
+<li>为CancelButton和ConfirmButton添加绑定事件；<img src='https://img-blog.csdnimg.cn/20201124194629484.png'></li>
+</ol>
+<h3 id="C-Inventory相关"><a href="#C-Inventory相关" class="headerlink" title="C_Inventory相关"></a>C_Inventory相关</h3><ol>
+<li>创建函数[Index(Integer),Success(Boolean)]GetEmptyInventorySpace()，用于背包空闲slot的寻找；<img src='https://img-blog.csdnimg.cn/20201124182952573.png'></li>
+</ol>
+<h3 id="C-InventoryManager相关"><a href="#C-InventoryManager相关" class="headerlink" title="C_InventoryManager相关"></a>C_InventoryManager相关</h3><ol>
+<li><p>创建函数[void]OpenTransactionWindow(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))，调用函数[void]Update(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))；<img src='https://img-blog.csdnimg.cn/20201124144935982.png'></p>
+</li>
+<li><p>创建函数[void]CountMoney()，将BP_Player中的CountMoney函数迁移过来；<img src='https://img-blog.csdnimg.cn/20201124145309889.png'></p>
+</li>
+<li><p>创建函数[StructOut(S_InventoryItem)]AddToItemAmount(ItemInformation(S_InventoryItem),AmountToAdd(Integer))，将修改后的ItemInformation导出；<img src='https://img-blog.csdnimg.cn/20201124163958914.png'></p>
+</li>
+<li><p>创建函数[void]SetActorContainerSlotItem(ActorContainerIndex)；<img src='https://img-blog.csdnimg.cn/20201124181438471.png'></p>
+</li>
+<li><p>创建函数[void]SetViewersActorContainerSlot(ActorContainerSlot(Integer),ItemInformation(S_InventoryItem))，，调用客户端事件ClientSetActorContainerSlotItem，用于同步客户端交易信息；<img src='https://img-blog.csdnimg.cn/20201124180507375.png'></p>
+</li>
+<li><p>函数功能扩展：为函数AddItem添加Inventory判断，若为PlayerInventory则正常移动，否则调用函数SetViewersActorContainerSlot;<img src='https://img-blog.csdnimg.cn/20201124164936346.png'></p>
+</li>
+<li><p>创建函数[RemainingAmount(Integer)]AddItemToStack(InventoryComponent(C_Inventory),InventoryIndex(Integer),Amount(Integer))，根据叠加上限MaxStackSize减去叠加数目Amount计算出剩余生成数量RemainingAmount，调用函数AddToItemAmount完成InventoryItem信息修改，并返回RemainingAmount；<img src='https://img-blog.csdnimg.cn/20201124164315887.png'><img src='https://img-blog.csdnimg.cn/2020112416440786.png'><img src='https://img-blog.csdnimg.cn/20201124164435782.png'></p>
+</li>
+<li><p>创建函数[Struct(S_InventoryItem)]SetItemAmount(InventoryItem(S_InventoryItem),Amount(Integer))，用于物品数量的修改；<img src='https://img-blog.csdnimg.cn/20201124182550508.png'></p>
+</li>
+<li><p>创建函数[Output_Get(Integer),WasFullAmountRemove(Boolean),StructOut(S_InventoryItem)]RemoveFromItemAmount(InventoryItem(S_InventoryItem),AmountToRemove(Integer))；<img src='https://img-blog.csdnimg.cn/20201124191915761.png'></p>
+</li>
+<li><p>函数功能扩展：为函数MoveItem添加两个新的传入参数FromInventoryComponent和ToComponent</p>
+<ul>
+<li><p>判断是否为有效移动，若为有效移动，将传入参数创建为本地变量<img src='https://img-blog.csdnimg.cn/20201124184819754.png'></p>
+</li>
+<li><p>判断移动到另一物品上还是空白位置<img src='https://img-blog.csdnimg.cn/20201124184927617.png'></p>
+<ul>
+<li><p>移动到空白位置<img src='https://img-blog.csdnimg.cn/20201124185055331.png'></p>
+</li>
+<li><p>移动到另一物品上，判断是否为相同物品<img src='https://img-blog.csdnimg.cn/2020112418501065.png'></p>
+<ul>
+<li>为相同物品，判断是否超出堆叠上限<img src='https://img-blog.csdnimg.cn/20201124185330475.png'><ul>
+<li>未超出，直接进行叠加<img src='https://img-blog.csdnimg.cn/20201124185413385.png'></li>
+<li>超出，需要寻找空白位置并额外创建物品<img src='https://img-blog.csdnimg.cn/20201124185603858.png'></li>
+</ul>
+</li>
+<li>不是相同物品，判断是否为玩家背包<img src='https://img-blog.csdnimg.cn/20201124185747664.png'><ul>
+<li>若为玩家背包，直接进行物品对调<img src='https://img-blog.csdnimg.cn/20201124185836885.png'></li>
+<li>若为商店背包<img src='https://img-blog.csdnimg.cn/20201124195641468.png'></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建函数[void]SplitItem(FromInventory(C_Inventory),ToInventory(C_Inventory),FromInventoryIndex(Integer),ToInventoryIndex(Integer),Amount(Integer))，具体思路同MoveItem函数；<img src='https://img-blog.csdnimg.cn/20201124193737972.png'></p>
+</li>
+<li><p>创建函数[void]CloseActorContainer()，调用接口函数GetPlayersViewing和客户端事件Client_CloseActorContainer；<img src='https://img-blog.csdnimg.cn/20201124172748143.png'></p>
+</li>
+<li><p>创建函数[void]ClearContainerSlotItem(ContainerSlot(Integer))；<img src='https://img-blog.csdnimg.cn/20201124200200108.png'></p>
+</li>
+<li><p>创建函数[void]ClearViewersActorContainer(ActorContainerSlot(Integer))，调用客户端事件Client_ClearActorContainerSlotItems；<img src='https://img-blog.csdnimg.cn/2020112420035559.png'></p>
+</li>
+</ol>
+<h3 id="BP-RPG-NPC相关"><a href="#BP-RPG-NPC相关" class="headerlink" title="BP_RPG_NPC相关"></a>BP_RPG_NPC相关</h3><ol>
+<li>实现接口函数GetPlayersViewing，将PlayerState信息导出；<img src='https://img-blog.csdnimg.cn/20201124165756372.png'></li>
+<li>将蓝图接口BPI_UsableActorContainer添加进来，并实现接口函数OnActorUsed，调用服务端事件ServerUseContainer；<img src='https://img-blog.csdnimg.cn/20201124170731704.png'></li>
+</ol>
+<h3 id="RPG-PlayerController相关"><a href="#RPG-PlayerController相关" class="headerlink" title="RPG_PlayerController相关"></a>RPG_PlayerController相关</h3><ol>
+<li><p>实现蓝图接口事件EventUIOpenTransactionWindow，调用客户端事件Client_OpenTransactionWindow；<img src='https://img-blog.csdnimg.cn/20201124141309624.png'></p>
+</li>
+<li><p>实现蓝图接口事件EventAddMoney，调用客户端事件Client_AddMoney；<img src='https://img-blog.csdnimg.cn/20201124152053403.png'></p>
+</li>
+<li><p>实现蓝图接口事件EventUISplitInventoryItem，调用客户端事件ServerSplitInventoryItem；<img src='https://img-blog.csdnimg.cn/2020112415291059.png'></p>
+</li>
+<li><p>实现接口函数[Level(Integer),Moneny(Integer)]GetPlayerStatus()，将服务端Replicated到客户端的变量Level和Money信息导出；<img src='https://img-blog.csdnimg.cn/20201124150829781.png'></p>
+</li>
+<li><p>创建函数[HitActor(Actor)]GetUsableActor()，HitActor在BP_Player中完成设置；</p>
+<p><img src='https://img-blog.csdnimg.cn/20201124171800115.png'><img src='https://img-blog.csdnimg.cn/202011241715382.png'></p>
+</li>
+<li><p>创建函数[void]OnActorUsed()，调用函数GetUsableActor和接口函数OnActorUsed；<img src='https://img-blog.csdnimg.cn/20201124172200596.png'></p>
+</li>
+</ol>
+<h2 id="RPC-Remote-Procedure-Call"><a href="#RPC-Remote-Procedure-Call" class="headerlink" title="RPC(Remote Procedure Call)"></a>RPC(Remote Procedure Call)</h2><h3 id="Run-on-Server-Reliable"><a href="#Run-on-Server-Reliable" class="headerlink" title="Run on Server(Reliable)"></a>Run on Server(Reliable)</h3><h4 id="Server-SplitInventoryItem"><a href="#Server-SplitInventoryItem" class="headerlink" title="Server_SplitInventoryItem"></a>Server_SplitInventoryItem</h4><p>在C_InventoryManager事件图表中创建，调用函数SplitItem；<img src='https://img-blog.csdnimg.cn/20201124153530678.png'></p>
+<h4 id="Server-OnActorUsed"><a href="#Server-OnActorUsed" class="headerlink" title="Server_OnActorUsed"></a>Server_OnActorUsed</h4><p>在RPG_PlayerController事件图表中创建，调用函数OnActorUsed和客户端事件Client_OpenInventory；<img src='https://img-blog.csdnimg.cn/20201124171333609.png'></p>
+<h4 id="Server-CloseActorContainer"><a href="#Server-CloseActorContainer" class="headerlink" title="Server_CloseActorContainer"></a>Server_CloseActorContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数CloseActorContainer；<img src='https://img-blog.csdnimg.cn/20201124195158920.png'></p>
+<h4 id="Server-TransactionItem"><a href="#Server-TransactionItem" class="headerlink" title="Server_TransactionItem"></a>Server_TransactionItem</h4><p>在W_TransactionWindow事件图表中创建；<img src='https://img-blog.csdnimg.cn/20201124195108141.png'></p>
+<h3 id="Run-on-owning-Client-Reliable"><a href="#Run-on-owning-Client-Reliable" class="headerlink" title="Run on owning Client(Reliable)"></a>Run on owning Client(Reliable)</h3><h4 id="Client-OpenTransactionWindow"><a href="#Client-OpenTransactionWindow" class="headerlink" title="Client_OpenTransactionWindow"></a>Client_OpenTransactionWindow</h4><p>在C_InventoryManager事件图表中创建，调用函数OpenTransactionWindow；<img src='https://img-blog.csdnimg.cn/20201124140959167.png'></p>
+<h4 id="Client-AddMoney"><a href="#Client-AddMoney" class="headerlink" title="Client_AddMoney"></a>Client_AddMoney</h4><p>在C_InventoryManager事件图表中创建，将BP_Player中的自定义事件GetMoney迁移过来；<img src='https://img-blog.csdnimg.cn/20201124145658353.png'></p>
+<h4 id="Client-CloseActorContainer"><a href="#Client-CloseActorContainer" class="headerlink" title="Client_CloseActorContainer"></a>Client_CloseActorContainer</h4><p>在C_InventoryManager事件图表中创建，调用函数CloseActorContainerWindow;<img src='https://img-blog.csdnimg.cn/20201124173309109.png'></p>
+<h4 id="Client-SetActorContainerSlotItem"><a href="#Client-SetActorContainerSlotItem" class="headerlink" title="Client_SetActorContainerSlotItem"></a>Client_SetActorContainerSlotItem</h4><p>在C_InventoryManager事件图表中创建，调用函数SetActorContainerSlotItem;<img src='https://img-blog.csdnimg.cn/20201124181051489.png'></p>
+<h4 id="Client-ClearActorContainerSlotItems"><a href="#Client-ClearActorContainerSlotItems" class="headerlink" title="Client_ClearActorContainerSlotItems"></a>Client_ClearActorContainerSlotItems</h4><p>在C_InventoryManager事件图表中创建，调用函数ClearContainerSlotItem;<img src='https://img-blog.csdnimg.cn/20201124195950691.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p>(Bug尚未解决，后续补上)</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UE-4-22/" rel="tag"># UE_4.22</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/21/RPG-Dev-Log-21/" rel="prev" title="RPG Game开发日志()">
+      <i class="fa fa-chevron-left"></i> RPG Game开发日志()
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%94%E7%BD%91%E6%B5%8B%E8%AF%95%E4%BA%A4%E6%98%93%E7%89%A9%E5%93%81"><span class="nav-number">1.1.</span> <span class="nav-text">联网测试交易物品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%9E%9A%E4%B8%BE%E5%8F%8A%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">相关枚举及结构体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">相关蓝图接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BPI-InventoryInterface%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">BPI_InventoryInterface相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BPI-HUDInterface%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.1.2.2.</span> <span class="nav-text">BPI_HUDInterface相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BPI-UsableActorContainer%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.1.2.3.</span> <span class="nav-text">BPI_UsableActorContainer相关</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BP-DragDrop%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.2.</span> <span class="nav-text">BP_DragDrop相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#W-InventorySlot%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.3.</span> <span class="nav-text">W_InventorySlot相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#W-TransactionWindow%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.4.</span> <span class="nav-text">W_TransactionWindow相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-Inventory%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.5.</span> <span class="nav-text">C_Inventory相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-InventoryManager%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.6.</span> <span class="nav-text">C_InventoryManager相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BP-RPG-NPC%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.7.</span> <span class="nav-text">BP_RPG_NPC相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPG-PlayerController%E7%9B%B8%E5%85%B3"><span class="nav-number">1.1.8.</span> <span class="nav-text">RPG_PlayerController相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPC-Remote-Procedure-Call"><span class="nav-number">1.2.</span> <span class="nav-text">RPC(Remote Procedure Call)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-on-Server-Reliable"><span class="nav-number">1.2.1.</span> <span class="nav-text">Run on Server(Reliable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-SplitInventoryItem"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Server_SplitInventoryItem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-OnActorUsed"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Server_OnActorUsed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-CloseActorContainer"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Server_CloseActorContainer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Server-TransactionItem"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Server_TransactionItem</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-on-owning-Client-Reliable"><span class="nav-number">1.2.2.</span> <span class="nav-text">Run on owning Client(Reliable)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-OpenTransactionWindow"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Client_OpenTransactionWindow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-AddMoney"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Client_AddMoney</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-CloseActorContainer"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">Client_CloseActorContainer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-SetActorContainerSlotItem"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">Client_SetActorContainerSlotItem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Client-ClearActorContainerSlotItems"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">Client_ClearActorContainerSlotItems</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jocoboy</p>
+  <div class="site-description" itemprop="description">A website to share technologies for the latest version of Unreal Engine.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/unreal-engine-channel" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;unreal-engine-channel" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:unreal-engine-channel@outlook.com" title="E-Mail → mailto:unreal-engine-channel@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jocoboy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">54k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">49 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
