@@ -1,14 +1,7 @@
 ---
-title: RPG Game开发日志()
+title: {{ title }}
 date: {{ date }}
-categories: Logs
-tags: UE_4.22 
+categories: 
+tags: 
 ---
 
-涉及内容：
-
-<!--more-->
-
-# 涉及内容
-
-# 最终效果展示
