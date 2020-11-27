@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201020154615593.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201020134241578.gif">
 <meta property="article:published_time" content="2020-10-20T05:33:47.000Z">
-<meta property="article:modified_time" content="2020-11-26T14:02:37.485Z">
+<meta property="article:modified_time" content="2020-11-27T18:30:35.953Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-26 22:02:37" itemprop="dateModified" datetime="2020-11-26T22:02:37+08:00">2020-11-26</time>
+                <time title="Modified: 2020-11-28 02:30:35" itemprop="dateModified" datetime="2020-11-28T02:30:35+08:00">2020-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -280,7 +280,6 @@
       
         <p>涉及内容：创建NPC，骨骼重定向，任务互动发放等；</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
 <p>虚幻商城[Generic NPC Anim Pack]</p>
 <p>虚幻商城[Infinity Blade:Warriors]</p>
@@ -321,16 +320,11 @@
 </li>
 <li><p>添加NPC互动效果蓝图 <img src='https://img-blog.csdnimg.cn/20201020152018538.png'></p>
 </li>
-<li><p>打开Char_Shibi,创建事件调度OnInteract，将与E键盘事件关联；</p>
-</li>
-<li><p>打开BP_RPG_NPC,创建自定义事件OnInteract，用于判断角色与NPC交互时，NPC身上是否有未分发的任务<img src='https://img-blog.csdnimg.cn/20201020152724167.png'></p>
-</li>
-<li><p>打开Char_Shibi，创建事件调度UpdateLevelForQuest(Integer),在UpLevel之后调用；</p>
-</li>
-<li><p>打开BP_RPG_NPC,创建变量QuestInLevel(Map)，将Level映射到Quest类。创建自定义事件UpdateQuest(Integer),用于在角色升级后，判断NPC身上是否产生新的任务；<img src='https://img-blog.csdnimg.cn/20201020153139435.png'></p>
-</li>
-<li><p>复制BP_MasterQuest两份，命名为BP_FirstEventQuest和BP_FirstSideQuest，并修改任务信息；</p>
-</li>
+<li>打开Char_Shibi,创建事件调度OnInteract，将与E键盘事件关联；</li>
+<li>打开BP_RPG_NPC,创建自定义事件OnInteract，用于判断角色与NPC交互时，NPC身上是否有未分发的任务<img src='https://img-blog.csdnimg.cn/20201020152724167.png'></li>
+<li>打开Char_Shibi，创建事件调度UpdateLevelForQuest(Integer),在UpLevel之后调用；</li>
+<li>打开BP_RPG_NPC,创建变量QuestInLevel(Map)，将Level映射到Quest类。创建自定义事件UpdateQuest(Integer),用于在角色升级后，判断NPC身上是否产生新的任务；<img src='https://img-blog.csdnimg.cn/20201020153139435.png'></li>
+<li>复制BP_MasterQuest两份，命名为BP_FirstEventQuest和BP_FirstSideQuest，并修改任务信息；</li>
 </ol>
 <h2 id="UI动画添加"><a href="#UI动画添加" class="headerlink" title="UI动画添加"></a>UI动画添加</h2><ol>
 <li>打开W_Quest，为Border创建HideAll动画；<img src='https://img-blog.csdnimg.cn/20201020154300252.png'></li>
@@ -339,7 +333,8 @@
 <li>打开W_Quest事件蓝图，添加宏[Exec] PlayHideAll(Exec,Boolean)，组织和关联HideAll、Text、Show动画执行时机<img src='https://img-blog.csdnimg.cn/20201020154615593.png'></li>
 <li>创建自定义事件PlayQuest调用PlayHideAll，并在UpdateQuest末尾添加调用;</li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201020134241578.gif'>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201020134241578.gif'></p>
+
     </div>
 
     
@@ -455,7 +450,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -468,7 +463,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -524,12 +519,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">54k</span>
+    <span title="Symbols count total">56k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">49 mins.</span>
+    <span title="Reading time total">51 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -586,6 +581,8 @@
 
 
 
+
+  
 
   
 

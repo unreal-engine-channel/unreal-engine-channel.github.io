@@ -58,7 +58,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2020102813041126.gif">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201028130602858.gif">
 <meta property="article:published_time" content="2020-10-27T10:21:00.000Z">
-<meta property="article:modified_time" content="2020-11-26T14:02:37.485Z">
+<meta property="article:modified_time" content="2020-11-27T18:30:35.953Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
@@ -256,7 +256,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-26 22:02:37" itemprop="dateModified" datetime="2020-11-26T22:02:37+08:00">2020-11-26</time>
+                <time title="Modified: 2020-11-28 02:30:35" itemprop="dateModified" datetime="2020-11-28T02:30:35+08:00">2020-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -295,7 +295,6 @@
       
         <p>涉及内容：战斗系统（续篇），AI设置，蒙太奇动画。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="蒙太奇动画"><a href="#蒙太奇动画" class="headerlink" title="蒙太奇动画"></a>蒙太奇动画</h2><h3 id="玩家被击蒙太奇"><a href="#玩家被击蒙太奇" class="headerlink" title="玩家被击蒙太奇"></a>玩家被击蒙太奇</h3><ol>
 <li>添加ShinBi被攻击时的骨骼动画，创建Montage，将HitRect_Back、HitRect_Font、HitReact_Left、HitRect_Right分成4个section添加进来;<img src='https://img-blog.csdnimg.cn/20201027183226400.png'></li>
 <li>打开BP_Shibi事件图表，在OnRecieveDamage事件添加蒙太奇动画，每次角色被攻击时，随机播放4个section中的一个；<img src='https://img-blog.csdnimg.cn/20201027183642919.png'></li>
@@ -346,9 +345,9 @@
 <li>创建任务BTTask_Reset，用于判断敌人AI是否已经脱仇，并执行来自BP_Enemy的Reset事件；<img src='https://img-blog.csdnimg.cn/2020102722221863.png'><img src='https://img-blog.csdnimg.cn/20201027222301945.png'></li>
 <li>创建Sequence并添加Blackboard Decorator[RunBack],设置BlackboardKey=Behavior,KeyValue=RunBack，序列执行顺序为:MoveTo(Original)—&gt;BTTask_Reset（then Loop);<img src='https://img-blog.csdnimg.cn/20201027222635974.png'></li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102813041126.gif'>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020102813041126.gif'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201028130602858.gif'></p>
 
-<img src='https://img-blog.csdnimg.cn/20201028130602858.gif'>
     </div>
 
     
@@ -464,7 +463,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -477,7 +476,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -533,12 +532,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">54k</span>
+    <span title="Symbols count total">56k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">49 mins.</span>
+    <span title="Reading time total">51 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -595,6 +594,8 @@
 
 
 
+
+  
 
   
 

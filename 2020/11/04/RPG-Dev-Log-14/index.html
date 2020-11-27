@@ -59,7 +59,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201105083011449.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201105082938769.png">
 <meta property="article:published_time" content="2020-11-04T15:01:43.000Z">
-<meta property="article:modified_time" content="2020-11-26T14:02:37.485Z">
+<meta property="article:modified_time" content="2020-11-27T18:30:35.953Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
@@ -257,7 +257,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-26 22:02:37" itemprop="dateModified" datetime="2020-11-26T22:02:37+08:00">2020-11-26</time>
+                <time title="Modified: 2020-11-28 02:30:35" itemprop="dateModified" datetime="2020-11-28T02:30:35+08:00">2020-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -296,7 +296,6 @@
       
         <p>涉及内容：大任务系统创建(续篇),蓝图UI任务数据绑定。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="创建W-MissionSubGoal"><a href="#创建W-MissionSubGoal" class="headerlink" title="创建W_MissionSubGoal"></a>创建W_MissionSubGoal</h2><ol>
 <li>创建控件W_MissionSubGoal，作为W_Mission中任务分支信息SubGoalInfoVerticalBox的子控件；<br><img src='https://img-blog.csdnimg.cn/20201105072242910.png'><img src='https://img-blog.csdnimg.cn/20201105072311908.png'></li>
 <li>创建函数Update，用于更新SubGoalText的文本内容(这部分蓝图可从W_SubGoal中的Update函数迁移过来)，并根据任务状态设置CurrentImage、SuccessImage、FailedImage的可视性，并在事件开始构造时调用；<img src='https://img-blog.csdnimg.cn/20201105072948473.png'></li>
@@ -329,12 +328,9 @@
 <li>函数功能扩展：函数AddQuest(QuestClass)变更为AddQuest(QuestClass,DirectlyStart)，根据当前任务数量和DirectlyStart的布尔值判断是否自动接取任务。若自动接取任务，则播放动画PlayQuest和PlaySubGoal(来着W_Quest)；</li>
 <li>关联事件修改：打开事件图表，修改自定义事件UpdateCompletedSubGoal；</li>
 </ol>
-<h2 id="任务实例设置"><a href="#任务实例设置" class="headerlink" title="任务实例设置"></a>任务实例设置</h2><h3 id="主线任务"><a href="#主线任务" class="headerlink" title="主线任务"></a>主线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080724734.png'>
-
-<h3 id="支线任务"><a href="#支线任务" class="headerlink" title="支线任务"></a>支线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080758220.png'>
-
-<h3 id="副本任务"><a href="#副本任务" class="headerlink" title="副本任务"></a>副本任务</h3><img src='https://img-blog.csdnimg.cn/20201105080823342.png'>
-
+<h2 id="任务实例设置"><a href="#任务实例设置" class="headerlink" title="任务实例设置"></a>任务实例设置</h2><h3 id="主线任务"><a href="#主线任务" class="headerlink" title="主线任务"></a>主线任务</h3><p><img src='https://img-blog.csdnimg.cn/20201105080724734.png'></p>
+<h3 id="支线任务"><a href="#支线任务" class="headerlink" title="支线任务"></a>支线任务</h3><p><img src='https://img-blog.csdnimg.cn/20201105080758220.png'></p>
+<h3 id="副本任务"><a href="#副本任务" class="headerlink" title="副本任务"></a>副本任务</h3><p><img src='https://img-blog.csdnimg.cn/20201105080823342.png'></p>
 <h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201105082833827.png'><img src='https://img-blog.csdnimg.cn/20201105082916789.png'><img src='https://img-blog.csdnimg.cn/20201105083011449.png'><img src='https://img-blog.csdnimg.cn/20201105082938769.png'></p>
 
     </div>
@@ -452,7 +448,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -465,7 +461,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -521,12 +517,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">54k</span>
+    <span title="Symbols count total">56k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">49 mins.</span>
+    <span title="Reading time total">51 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -583,6 +579,8 @@
 
 
 
+
+  
 
   
 

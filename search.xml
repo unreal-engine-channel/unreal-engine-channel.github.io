@@ -7,14 +7,11 @@
 <p>A behavior tree is to express the behavior of artificial intelligence. The behavior tree has a characteristic that is easy to change state transitions than FSM(Finite State Machine).</p>
 </blockquote>
 <a id="more"></a>
-
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>以RPG游戏为例，无论是PVE模式还是PVP模式，都会涉及人工智能这个概念。其中包括引导新手的NPC，玩家对战的NPC等。</p>
 <h2 id="FSM-Finite-State-Machine"><a href="#FSM-Finite-State-Machine" class="headerlink" title="FSM(Finite State Machine)"></a>FSM(Finite State Machine)</h2><p>双FSM是目前最常用的一样方法，它定义了有限多个状态（行为），用图表来表达状态之间的因果关系。虽然理解状态的组成和转移很容易，但有个问题：状态和转移越多，维护就越困难。</p>
-<img src='https://img-blog.csdnimg.cn/20201101214601997.png' alt='[Fig.1] FSM'>
-
+<p><img src='https://img-blog.csdnimg.cn/20201101214601997.png' alt='[Fig.1] FSM'></p>
 <h3 id="Fig-1-FSM"><a href="#Fig-1-FSM" class="headerlink" title="[Fig.1] FSM"></a>[Fig.1] FSM</h3><p>图示给出了FSM的一个例子。它由Search、Chase和Attack状态组成，状态转换条件显示在箭头之上。为了改进FSM，实现更加精密的人工智能开发，提出了行为树的概念。它仍然具有类似于FSM的形式，但是即便状态和状态之间的关系再多，管理难度也远小于FSM。它更适合具有复杂行为和功能的智能体。</p>
-<h2 id="Behavior-Tree"><a href="#Behavior-Tree" class="headerlink" title="Behavior Tree"></a>Behavior Tree</h2><img src='https://img-blog.csdnimg.cn/20201101220407953.png' alt='[Fig.2] Behavior Tree'>
-
+<h2 id="Behavior-Tree"><a href="#Behavior-Tree" class="headerlink" title="Behavior Tree"></a>Behavior Tree</h2><p><img src='https://img-blog.csdnimg.cn/20201101220407953.png' alt='[Fig.2] Behavior Tree'></p>
 <h3 id="Fig-2-Behavior-Tree"><a href="#Fig-2-Behavior-Tree" class="headerlink" title="[Fig.2] Behavior Tree"></a>[Fig.2] Behavior Tree</h3><p>图示给出了一个行为树的例子。这些行为树在PRG/RTS/FPS等类型的游戏中都具备可用性。对于单个对象的行为或控制逻辑，我们认为没有必要使用行为树。</p>
 <h3 id="原理和方法"><a href="#原理和方法" class="headerlink" title="原理和方法"></a>原理和方法</h3><p>行为树是通过将AI的角色行为定义为树的方法，通过连接角色行为的条件和因果关系，优先级等对应的节点来完成。 </p>
 <h3 id="Unreal-Engine中的BT"><a href="#Unreal-Engine中的BT" class="headerlink" title="Unreal Engine中的BT"></a>Unreal Engine中的BT</h3><h4 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h4><ul>
@@ -24,10 +21,8 @@
 <li>Selector：顺序执行子节点，直到有一个返回成功。如果所有的子节点都返回失败，则该选择器也返回失败。</li>
 <li>Service：在固定更新频率的黑板上运行。</li>
 </ul>
-<img src='https://img-blog.csdnimg.cn/20201101222235173.png' alt='[Table 2] Unreal Engine'>
-
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><img src='https://img-blog.csdnimg.cn/20201101225753418.png' alt='[Fig.5] Unreal Engine Behavior Tree'>
-
+<p><img src='https://img-blog.csdnimg.cn/20201101222235173.png' alt='[Table 2] Unreal Engine'></p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p><img src='https://img-blog.csdnimg.cn/20201101225753418.png' alt='[Fig.5] Unreal Engine Behavior Tree'></p>
 <h3 id="Unity-Engine中的BT"><a href="#Unity-Engine中的BT" class="headerlink" title="Unity Engine中的BT"></a>Unity Engine中的BT</h3><h4 id="注解-1"><a href="#注解-1" class="headerlink" title="注解"></a>注解</h4><ul>
 <li>Action：基础节点。</li>
 <li>Decorator：定义当前分支返回结果是否为真。</li>
@@ -36,14 +31,9 @@
 <li>Priority selector：决定最高优先级的节点。</li>
 <li>Parallel: 平行子节点将被同时执行。</li>
 </ul>
-<img src='https://img-blog.csdnimg.cn/20201101222050462.png' alt='[Table 1] Unity Engine'>
-
-<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><img src='https://img-blog.csdnimg.cn/20201101230244379.png' alt='[Fig.6] Unity Engine Behavior Tree'>
-
+<p><img src='https://img-blog.csdnimg.cn/20201101222050462.png' alt='[Table 1] Unity Engine'></p>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p><img src='https://img-blog.csdnimg.cn/20201101230244379.png' alt='[Fig.6] Unity Engine Behavior Tree'></p>
 <h4 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sequence_node</span>(<span class="params">owner, node_name</span>):</span></span><br><span class="line">    run_index = get_run_index(node_name)</span><br><span class="line">    <span class="keyword">while</span> run_index &lt; len(child_list):</span><br><span class="line">        res = child_list[run_index](owner)</span><br><span class="line">        <span class="keyword">if</span> res == FAILURE:</span><br><span class="line">            set_run_index(node_name, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">elif</span> res == RUNNING:</span><br><span class="line">            set_run_index(node_name, run_index)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            run_index += <span class="number">1</span></span><br><span class="line">    set_run_index(node_name, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> SUCCESS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selector_node</span>(<span class="params">owner, node_name</span>):</span></span><br><span class="line">    run_index = get_run_index(node_name)</span><br><span class="line">    <span class="keyword">while</span> run_index &lt; len(child_list):</span><br><span class="line">        res = child_list[run_index](owner)</span><br><span class="line">        <span class="keyword">if</span> res == SUCCESS:</span><br><span class="line">            set_run_index(node_name, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> res == RUNNING:</span><br><span class="line">            set_run_index(node_name, run_index)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            run_index += <span class="number">1</span></span><br><span class="line">    set_run_index(node_name, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> FAILURE</span><br><span class="line">    </span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">parallel</span>(<span class="params">owner, node_name</span>):</span></span><br><span class="line">    run_index_list = get_run_index(node_name)</span><br><span class="line">    <span class="keyword">if</span> len(run_index_list) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> run_index_list:</span><br><span class="line">            state_dic[index] = child_list[index](owner)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        run_index = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> run_index &lt; len(child_list):</span><br><span class="line">            state_dic[run_index] = child_list[run_index](owner)</span><br><span class="line">            run_index += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> state_dic.count(SUCCESS) &gt;= MIN_SUCCESS:</span><br><span class="line">        <span class="keyword">return</span> SUCCESS</span><br><span class="line">    <span class="keyword">elif</span> state_dic.count(FAILURE) &gt;= MIN_FAILURE:</span><br><span class="line">        <span class="keyword">return</span> FAILURE</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> RUNNING</span><br></pre></td></tr></table></figure>
-
-
-
 <h3 id="两大引擎中的BT对比-参照UE4"><a href="#两大引擎中的BT对比-参照UE4" class="headerlink" title="两大引擎中的BT对比(参照UE4)"></a>两大引擎中的BT对比(参照UE4)</h3><p>​        两个引擎的行为树具有很多共同点，就是可以很容易地了解一个行为实现的条件和下一个行为是什么。</p>
 <p>我们定义一组AI行为：</p>
 <ol>
@@ -56,10 +46,8 @@
 <li><p>[EnemyBaseInRange]若发现基地，则攻击基地。</p>
 </li>
 </ol>
-<img src='https://img-blog.csdnimg.cn/20201101225148412.png'  alt='[Fig.3] Unreal Engine Behavior Tree'>
-
-<img src='https://img-blog.csdnimg.cn/20201101230351316.png' alt='[Fig.4] Unity Engine Behavior Tree'>
-
+<p><img src='https://img-blog.csdnimg.cn/20201101225148412.png'  alt='[Fig.3] Unreal Engine Behavior Tree'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201101230351316.png' alt='[Fig.4] Unity Engine Behavior Tree'></p>
 <h4 id="行为树为事件驱动型"><a href="#行为树为事件驱动型" class="headerlink" title="行为树为事件驱动型"></a>行为树为事件驱动型</h4><blockquote>
 <p>行为树可避免在每帧中执行大量工作。行为树并不会经常检查相关变化是否已经发生，它只会被动地等待在树中引起变化的“事件”。</p>
 <p>事件驱动型结构对运行性能和除错大有帮助。如果希望获得这些帮助，必须理解虚幻引擎树的其他不同点，并正确搭建行为树结构。</p>
@@ -96,11 +84,132 @@
       </tags>
   </entry>
   <entry>
+    <title>Graphic-Drawing-System</title>
+    <url>/2020/11/27/Graphic-Drawing-System/</url>
+    <content><![CDATA[<p>图形绘制系统的主要内容：Modeling(建模)、Geometric processing(几何处理)、Rasterization(光栅化)、Fragment processing(片元处理)、Frame buffer(帧缓存)。</p>
+<a id="more"></a>
+<h1 id="Geometric-processing-几何处理"><a href="#Geometric-processing-几何处理" class="headerlink" title="Geometric processing(几何处理)"></a>Geometric processing(几何处理)</h1><p><img src='https://img-blog.csdnimg.cn/20201127213955149.png'></p>
+<blockquote>
+<ul>
+<li><p>完整的图形绘制管道</p>
+<ol>
+<li>通过给P添加分量1将其扩展为齐次4元组；</li>
+<li>用这个4元组乘上矩阵modelview，得到视点坐标系下的4元组；</li>
+<li>再将点乘上投影矩阵，得到裁剪坐标下的4元组；</li>
+<li>对以此点为端点的边实施裁剪操作；</li>
+<li>执行透视除法，得到一个3元组（规范化的设备坐标）；</li>
+<li>在视区变换过程中3元组被乘上一个矩阵：得到的结果被用于绘制和深度计算（窗口坐标）。</li>
+</ol>
+</li>
+<li><p>从三维空间到二维平面，就如同用相机拍照一样，通常都要经历以下几个步骤（括号内表示的是相应的图形学概念） </p>
+<ol>
+<li><p>将相机置于三角架上，让它对准三维景物（视点变换，Viewing Transformation）； </p>
+</li>
+<li><p>将三维物体放在适当的位置（模型变换，Modeling Transformation ）； </p>
+</li>
+<li><p>选择相机镜头并调焦，使三维物体投影在二维胶片上（投影变换，Projection Transformation ）;</p>
+</li>
+<li><p>决定二维像片的大小（视口变换，Viewport Transformation ）。 </p>
+</li>
+</ol>
+<p>这样，一个三维空间里的物体就可以用相应的二维平面物体表示了，也就能在二维的计算机屏幕上正确显示了。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="Viewing-amp-Modeling-Transformation-视点-amp-模型变换"><a href="#Viewing-amp-Modeling-Transformation-视点-amp-模型变换" class="headerlink" title="Viewing &amp; Modeling  Transformation(视点&amp;模型变换)"></a>Viewing &amp; Modeling  Transformation(视点&amp;模型变换)</h2><h3 id="摄像机的定位和定向"><a href="#摄像机的定位和定向" class="headerlink" title="摄像机的定位和定向"></a>摄像机的定位和定向</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p><img src='https://img-blog.csdnimg.cn/20201128001507408.png'></p>
+<p>给定eye、look和up，我们得到：</p>
+<p><img src='https://img-blog.csdnimg.cn/20201128002206685.png'></p>
+<h4 id="Modelview-matrix-模型视点矩阵"><a href="#Modelview-matrix-模型视点矩阵" class="headerlink" title="Modelview matrix(模型视点矩阵)"></a>Modelview matrix(模型视点矩阵)</h4><p><img src='https://img-blog.csdnimg.cn/20201128013208174.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201128013227487.png'></p>
+<p>模型视点矩阵的作用是把世界坐标系转换成摄像机坐标系。</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><blockquote>
+<p>考虑一个摄像机，其eye=(4,4,4)，look=(0,1,0)，up为(0,1,0)，求出u，v，n。</p>
+<p>n=(4,4,4)-(0,1,0)=(4,3,4)</p>
+<script type="math/tex; mode=display">
+\left[
+ \begin{matrix}
+   i & j & k \\
+   0 & 1 & 0 \\
+   4 & 3 & 4
+  \end{matrix}
+  \right]</script><p>u=(0,1,0)×(4,3,4)=(4,0,-4)</p>
+<script type="math/tex; mode=display">
+\left[
+ \begin{matrix}
+   i & j & k \\
+   4 & 3 & 4 \\
+   4 & 0 & -4
+  \end{matrix}
+  \right]</script><p>v=(4,3,4)×(4,0,-4)=(-12,32,-12)</p>
+</blockquote>
+<h4 id="OpenGL视点变换API"><a href="#OpenGL视点变换API" class="headerlink" title="OpenGL视点变换API"></a>OpenGL视点变换API</h4><ul>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/glulookat">gluLookAt(GLdouble eyex,   GLdouble eyey,   GLdouble eyez,   GLdouble centerx,   GLdouble centery,   GLdouble centerz,   GLdouble upx,   GLdouble upy,   GLdouble upz)</a></li>
+</ul>
+<h2 id="Projection-Transformation-投影变换"><a href="#Projection-Transformation-投影变换" class="headerlink" title="Projection Transformation(投影变换)"></a>Projection Transformation(投影变换)</h2><h3 id="平行投影-正交投影"><a href="#平行投影-正交投影" class="headerlink" title="平行投影(正交投影)"></a>平行投影(正交投影)</h3><h4 id="平行投影矩阵"><a href="#平行投影矩阵" class="headerlink" title="平行投影矩阵"></a>平行投影矩阵</h4><p><img src='https://img-blog.csdnimg.cn/20201128020858774.png'></p>
+<p><a href="https://www.cnblogs.com/leixinyue/p/11166135.html">推导过程</a></p>
+<h4 id="OpenGL平行投影API"><a href="#OpenGL平行投影API" class="headerlink" title="OpenGL平行投影API"></a>OpenGL平行投影API</h4><ul>
+<li><p><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/glortho">glOrtho(GLdouble left,   GLdouble right,   GLdouble bottom,   GLdouble top,   GLdouble zNear,   GLdouble zFar)</a></p>
+</li>
+<li><p><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/gluortho2d">gluOrtho2D(GLdouble left,   GLdouble right,   GLdouble top,   GLdouble bottom)</a></p>
+</li>
+</ul>
+<h3 id="透视投影"><a href="#透视投影" class="headerlink" title="透视投影"></a>透视投影</h3><h4 id="透视除法"><a href="#透视除法" class="headerlink" title="透视除法"></a>透视除法</h4><p><img src='https://img-blog.csdnimg.cn/20201128020312218.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201128020336728.png'></p>
+<p>在Eye coordinates(观察坐标）被Projection matrix相乘后，得到的Clip coordinates(裁剪坐标)仍然是homogeneous coordinates(齐次坐标)。最终它需要除以Clip coordinates的w分量，才能变成Normalized device coordinates(规范化设备坐标NDC)。因此，我们可以把裁剪坐标的Wc分量设置为-Ze，则投影矩阵第4行变为(0, 0, -1, 0)。</p>
+<h4 id="透视投影矩阵"><a href="#透视投影矩阵" class="headerlink" title="透视投影矩阵"></a>透视投影矩阵</h4><p><img src='https://img-blog.csdnimg.cn/20201128020621398.png'></p>
+<p><a href="https://www.cnblogs.com/leixinyue/p/11166135.html">推导过程</a></p>
+<h4 id="OpenGL透视投影API"><a href="#OpenGL透视投影API" class="headerlink" title="OpenGL透视投影API"></a>OpenGL透视投影API</h4><ul>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/glfrustum">glFrustum(GLdouble left,   GLdouble right,   GLdouble bottom,   GLdouble top,   GLdouble zNear,   GLdouble zFar)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/gluperspective">gluPerspective(GLdouble fovy,   GLdouble aspect,   GLdouble zNear,   GLdouble zFar)</a></li>
+</ul>
+<h2 id="Viewport-Transformation-视口变换"><a href="#Viewport-Transformation-视口变换" class="headerlink" title="Viewport Transformation(视口变换)"></a>Viewport Transformation(视口变换)</h2><p><img src='https://img-blog.csdnimg.cn/20201127214343608.png'></p>
+<h3 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ol>
+<li>仿射变换可以很容易地对物体实施缩放、旋转和平移操作</li>
+<li>一系列仿射变换可以组合成一个单一的仿射变换</li>
+<li>仿射变换可以使用一个紧凑的矩阵形式表示</li>
+</ol>
+<h4 id="基本变换"><a href="#基本变换" class="headerlink" title="基本变换"></a>基本变换</h4><ul>
+<li>平移<img src='https://img-blog.csdnimg.cn/2020112723281810.png'></li>
+<li>缩放<img src='https://img-blog.csdnimg.cn/20201127232917795.png'></li>
+<li>旋转<img src='https://img-blog.csdnimg.cn/20201127234421587.png'><img src='https://img-blog.csdnimg.cn/20201127234441934.png'></li>
+</ul>
+<h4 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h4><blockquote>
+<p>假设裁剪矩形的左下角坐标为（wxl=10,wyb=10），右上角坐标为（wxr=50，wyt=50）。</p>
+<p>设备坐标系中视口的左下角坐标为（vxl=10,vyb=30），右上角坐标为（vxr=50,vyt=90）。</p>
+<p>已知在窗口内有一点p(20,30)，要将点p映射到视区内的点p’，请问p’点在设备坐标系中的坐标是多少？</p>
+<ol>
+<li><p>将窗口坐标系（window coordinates）左下角（10,10）平移至观察坐标系的坐标原点（0,0），平移矢量为（-10，-10）。</p>
+</li>
+<li><p>针对坐标原点进行比例变换，使窗口大小和视区相等，比例因子为 Sx=(50-10)/(50-10)=1， Sy=(90-30)/(50-10)=1.5。</p>
+</li>
+<li><p>将窗口内的点映射到设备坐标系（device coordinates）的视区中，再进行反平移，将视区的左下角移回到设备坐标系中的位置（10,30），平移矢量为（10,30）。</p>
+</li>
+<li><p>计算得到变换矩阵T。<br><img src='https://img-blog.csdnimg.cn/20201127225018489.png'><br><img src='https://img-blog.csdnimg.cn/20201127225157233.png'></p>
+</li>
+<li><p>将变换矩阵T左乘p点齐次坐标得到p’齐次坐标。</p>
+<p><img src='https://img-blog.csdnimg.cn/20201127234649217.png'></p>
+</li>
+</ol>
+</blockquote>
+<h3 id="OpenGL视口变换API"><a href="#OpenGL视口变换API" class="headerlink" title="OpenGL视口变换API"></a>OpenGL视口变换API</h3><ul>
+<li><p><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/glviewport">glViewport(GLint x, GLint y , GLsizei width , GLsizei height)</a></p>
+</li>
+<li><p><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/gldepthrange">glDepthRange(GLclampd zNear, GLclampd zFar )</a></p>
+</li>
+</ul>
+<h1 id="Rasterization-光栅化"><a href="#Rasterization-光栅化" class="headerlink" title="Rasterization(光栅化)"></a>Rasterization(光栅化)</h1><h1 id="Fragment-processing-片元处理"><a href="#Fragment-processing-片元处理" class="headerlink" title="Fragment processing(片元处理)"></a>Fragment processing(片元处理)</h1><h1 id="Frame-buffer-帧缓存"><a href="#Frame-buffer-帧缓存" class="headerlink" title="Frame buffer(帧缓存)"></a>Frame buffer(帧缓存)</h1>]]></content>
+      <categories>
+        <category>Theories</category>
+      </categories>
+      <tags>
+        <tag>Computer Graphics</tag>
+        <tag>OpenGL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RPG Game开发日志(一)</title>
     <url>/2020/10/11/RPG-Dev-Log-1/</url>
-    <content><![CDATA[<p>涉及内容：简单场景创建；鼠标跟随贴花制作；动画蓝图制作；移动操控绑定等。</p>
-<a id="more"></a>
-
+    <content><![CDATA[<p>涉及内容：简单场景创建；鼠标跟随贴花制作；动画蓝图制作；移动操控绑定等。<br><a id="more"></a></p>
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="简单场景创建"><a href="#简单场景创建" class="headerlink" title="简单场景创建"></a>简单场景创建</h2><ol>
 <li>清理默认物体，如Floor、Capsule等;</li>
 <li>添加Box Brush，Transform&gt;Location=(0,0,0)，Brush Settings &gt; X=5000,Y=5000,Z=800;</li>
@@ -109,8 +218,7 @@
 <li>添加StarterContent初学者内容包，为场景物体添加材质。</li>
 <li>保存场景为Training至RPG_Game&gt;Maps。</li>
 </ol>
-<img src="https://img-blog.csdnimg.cn/20201011122013690.png">
-
+<p><img src="https://img-blog.csdnimg.cn/20201011122013690.png"></p>
 <h2 id="鼠标跟随贴花制作"><a href="#鼠标跟随贴花制作" class="headerlink" title="鼠标跟随贴花制作"></a>鼠标跟随贴花制作</h2><ol>
 <li>图标来源：<a href="https://www.iconfont.cn/">阿里巴巴矢量图标库</a>  </li>
 <li>添加Goal图标至RPG_Game&gt;Textures；</li>
@@ -138,9 +246,9 @@
 <li>鼠标贴花生成；<img src='https://img-blog.csdnimg.cn/20201011132417698.png'></li>
 <li>移动转向控制。<img src='https://img-blog.csdnimg.cn/20201011133109943.png'><img src='https://img-blog.csdnimg.cn/20201011133157497.png' ><img src='https://img-blog.csdnimg.cn/20201011133223590.png'><img src='https://img-blog.csdnimg.cn/2020101113325827.png'><img src='https://img-blog.csdnimg.cn/20201011133327798.png'></li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201012174104608.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201012174324500.png'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201012174104608.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201012174324500.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -153,7 +261,6 @@
     <url>/2020/10/25/RPG-Dev-Log-10/</url>
     <content><![CDATA[<p>涉及内容：创建Enemy；创建战斗系统（开篇）。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
 <p>虚幻商城[InfinityBlade:Adversaries]</p>
 <p>虚幻商城[Action RPG]</p>
@@ -183,10 +290,8 @@
 </li>
 <li><p>以BP_Weapon为父类，创建Weapon_Grunting,添加Grunting武器模型，调整胶囊体和武器朝向；</p>
 </li>
-<li><p>打开Enemy_Grunting骨骼，添加Sockect[Weapon]至b_MF_Weapon_R,添加preview assets，设置预览动画，调整Socket位置;</p>
-</li>
-<li><p>打开事件图表，添加蓝图，将Weapon添加至敌人身上；<img src='https://img-blog.csdnimg.cn/20201025C204213703.png'></p>
-</li>
+<li>打开Enemy_Grunting骨骼，添加Sockect[Weapon]至b_MF_Weapon_R,添加preview assets，设置预览动画，调整Socket位置;</li>
+<li>打开事件图表，添加蓝图，将Weapon添加至敌人身上；<img src='https://img-blog.csdnimg.cn/20201025C204213703.png'></li>
 </ol>
 <h3 id="创建敌人名称血量UI"><a href="#创建敌人名称血量UI" class="headerlink" title="创建敌人名称血量UI"></a>创建敌人名称血量UI</h3><ol>
 <li>创建Widget[W_Enemy]，层级面板和预览效果；<img src='https://img-blog.csdnimg.cn/20201025204659690.png'></li>
@@ -263,7 +368,8 @@
 <li><p>打开W_DamageText，扩展UpdateValue函数功能，添加新的传入参数[Critical]，用于暴击伤害时伤害数字的特殊显示；<img src='https://img-blog.csdnimg.cn/20201026175016824.png'></p>
 </li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201026011936218.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201026011936218.gif'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -276,7 +382,6 @@
     <url>/2020/10/27/RPG-Dev-Log-11/</url>
     <content><![CDATA[<p>涉及内容：战斗系统（续篇），AI设置，蒙太奇动画。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="蒙太奇动画"><a href="#蒙太奇动画" class="headerlink" title="蒙太奇动画"></a>蒙太奇动画</h2><h3 id="玩家被击蒙太奇"><a href="#玩家被击蒙太奇" class="headerlink" title="玩家被击蒙太奇"></a>玩家被击蒙太奇</h3><ol>
 <li>添加ShinBi被攻击时的骨骼动画，创建Montage，将HitRect_Back、HitRect_Font、HitReact_Left、HitRect_Right分成4个section添加进来;<img src='https://img-blog.csdnimg.cn/20201027183226400.png'></li>
 <li>打开BP_Shibi事件图表，在OnRecieveDamage事件添加蒙太奇动画，每次角色被攻击时，随机播放4个section中的一个；<img src='https://img-blog.csdnimg.cn/20201027183642919.png'></li>
@@ -327,9 +432,9 @@
 <li>创建任务BTTask_Reset，用于判断敌人AI是否已经脱仇，并执行来自BP_Enemy的Reset事件；<img src='https://img-blog.csdnimg.cn/2020102722221863.png'><img src='https://img-blog.csdnimg.cn/20201027222301945.png'></li>
 <li>创建Sequence并添加Blackboard Decorator[RunBack],设置BlackboardKey=Behavior,KeyValue=RunBack，序列执行顺序为:MoveTo(Original)—&gt;BTTask_Reset（then Loop);<img src='https://img-blog.csdnimg.cn/20201027222635974.png'></li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102813041126.gif'>
-
-<img src='https://img-blog.csdnimg.cn/20201028130602858.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020102813041126.gif'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201028130602858.gif'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -342,7 +447,6 @@
     <url>/2020/11/01/RPG-Dev-Log-12/</url>
     <content><![CDATA[<p>涉及内容：制作简单的粒子特效，获得经验金币，重生Enemy。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="敌人死后消亡特效"><a href="#敌人死后消亡特效" class="headerlink" title="敌人死后消亡特效"></a>敌人死后消亡特效</h2><ol>
 <li>创建MaterialFunction[MF_DissolveEffect]，添加Input[Visibility]，Type=Function Input Scalar；<img src='https://img-blog.csdnimg.cn/2020110116235018.png'></li>
 <li>打开Enemy材质球，调用MF_DissolveEffect，添加OnHit和Visibility参数，设置EmissiveColor和OpacityMask；<img src='https://img-blog.csdnimg.cn/20201101162845368.png'></li>
@@ -410,7 +514,8 @@
 <li>设置Enemy_Grunting，Auto Prossess AI = Placed in World or Spawned，并设置默认属性值，敌人等级的随机生成；<img src='https://img-blog.csdnimg.cn/20201101190150116.png'></li>
 <li>将BP_SpawnSphere添加到场景，并指定场景中的Enemy的RespawnActor为BP_SpawnSphere;</li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020110116105649.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020110116105649.gif'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -423,23 +528,20 @@
     <url>/2020/11/03/RPG-Dev-Log-13/</url>
     <content><![CDATA[<p>涉及内容：大任务系统创建（进阶），UI设计应用细讲。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="任务系统主界面W-Mission"><a href="#任务系统主界面W-Mission" class="headerlink" title="任务系统主界面W_Mission"></a>任务系统主界面W_Mission</h2><h3 id="任务类型侧边栏"><a href="#任务类型侧边栏" class="headerlink" title="任务类型侧边栏"></a>任务类型侧边栏</h3><p>涉及组件：</p>
 <ul>
 <li>Panel: [Size Box]、[Horizontal Box]、[Vertical Box]、[Overlay]</li>
 <li>Common: [Border]、[Button]、[Text]</li>
 </ul>
-<h4 id="层级面板"><a href="#层级面板" class="headerlink" title="层级面板"></a>层级面板</h4><img src='https://img-blog.csdnimg.cn/20201103114016404.png'>
-
-<h4 id="实装效果"><a href="#实装效果" class="headerlink" title="实装效果"></a>实装效果</h4><img src='https://img-blog.csdnimg.cn/20201103114544272.png'>
-
+<h4 id="层级面板"><a href="#层级面板" class="headerlink" title="层级面板"></a>层级面板</h4><p><img src='https://img-blog.csdnimg.cn/20201103114016404.png'></p>
+<h4 id="实装效果"><a href="#实装效果" class="headerlink" title="实装效果"></a>实装效果</h4><p><img src='https://img-blog.csdnimg.cn/20201103114544272.png'></p>
 <h4 id="组件动画"><a href="#组件动画" class="headerlink" title="组件动画"></a>组件动画</h4><p>Widget可视性：</p>
 <blockquote>
-<p>**Visible(可视)**： 可见、可点击<br>**Collapsed(已折叠)**： 不可见、不占用布局空间（性能优于 Hidden）<br>**Hidden(隐藏)**： 不可见、占用布局空间<br>**HitTestInvisible(非可命中测试（自身和所有子项）)**： 可见、当前 Widget 不可点击、所有 Child Widget 不可点击<br>**SelfHitTestInvisible(非可命中测试（仅自身）)**： 可见、当前 Widget 不可点击、不影响 Child Widget</p>
+<p><strong>Visible(可视)</strong>： 可见、可点击<br><strong>Collapsed(已折叠)</strong>： 不可见、不占用布局空间（性能优于 Hidden）<br><strong>Hidden(隐藏)</strong>： 不可见、占用布局空间<br><strong>HitTestInvisible(非可命中测试（自身和所有子项）)</strong>： 可见、当前 Widget 不可点击、所有 Child Widget 不可点击<br><strong>SelfHitTestInvisible(非可命中测试（仅自身）)</strong>： 可见、当前 Widget 不可点击、不影响 Child Widget</p>
 </blockquote>
 <ol>
-<li>打开W_Mission,添加组件动画OpenMission;<img src='https://img-blog.csdnimg.cn/20201103120349278.png'></li>
-<li>创建宏ShowMission(Visible);<img src='https://img-blog.csdnimg.cn/20201103121441665.png'></li>
+<li>打开W_Mission,添加组件动画OpenMission;<br><img src='https://img-blog.csdnimg.cn/20201103120349278.png'></li>
+<li>创建宏ShowMission(Visible);<br><img src='https://img-blog.csdnimg.cn/20201103121441665.png'></li>
 <li>创建自定义事件PlayMission(Visible)，调用宏ShowMission(Visible)；</li>
 </ol>
 <h3 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h3><p>设计组件：</p>
@@ -447,23 +549,17 @@
 <li>Panel: [Size Box]、[Vertical Box]、[Overlay]、[Scroll Box]</li>
 <li>Common: [Border]、[Text]</li>
 </ul>
-<h4 id="层级面板-1"><a href="#层级面板-1" class="headerlink" title="层级面板"></a>层级面板</h4><img src='https://img-blog.csdnimg.cn/20201103114907317.png'>
-
-<h4 id="实装效果-1"><a href="#实装效果-1" class="headerlink" title="实装效果"></a>实装效果</h4><img src='https://img-blog.csdnimg.cn/20201103114943124.png'>
-
+<h4 id="层级面板-1"><a href="#层级面板-1" class="headerlink" title="层级面板"></a>层级面板</h4><p><img src='https://img-blog.csdnimg.cn/20201103114907317.png'></p>
+<h4 id="实装效果-1"><a href="#实装效果-1" class="headerlink" title="实装效果"></a>实装效果</h4><p><img src='https://img-blog.csdnimg.cn/20201103114943124.png'></p>
 <h3 id="任务详情"><a href="#任务详情" class="headerlink" title="任务详情"></a>任务详情</h3><p>涉及组件：</p>
 <ul>
 <li>Panel: [Size Box]、[Horizontal Box]、[Vertical Box]、[Overlay]、[Scroll Box]</li>
 <li>Common: [Border]、[Button]、[Text]、[Image]</li>
 </ul>
-<h4 id="层级面板-2"><a href="#层级面板-2" class="headerlink" title="层级面板"></a>层级面板</h4><img src='https://img-blog.csdnimg.cn/20201103115323410.png'>
-
-<h4 id="实装效果-2"><a href="#实装效果-2" class="headerlink" title="实装效果"></a>实装效果</h4><img src='https://img-blog.csdnimg.cn/2020110311543341.png'>
-
-<h2 id="任务提示界面W-QuestBorder"><a href="#任务提示界面W-QuestBorder" class="headerlink" title="任务提示界面W_QuestBorder"></a>任务提示界面W_QuestBorder</h2><h3 id="层级面板-3"><a href="#层级面板-3" class="headerlink" title="层级面板"></a>层级面板</h3><img src='https://img-blog.csdnimg.cn/20201103120105457.png'>
-
-<h3 id="实装效果-3"><a href="#实装效果-3" class="headerlink" title="实装效果"></a>实装效果</h3><img src='https://img-blog.csdnimg.cn/20201103120130439.png'>
-
+<h4 id="层级面板-2"><a href="#层级面板-2" class="headerlink" title="层级面板"></a>层级面板</h4><p><img src='https://img-blog.csdnimg.cn/20201103115323410.png'></p>
+<h4 id="实装效果-2"><a href="#实装效果-2" class="headerlink" title="实装效果"></a>实装效果</h4><p><img src='https://img-blog.csdnimg.cn/2020110311543341.png'></p>
+<h2 id="任务提示界面W-QuestBorder"><a href="#任务提示界面W-QuestBorder" class="headerlink" title="任务提示界面W_QuestBorder"></a>任务提示界面W_QuestBorder</h2><h3 id="层级面板-3"><a href="#层级面板-3" class="headerlink" title="层级面板"></a>层级面板</h3><p><img src='https://img-blog.csdnimg.cn/20201103120105457.png'></p>
+<h3 id="实装效果-3"><a href="#实装效果-3" class="headerlink" title="实装效果"></a>实装效果</h3><p><img src='https://img-blog.csdnimg.cn/20201103120130439.png'></p>
 <h2 id="热键测试"><a href="#热键测试" class="headerlink" title="热键测试"></a>热键测试</h2><p>打开RPG_PlayerController，添加热键Tab响应事件，切入和切出任务系统主界面；<br><img src='https://img-blog.csdnimg.cn/20201103121909957.png'></p>
 <h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020110311322945.png'><img src='https://img-blog.csdnimg.cn/20201103113402801.png'></p>
 ]]></content>
@@ -479,7 +575,6 @@
     <url>/2020/11/04/RPG-Dev-Log-14/</url>
     <content><![CDATA[<p>涉及内容：大任务系统创建(续篇),蓝图UI任务数据绑定。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="创建W-MissionSubGoal"><a href="#创建W-MissionSubGoal" class="headerlink" title="创建W_MissionSubGoal"></a>创建W_MissionSubGoal</h2><ol>
 <li>创建控件W_MissionSubGoal，作为W_Mission中任务分支信息SubGoalInfoVerticalBox的子控件；<br><img src='https://img-blog.csdnimg.cn/20201105072242910.png'><img src='https://img-blog.csdnimg.cn/20201105072311908.png'></li>
 <li>创建函数Update，用于更新SubGoalText的文本内容(这部分蓝图可从W_SubGoal中的Update函数迁移过来)，并根据任务状态设置CurrentImage、SuccessImage、FailedImage的可视性，并在事件开始构造时调用；<img src='https://img-blog.csdnimg.cn/20201105072948473.png'></li>
@@ -512,12 +607,9 @@
 <li>函数功能扩展：函数AddQuest(QuestClass)变更为AddQuest(QuestClass,DirectlyStart)，根据当前任务数量和DirectlyStart的布尔值判断是否自动接取任务。若自动接取任务，则播放动画PlayQuest和PlaySubGoal(来着W_Quest)；</li>
 <li>关联事件修改：打开事件图表，修改自定义事件UpdateCompletedSubGoal；</li>
 </ol>
-<h2 id="任务实例设置"><a href="#任务实例设置" class="headerlink" title="任务实例设置"></a>任务实例设置</h2><h3 id="主线任务"><a href="#主线任务" class="headerlink" title="主线任务"></a>主线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080724734.png'>
-
-<h3 id="支线任务"><a href="#支线任务" class="headerlink" title="支线任务"></a>支线任务</h3><img src='https://img-blog.csdnimg.cn/20201105080758220.png'>
-
-<h3 id="副本任务"><a href="#副本任务" class="headerlink" title="副本任务"></a>副本任务</h3><img src='https://img-blog.csdnimg.cn/20201105080823342.png'>
-
+<h2 id="任务实例设置"><a href="#任务实例设置" class="headerlink" title="任务实例设置"></a>任务实例设置</h2><h3 id="主线任务"><a href="#主线任务" class="headerlink" title="主线任务"></a>主线任务</h3><p><img src='https://img-blog.csdnimg.cn/20201105080724734.png'></p>
+<h3 id="支线任务"><a href="#支线任务" class="headerlink" title="支线任务"></a>支线任务</h3><p><img src='https://img-blog.csdnimg.cn/20201105080758220.png'></p>
+<h3 id="副本任务"><a href="#副本任务" class="headerlink" title="副本任务"></a>副本任务</h3><p><img src='https://img-blog.csdnimg.cn/20201105080823342.png'></p>
 <h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201105082833827.png'><img src='https://img-blog.csdnimg.cn/20201105082916789.png'><img src='https://img-blog.csdnimg.cn/20201105083011449.png'><img src='https://img-blog.csdnimg.cn/20201105082938769.png'></p>
 ]]></content>
       <categories>
@@ -532,7 +624,6 @@
     <url>/2020/11/07/RPG-Dev-Log-15/</url>
     <content><![CDATA[<p>涉及内容：大任务系统续，任务分支完成互动。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="W-PC-Main相关"><a href="#W-PC-Main相关" class="headerlink" title="W_PC_Main相关"></a>W_PC_Main相关</h2><ol>
 <li><p>创建动画HideAll，用于隐藏主界面的所有用户自定义控件；<img src='https://img-blog.csdnimg.cn/20201108003424947.png'></p>
 </li>
@@ -570,7 +661,7 @@
 </ol>
 <h2 id="BP-TargetObject及其相关子类"><a href="#BP-TargetObject及其相关子类" class="headerlink" title="BP_TargetObject及其相关子类"></a>BP_TargetObject及其相关子类</h2><ol>
 <li><p>BP_TargetObject组件面板修改如下（StaticMesh已被删除）；</p>
-<img src='https://img-blog.csdnimg.cn/20201108033013777.png'>
+<p><img src='https://img-blog.csdnimg.cn/20201108033013777.png'></p>
 </li>
 <li><p>为Object_Treasure单独添加StaticMesh组件；</p>
 </li>
@@ -586,17 +677,13 @@
 <li>打开事件图表，修改Tab事件，打开任务系统界面时暂停游戏；<img src='https://img-blog.csdnimg.cn/2020110800393081.png'></li>
 </ol>
 <h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="【子任务】狩猎小鬼完成效果"><a href="#【子任务】狩猎小鬼完成效果" class="headerlink" title="【子任务】狩猎小鬼完成效果"></a>【子任务】狩猎小鬼完成效果</h2><p><img src='https://img-blog.csdnimg.cn/20201109160208908.png'><img src='https://img-blog.csdnimg.cn/202011091641213.png'></p>
-<h2 id="【子任务】寻找小麦完成效果"><a href="#【子任务】寻找小麦完成效果" class="headerlink" title="【子任务】寻找小麦完成效果"></a>【子任务】寻找小麦完成效果</h2><img src='https://img-blog.csdnimg.cn/20201108230246514.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201108230310157.png'>
-
-<h2 id="【子任务】完成前后对比"><a href="#【子任务】完成前后对比" class="headerlink" title="【子任务】完成前后对比"></a>【子任务】完成前后对比</h2><img src='https://img-blog.csdnimg.cn/20201108230013575.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201108230045246.png'>
-
-<img src='https://img-blog.csdnimg.cn/2020110916421358.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201109164242272.png'>]]></content>
+<h2 id="【子任务】寻找小麦完成效果"><a href="#【子任务】寻找小麦完成效果" class="headerlink" title="【子任务】寻找小麦完成效果"></a>【子任务】寻找小麦完成效果</h2><p><img src='https://img-blog.csdnimg.cn/20201108230246514.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201108230310157.png'></p>
+<h2 id="【子任务】完成前后对比"><a href="#【子任务】完成前后对比" class="headerlink" title="【子任务】完成前后对比"></a>【子任务】完成前后对比</h2><p><img src='https://img-blog.csdnimg.cn/20201108230013575.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201108230045246.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/2020110916421358.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201109164242272.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -609,7 +696,6 @@
     <url>/2020/11/10/RPG-Dev-Log-16/</url>
     <content><![CDATA[<p>涉及内容：创建Npc对话系统（开篇），编辑剧本。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
 <li>创建枚举E_TalkType，代表当前对话选项对应的查看内容；<img src='https://img-blog.csdnimg.cn/20201110195932647.png'></li>
 <li>创建枚举E_SelectSubGoalType，代表对话时分支选项的类型；<img src='https://img-blog.csdnimg.cn/2020111020024350.png'></li>
@@ -617,8 +703,7 @@
 <li>创建结构体S_SpeechContent，包含Player与NPC对话的名字、内容、延迟(默认为4s)、是否有分支选项、分支选项内容；<img src='https://img-blog.csdnimg.cn/20201110200855293.png'></li>
 <li>创建结构体S_Conversation，包含对话内容、对话信息、任务类、对话类型、指定任务是否已完成、推荐等级信息；<img src='https://img-blog.csdnimg.cn/20201110201213956.png'></li>
 </ol>
-<h2 id="创建BP-FindGrain"><a href="#创建BP-FindGrain" class="headerlink" title="创建BP_FindGrain"></a>创建BP_FindGrain</h2><img src='https://img-blog.csdnimg.cn/20201110220053550.png'>
-
+<h2 id="创建BP-FindGrain"><a href="#创建BP-FindGrain" class="headerlink" title="创建BP_FindGrain"></a>创建BP_FindGrain</h2><p><img src='https://img-blog.csdnimg.cn/20201110220053550.png'></p>
 <h2 id="创建UI"><a href="#创建UI" class="headerlink" title="创建UI"></a>创建UI</h2><h3 id="创建对话选项条W-TalkInfo"><a href="#创建对话选项条W-TalkInfo" class="headerlink" title="创建对话选项条W_TalkInfo"></a>创建对话选项条W_TalkInfo</h3><ol>
 <li>层级面板和预览效果;<img src='https://img-blog.csdnimg.cn/20201110210022230.png'></li>
 <li>打开事件图表，创建函数Update，用于根据TalkType更新TalkInfoImage、HotKeyText（选项数字）、SelectTalkInfo(按钮文本)，并在事件构造时调用;<img src='https://img-blog.csdnimg.cn/20201110210336891.png'></li>
@@ -655,18 +740,12 @@
 </li>
 <li><p>创建事件OnClickedEndTalk，结束对话并清空UI;</p>
 </li>
-<li><p>创建事件OnClickedElseInfo(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedGoodsStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedWeaponStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedEquipStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedDrugStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedFoodStore(尚未实装)</p>
-</li>
+<li>创建事件OnClickedElseInfo(尚未实装)</li>
+<li>创建事件OnClickedGoodsStore(尚未实装)</li>
+<li>创建事件OnClickedWeaponStore(尚未实装)</li>
+<li>创建事件OnClickedEquipStore(尚未实装)</li>
+<li>创建事件OnClickedDrugStore(尚未实装)</li>
+<li>创建事件OnClickedFoodStore(尚未实装)</li>
 </ul>
 <p><img src='https://img-blog.csdnimg.cn/20201110213742981.png'><img src='https://img-blog.csdnimg.cn/20201110213844323.png'></p>
 </li>
@@ -679,15 +758,13 @@
 </ul>
 </li>
 </ol>
-<h3 id="实例设置-NPC皮特"><a href="#实例设置-NPC皮特" class="headerlink" title="实例设置(NPC皮特)"></a>实例设置(NPC皮特)</h3><img src='https://img-blog.csdnimg.cn/20201110220234754.png'>
-
-
+<h3 id="实例设置-NPC皮特"><a href="#实例设置-NPC皮特" class="headerlink" title="实例设置(NPC皮特)"></a>实例设置(NPC皮特)</h3><p><img src='https://img-blog.csdnimg.cn/20201110220234754.png'></p>
 <h2 id="剧本编辑"><a href="#剧本编辑" class="headerlink" title="剧本编辑"></a>剧本编辑</h2><h3 id="创建Data-Table"><a href="#创建Data-Table" class="headerlink" title="创建Data Table"></a>创建Data Table</h3><ol>
 <li>创建D_NPC_Conversation；<img src='https://img-blog.csdnimg.cn/20201110202006809.png'></li>
 </ol>
 <h3 id="编辑对话选项内容（含分支选项）"><a href="#编辑对话选项内容（含分支选项）" class="headerlink" title="编辑对话选项内容（含分支选项）"></a>编辑对话选项内容（含分支选项）</h3><ol>
 <li><p>[QuestInfo]任务接取向——接取FindGrain任务：</p>
-<img src='https://img-blog.csdnimg.cn/20201110203722362.png'>
+<p><img src='https://img-blog.csdnimg.cn/20201110203722362.png'></p>
 </li>
 <li><p>[ElseInfo]剧情介绍向——与NPC闲聊；<img src='https://img-blog.csdnimg.cn/20201110202040377.png'></p>
 </li>
@@ -704,85 +781,83 @@
 <li><p>[End]结束对话：<img src='https://img-blog.csdnimg.cn/2020111020280739.png'></p>
 </li>
 </ol>
-<h3 id="编辑对话剧本"><a href="#编辑对话剧本" class="headerlink" title="编辑对话剧本"></a>编辑对话剧本</h3><table>
+<h3 id="编辑对话剧本"><a href="#编辑对话剧本" class="headerlink" title="编辑对话剧本"></a>编辑对话剧本</h3><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">TalkerName</th>
-<th align="center">SpeechInfo</th>
+<th style="text-align:center">TalkerName</th>
+<th style="text-align:center">SpeechInfo</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Shinbi</td>
-<td align="center">嗨，大叔，你知道如何才能进入峡谷吗？</td>
+<tbody>
+<tr>
+<td style="text-align:center">Shinbi</td>
+<td style="text-align:center">嗨，大叔，你知道如何才能进入峡谷吗？</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">大叔？小哥年方十八！</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">大叔？小哥年方十八！</td>
 </tr>
 <tr>
-<td align="center">Shibi</td>
-<td align="center">…</td>
+<td style="text-align:center">Shibi</td>
+<td style="text-align:center">…</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">咳咳。。。峡谷常年迷雾，又有猛兽出没，凶险万分，姑娘切莫深入。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">咳咳。。。峡谷常年迷雾，又有猛兽出没，凶险万分，姑娘切莫深入。</td>
 </tr>
 <tr>
-<td align="center">Shinbi</td>
-<td align="center">大叔放心，小女子十八般武艺样样精通，拳打南山猛虎，脚踢北海蛟龙，正好顺道为名除害！</td>
+<td style="text-align:center">Shinbi</td>
+<td style="text-align:center">大叔放心，小女子十八般武艺样样精通，拳打南山猛虎，脚踢北海蛟龙，正好顺道为名除害！</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">。。。大叔。。的确，看姑娘的着装并非普通女子，非富即贵，只是。。。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">。。。大叔。。的确，看姑娘的着装并非普通女子，非富即贵，只是。。。</td>
 </tr>
 <tr>
-<td align="center">Shinbi</td>
-<td align="center">哈哈…就是，小女子才貌双全，大叔有何难处尽管直言！</td>
+<td style="text-align:center">Shinbi</td>
+<td style="text-align:center">哈哈…就是，小女子才貌双全，大叔有何难处尽管直言！</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">呃。。这个，最近天降大雪，家中缺粮，我这不出来寻粮了吗，如果姑娘能带来一袋小麦，我将带你进入峡谷的入口。。。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">呃。。这个，最近天降大雪，家中缺粮，我这不出来寻粮了吗，如果姑娘能带来一袋小麦，我将带你进入峡谷的入口。。。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支1-1)</td>
-<td align="center">哈哈，小事情，交给我吧！不过这荒天雪地的能不能折现？？</td>
+<td style="text-align:center">Shinbi(分支1-1)</td>
+<td style="text-align:center">哈哈，小事情，交给我吧！不过这荒天雪地的能不能折现？？</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支1-2)</td>
-<td align="center">这荒天雪地的上哪去找一袋小麦。。</td>
+<td style="text-align:center">Shinbi(分支1-2)</td>
+<td style="text-align:center">这荒天雪地的上哪去找一袋小麦。。</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">这个、、、多谢女侠，折合成市价30硬币。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">这个、、、多谢女侠，折合成市价30硬币。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支2-1)</td>
-<td align="center">给与30硬币。</td>
+<td style="text-align:center">Shinbi(分支2-1)</td>
+<td style="text-align:center">给与30硬币。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支2-2)</td>
-<td align="center">给与一袋小麦。</td>
+<td style="text-align:center">Shinbi(分支2-2)</td>
+<td style="text-align:center">给与一袋小麦。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支2-3)</td>
-<td align="center">我再想想。。</td>
+<td style="text-align:center">Shinbi(分支2-3)</td>
+<td style="text-align:center">我再想想。。</td>
 </tr>
-</tbody></table>
-<img src='https://img-blog.csdnimg.cn/20201110203809964.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110203838787.png'>
-
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201110194837692.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110194928442.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110195002450.png'>
-
-<img src='https://img-blog.csdnimg.cn/2020111019504116.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110195118759.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110195145659.png'>]]></content>
+</tbody>
+</table>
+</div>
+<p><img src='https://img-blog.csdnimg.cn/20201110203809964.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110203838787.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201110194837692.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110194928442.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110195002450.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/2020111019504116.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110195118759.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110195145659.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -795,7 +870,6 @@
     <url>/2020/11/14/RPG-Dev-Log-17/</url>
     <content><![CDATA[<p>涉及内容：Npc对话系统续，创建背包。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="NPC对话系统（续篇）"><a href="#NPC对话系统（续篇）" class="headerlink" title="NPC对话系统（续篇）"></a>NPC对话系统（续篇）</h2><ol>
 <li>打开枚举E_SelectSubGoalType，添加两个新的枚举BackToLastQuest和FinishQuest;</li>
 <li>打开结构体S_Conversation，添加两个新的成员RecieveTalkTypeInfo(Text)和RecieveQuestTalkInfo(S_SpeechContent[]);</li>
@@ -833,9 +907,9 @@
 </ol>
 <h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="接取NPC任务"><a href="#接取NPC任务" class="headerlink" title="接取NPC任务"></a>接取NPC任务</h2><p><img src='https://img-blog.csdnimg.cn/20201114165442401.png'><img src='https://img-blog.csdnimg.cn/20201114170429745.png'></p>
 <h2 id="提交NPC任务"><a href="#提交NPC任务" class="headerlink" title="提交NPC任务"></a>提交NPC任务</h2><p><img src='https://img-blog.csdnimg.cn/20201114165550957.png'><img src='https://img-blog.csdnimg.cn/20201114170513599.png'></p>
-<h2 id="完成NPC任务"><a href="#完成NPC任务" class="headerlink" title="完成NPC任务"></a>完成NPC任务</h2><img src='https://img-blog.csdnimg.cn/20201114165629575.png'>
-
-<h2 id="背包效果"><a href="#背包效果" class="headerlink" title="背包效果"></a>背包效果</h2><img src='https://img-blog.csdnimg.cn/20201114155859633.png'>]]></content>
+<h2 id="完成NPC任务"><a href="#完成NPC任务" class="headerlink" title="完成NPC任务"></a>完成NPC任务</h2><p><img src='https://img-blog.csdnimg.cn/20201114165629575.png'></p>
+<h2 id="背包效果"><a href="#背包效果" class="headerlink" title="背包效果"></a>背包效果</h2><p><img src='https://img-blog.csdnimg.cn/20201114155859633.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -848,16 +922,13 @@
     <url>/2020/11/16/RPG-Dev-Log-18/</url>
     <content><![CDATA[<p>涉及内容：脚部IK制作。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="脚部IK制作"><a href="#脚部IK制作" class="headerlink" title="脚部IK制作"></a>脚部IK制作</h2><h3 id="事件图表"><a href="#事件图表" class="headerlink" title="事件图表"></a>事件图表</h3><h4 id="相关宏"><a href="#相关宏" class="headerlink" title="相关宏"></a>相关宏</h4><ol>
 <li><p>创建宏</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Start(Vector),End(Vector)]TraceStart&#x2F;End(X(Float),Y(Float),Z(Float))</span><br></pre></td></tr></table></figure>
-
 <p>用于计算射线检测的起点和终点位置;<img src='https://img-blog.csdnimg.cn/20201116155309202.png'></p>
 </li>
 <li><p>创建宏</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[ClampedOffset(Vector)]ClampOffset(Roll(Float),Pitch(Float),Z(Float))</span><br></pre></td></tr></table></figure>
-
 <p>用于限制X,Y,Z轴的偏移距离；<img src='https://img-blog.csdnimg.cn/20201116161451526.png'></p>
 </li>
 <li><p>创建宏</p>
@@ -886,14 +957,10 @@
 </li>
 <li><p>函数</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[void]FootIK()</span><br></pre></td></tr></table></figure>
-
 <p>脚部IK数值计算汇总（此函数在EventBlueprintUpdateAnimation中调用）：当角色不在跳跃状态时，获取foot_l和foot_r的骨骼位置，调用函数TraceFootIK，根据Hit布尔值设置LeftFootOffsetsTarget的值(ClampedOffset or Zero)。循环调用宏InterpOffsets实现脚部偏移过渡效果，并设置Pelvis.z=Min(LeftFootOffset.z,RightFootOffset.z);</p>
-<img src='https://img-blog.csdnimg.cn/2020111617001856.png'>
-
-<img src='https://img-blog.csdnimg.cn/2020111616594744.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201116165832569.png'>
-
+<p><img src='https://img-blog.csdnimg.cn/2020111617001856.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/2020111616594744.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201116165832569.png'></p>
 </li>
 </ol>
 <h3 id="动画图表"><a href="#动画图表" class="headerlink" title="动画图表"></a>动画图表</h3><ol>
@@ -903,7 +970,7 @@
 </ol>
 <ul>
 <li><p>pelvis</p>
-<img src='https://img-blog.csdnimg.cn/20201116172111319.png'>
+<p><img src='https://img-blog.csdnimg.cn/20201116172111319.png'></p>
 </li>
 <li><p>ik_foot_l &amp; VB thigh_l_calf_l</p>
 <p><img src='https://img-blog.csdnimg.cn/20201116172150724.png'><img src='https://img-blog.csdnimg.cn/20201116172216387.png'></p>
@@ -912,16 +979,13 @@
 <p><img src='https://img-blog.csdnimg.cn/20201116172256840.png'><img src='https://img-blog.csdnimg.cn/2020111617232282.png'></p>
 </li>
 </ul>
-<img src='https://img-blog.csdnimg.cn/20201116172648890.png'>
-
-<ol start="4">
-<li>最后按布尔输出混合姿势<img src='https://img-blog.csdnimg.cn/20201116172617594.png'>  
-
-</li>
+<p><img src='https://img-blog.csdnimg.cn/20201116172648890.png'></p>
+<ol>
+<li>最后按布尔输出混合姿势<br><img src='https://img-blog.csdnimg.cn/20201116172617594.png'>  </li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="添加前Shinbi右脚悬空"><a href="#添加前Shinbi右脚悬空" class="headerlink" title="添加前Shinbi右脚悬空"></a>添加前Shinbi右脚悬空</h2><img src='https://img-blog.csdnimg.cn/20201116152721533.png'>
-
-<h2 id="添加后Shinbi右脚落地"><a href="#添加后Shinbi右脚落地" class="headerlink" title="添加后Shinbi右脚落地"></a>添加后Shinbi右脚落地</h2><img src='https://img-blog.csdnimg.cn/20201116160346496.png'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="添加前Shinbi右脚悬空"><a href="#添加前Shinbi右脚悬空" class="headerlink" title="添加前Shinbi右脚悬空"></a>添加前Shinbi右脚悬空</h2><p><img src='https://img-blog.csdnimg.cn/20201116152721533.png'></p>
+<h2 id="添加后Shinbi右脚落地"><a href="#添加后Shinbi右脚落地" class="headerlink" title="添加后Shinbi右脚落地"></a>添加后Shinbi右脚落地</h2><p><img src='https://img-blog.csdnimg.cn/20201116160346496.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -934,7 +998,6 @@
     <url>/2020/11/17/RPG-Dev-Log-19/</url>
     <content><![CDATA[<p>涉及内容：背包系统数据绑定，服务端客户端初讲，RPC。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="背包系统数据绑定"><a href="#背包系统数据绑定" class="headerlink" title="背包系统数据绑定"></a>背包系统数据绑定</h2><h3 id="相关枚举"><a href="#相关枚举" class="headerlink" title="相关枚举"></a>相关枚举</h3><ol>
 <li>创建枚举E_ItemType [其他物品,武器装备,消耗物品,任务物品]，用于设置物品类别；</li>
 <li>创建枚举E_QualityType [Poor,Common,Uncommon,Rare,Epic,Legendary]，用于设置物品品级；</li>
@@ -995,7 +1058,8 @@
 <h4 id="Client-SetInventorySlotItem"><a href="#Client-SetInventorySlotItem" class="headerlink" title="Client_SetInventorySlotItem"></a>Client_SetInventorySlotItem</h4><p>在C_InventoryManager事件图表中创建，调用函数SetInventorySlotItem;<img src='https://img-blog.csdnimg.cn/20201117182358410.png'></p>
 <h4 id="Client-OpenInventory"><a href="#Client-OpenInventory" class="headerlink" title="Client_OpenInventory"></a>Client_OpenInventory</h4><p>在C_InventoryManager事件图表中创建，调用函数OpenInventoryWindow;<img src='https://img-blog.csdnimg.cn/20201117183848642.png'></p>
 <h4 id="Client-CloseInventory"><a href="#Client-CloseInventory" class="headerlink" title="Client_CloseInventory"></a>Client_CloseInventory</h4><p>在C_InventoryManager事件图表中创建，调用函数CloseInventoryWindow;<img src='https://img-blog.csdnimg.cn/20201117183911582.png'></p>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201117155229532.png'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201117155229532.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -1006,9 +1070,7 @@
   <entry>
     <title>RPG Game开发日志(二)</title>
     <url>/2020/10/12/RPG-Dev-Log-2/</url>
-    <content><![CDATA[<p>涉及内容：UI血条创建；绑定角色属性等。</p>
-<a id="more"></a>
-
+    <content><![CDATA[<p>涉及内容：UI血条创建；绑定角色属性等。<br><a id="more"></a></p>
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="UI血条创建"><a href="#UI血条创建" class="headerlink" title="UI血条创建"></a>UI血条创建</h2><p>UI素材来源：虚幻商城[User Interface Kit]</p>
 <h3 id="材质球制作"><a href="#材质球制作" class="headerlink" title="材质球制作"></a>材质球制作</h3><ol>
 <li>创建Material [M_GlassBall]，将gb（T5,include frame,gloss,over) 拖拽进材质球蓝图;</li>
@@ -1045,9 +1107,9 @@
 <li>创建Widget Component [WC_OnDamaged],创建自定义事件SetDamageText,内部调用UpdateValue事件；</li>
 <li>打开函数ModifyAttribute，在Health值被修改前将WC_OnDamaged控件调出,并调用自定义事件SetDamageText，将会自动播放FadeOut动画。</li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201012175955500.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201012180028750.png'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201012175955500.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201012180028750.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -1060,7 +1122,6 @@
     <url>/2020/11/18/RPG-Dev-Log-20/</url>
     <content><![CDATA[<p>涉及内容：ToolTip，拖拽功能，RPC。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="修复W-Window关闭按钮"><a href="#修复W-Window关闭按钮" class="headerlink" title="修复W_Window关闭按钮"></a>修复W_Window关闭按钮</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
 <li>创建蓝图接口BPI_HUDInterface;</li>
 <li>创建接口函数[Void]UICloseInventoryWindow();</li>
@@ -1121,9 +1182,9 @@
 </ol>
 <h2 id="RPC-Remote-Procedure-Call"><a href="#RPC-Remote-Procedure-Call" class="headerlink" title="RPC(Remote Procedure Call)"></a>RPC(Remote Procedure Call)</h2><h3 id="Run-on-Server-Reliable"><a href="#Run-on-Server-Reliable" class="headerlink" title="Run on Server(Reliable)"></a>Run on Server(Reliable)</h3><h4 id="Server-MoveInventoryItem"><a href="#Server-MoveInventoryItem" class="headerlink" title="Server_MoveInventoryItem"></a>Server_MoveInventoryItem</h4><p>在C_InventoryManager事件图表中创建，调用函数MoveItem；<img src='https://img-blog.csdnimg.cn/20201118164516806.png'></p>
 <h3 id="Run-on-owning-Client-Reliable"><a href="#Run-on-owning-Client-Reliable" class="headerlink" title="Run on owning Client(Reliable)"></a>Run on owning Client(Reliable)</h3><h4 id="Client-ClearInventoryIndexItem"><a href="#Client-ClearInventoryIndexItem" class="headerlink" title="Client_ClearInventoryIndexItem"></a>Client_ClearInventoryIndexItem</h4><p>在C_InventoryManager事件图表中创建，调用函数ClearInventoryIndexItem；<img src='https://img-blog.csdnimg.cn/20201118170841858.png'></p>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="物品描述"><a href="#物品描述" class="headerlink" title="物品描述"></a>物品描述</h2><img src='https://img-blog.csdnimg.cn/20201118151239939.png'>
-
-<h2 id="拖拽效果"><a href="#拖拽效果" class="headerlink" title="拖拽效果"></a>拖拽效果</h2><img src='https://img-blog.csdnimg.cn/20201118151448629.png'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><h2 id="物品描述"><a href="#物品描述" class="headerlink" title="物品描述"></a>物品描述</h2><p><img src='https://img-blog.csdnimg.cn/20201118151239939.png'></p>
+<h2 id="拖拽效果"><a href="#拖拽效果" class="headerlink" title="拖拽效果"></a>拖拽效果</h2><p><img src='https://img-blog.csdnimg.cn/20201118151448629.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -1136,7 +1197,6 @@
     <url>/2020/11/21/RPG-Dev-Log-21/</url>
     <content><![CDATA[<p>涉及内容：创建NPC交易窗口，RPC。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="创建NPC交易窗口"><a href="#创建NPC交易窗口" class="headerlink" title="创建NPC交易窗口"></a>创建NPC交易窗口</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
 <li>打开E_ItemType，新增枚举[恢复物品]；</li>
 <li>打开ItemList，将Mana_Blue和Health_Red的ItemType更改为恢复物品；</li>
@@ -1194,7 +1254,6 @@
     <url>/2020/11/22/RPG-Dev-Log-22/</url>
     <content><![CDATA[<p>涉及内容：联网测试交易物品，RPC。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>说明：</p>
 <p>为了描述方便，定义<strong>SWAP_SLOT_INFO</strong> =(FromInventoryIndex(Integer),ToInventoryIndex(Integer),FromInventorySlotType(E_InventorySlotType),ToInventoryType(E_InventorySlotType)）</p>
 <h2 id="联网测试交易物品"><a href="#联网测试交易物品" class="headerlink" title="联网测试交易物品"></a>联网测试交易物品</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="相关枚举及结构体"><a href="#相关枚举及结构体" class="headerlink" title="相关枚举及结构体"></a>相关枚举及结构体</h4><ol>
@@ -1236,24 +1295,15 @@
 <li>创建函数[Index(Integer),Success(Boolean)]GetEmptyInventorySpace()，用于背包空闲slot的寻找；<img src='https://img-blog.csdnimg.cn/20201124182952573.png'></li>
 </ol>
 <h3 id="C-InventoryManager相关"><a href="#C-InventoryManager相关" class="headerlink" title="C_InventoryManager相关"></a>C_InventoryManager相关</h3><ol>
-<li><p>创建函数[void]OpenTransactionWindow(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))，调用函数[void]Update(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))；<img src='https://img-blog.csdnimg.cn/20201124144935982.png'></p>
-</li>
-<li><p>创建函数[void]CountMoney()，将BP_Player中的CountMoney函数迁移过来；<img src='https://img-blog.csdnimg.cn/20201124145309889.png'></p>
-</li>
-<li><p>创建函数[StructOut(S_InventoryItem)]AddToItemAmount(ItemInformation(S_InventoryItem),AmountToAdd(Integer))，将修改后的ItemInformation导出；<img src='https://img-blog.csdnimg.cn/20201124163958914.png'></p>
-</li>
-<li><p>创建函数[void]SetActorContainerSlotItem(ActorContainerIndex)；<img src='https://img-blog.csdnimg.cn/20201124181438471.png'></p>
-</li>
-<li><p>创建函数[void]SetViewersActorContainerSlot(ActorContainerSlot(Integer),ItemInformation(S_InventoryItem))，，调用客户端事件ClientSetActorContainerSlotItem，用于同步客户端交易信息；<img src='https://img-blog.csdnimg.cn/20201124180507375.png'></p>
-</li>
-<li><p>函数功能扩展：为函数AddItem添加Inventory判断，若为PlayerInventory则正常移动，否则调用函数SetViewersActorContainerSlot;<img src='https://img-blog.csdnimg.cn/20201124164936346.png'></p>
-</li>
-<li><p>创建函数[RemainingAmount(Integer)]AddItemToStack(InventoryComponent(C_Inventory),InventoryIndex(Integer),Amount(Integer))，根据叠加上限MaxStackSize减去叠加数目Amount计算出剩余生成数量RemainingAmount，调用函数AddToItemAmount完成InventoryItem信息修改，并返回RemainingAmount；<img src='https://img-blog.csdnimg.cn/20201124164315887.png'><img src='https://img-blog.csdnimg.cn/2020112416440786.png'><img src='https://img-blog.csdnimg.cn/20201124164435782.png'></p>
-</li>
-<li><p>创建函数[Struct(S_InventoryItem)]SetItemAmount(InventoryItem(S_InventoryItem),Amount(Integer))，用于物品数量的修改；<img src='https://img-blog.csdnimg.cn/20201124182550508.png'></p>
-</li>
-<li><p>创建函数[Output_Get(Integer),WasFullAmountRemove(Boolean),StructOut(S_InventoryItem)]RemoveFromItemAmount(InventoryItem(S_InventoryItem),AmountToRemove(Integer))；<img src='https://img-blog.csdnimg.cn/20201124191915761.png'></p>
-</li>
+<li>创建函数[void]OpenTransactionWindow(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))，调用函数[void]Update(<strong>SWAP_SLOT_INFO</strong>,ItemInformation(S_InventoryItem))；<img src='https://img-blog.csdnimg.cn/20201124144935982.png'></li>
+<li>创建函数[void]CountMoney()，将BP_Player中的CountMoney函数迁移过来；<img src='https://img-blog.csdnimg.cn/20201124145309889.png'></li>
+<li>创建函数[StructOut(S_InventoryItem)]AddToItemAmount(ItemInformation(S_InventoryItem),AmountToAdd(Integer))，将修改后的ItemInformation导出；<img src='https://img-blog.csdnimg.cn/20201124163958914.png'></li>
+<li>创建函数[void]SetActorContainerSlotItem(ActorContainerIndex)；<img src='https://img-blog.csdnimg.cn/20201124181438471.png'></li>
+<li>创建函数[void]SetViewersActorContainerSlot(ActorContainerSlot(Integer),ItemInformation(S_InventoryItem))，，调用客户端事件ClientSetActorContainerSlotItem，用于同步客户端交易信息；<img src='https://img-blog.csdnimg.cn/20201124180507375.png'></li>
+<li>函数功能扩展：为函数AddItem添加Inventory判断，若为PlayerInventory则正常移动，否则调用函数SetViewersActorContainerSlot;<img src='https://img-blog.csdnimg.cn/20201124164936346.png'></li>
+<li>创建函数[RemainingAmount(Integer)]AddItemToStack(InventoryComponent(C_Inventory),InventoryIndex(Integer),Amount(Integer))，根据叠加上限MaxStackSize减去叠加数目Amount计算出剩余生成数量RemainingAmount，调用函数AddToItemAmount完成InventoryItem信息修改，并返回RemainingAmount；<img src='https://img-blog.csdnimg.cn/20201124164315887.png'><img src='https://img-blog.csdnimg.cn/2020112416440786.png'><img src='https://img-blog.csdnimg.cn/20201124164435782.png'></li>
+<li>创建函数[Struct(S_InventoryItem)]SetItemAmount(InventoryItem(S_InventoryItem),Amount(Integer))，用于物品数量的修改；<img src='https://img-blog.csdnimg.cn/20201124182550508.png'></li>
+<li>创建函数[Output_Get(Integer),WasFullAmountRemove(Boolean),StructOut(S_InventoryItem)]RemoveFromItemAmount(InventoryItem(S_InventoryItem),AmountToRemove(Integer))；<img src='https://img-blog.csdnimg.cn/20201124191915761.png'></li>
 <li><p>函数功能扩展：为函数MoveItem添加两个新的传入参数FromInventoryComponent和ToComponent</p>
 <ul>
 <li><p>判断是否为有效移动，若为有效移动，将传入参数创建为本地变量<img src='https://img-blog.csdnimg.cn/20201124184819754.png'></p>
@@ -1280,14 +1330,10 @@
 </li>
 </ul>
 </li>
-<li><p>创建函数[void]SplitItem(FromInventory(C_Inventory),ToInventory(C_Inventory),FromInventoryIndex(Integer),ToInventoryIndex(Integer),Amount(Integer))，具体思路同MoveItem函数；<img src='https://img-blog.csdnimg.cn/20201124193737972.png'></p>
-</li>
-<li><p>创建函数[void]CloseActorContainer()，调用接口函数GetPlayersViewing和客户端事件Client_CloseActorContainer；<img src='https://img-blog.csdnimg.cn/20201124172748143.png'></p>
-</li>
-<li><p>创建函数[void]ClearContainerSlotItem(ContainerSlot(Integer))；<img src='https://img-blog.csdnimg.cn/20201124200200108.png'></p>
-</li>
-<li><p>创建函数[void]ClearViewersActorContainer(ActorContainerSlot(Integer))，调用客户端事件Client_ClearActorContainerSlotItems；<img src='https://img-blog.csdnimg.cn/2020112420035559.png'></p>
-</li>
+<li>创建函数[void]SplitItem(FromInventory(C_Inventory),ToInventory(C_Inventory),FromInventoryIndex(Integer),ToInventoryIndex(Integer),Amount(Integer))，具体思路同MoveItem函数；<img src='https://img-blog.csdnimg.cn/20201124193737972.png'></li>
+<li>创建函数[void]CloseActorContainer()，调用接口函数GetPlayersViewing和客户端事件Client_CloseActorContainer；<img src='https://img-blog.csdnimg.cn/20201124172748143.png'></li>
+<li>创建函数[void]ClearContainerSlotItem(ContainerSlot(Integer))；<img src='https://img-blog.csdnimg.cn/20201124200200108.png'></li>
+<li>创建函数[void]ClearViewersActorContainer(ActorContainerSlot(Integer))，调用客户端事件Client_ClearActorContainerSlotItems；<img src='https://img-blog.csdnimg.cn/2020112420035559.png'></li>
 </ol>
 <h3 id="BP-RPG-NPC相关"><a href="#BP-RPG-NPC相关" class="headerlink" title="BP_RPG_NPC相关"></a>BP_RPG_NPC相关</h3><ol>
 <li>实现接口函数GetPlayersViewing，将PlayerState信息导出；<img src='https://img-blog.csdnimg.cn/20201124165756372.png'></li>
@@ -1329,9 +1375,7 @@
   <entry>
     <title>RPG Game开发日志(三)</title>
     <url>/2020/10/13/RPG-Dev-Log-3/</url>
-    <content><![CDATA[<p>涉及内容：人物等级属性绑定，经验条动画效果等。</p>
-<a id="more"></a>
-
+    <content><![CDATA[<p>涉及内容：人物等级属性绑定，经验条动画效果等。<br><a id="more"></a></p>
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>UI素材来源：</p>
 <p>虚幻商城[Advanced Mission And Notification System]</p>
 <p><a href="http://www.aigei.com/">爱给网</a> [SlicedImages]</p>
@@ -1384,10 +1428,8 @@
 <li>修改[void] SetupAttributeBars()，扩展函数功能（由原先的Health、Mana扩展至Stamina);<img src='https://img-blog.csdnimg.cn/20201013233517102.png'></li>
 <li>修改Num-/+ 键盘事件，测试扩展至Mana、Stamina;<img src='https://img-blog.csdnimg.cn/20201013233813393.png'></li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201013220531552.gif'>
-
-<img src='https://img-blog.csdnimg.cn/20201013220800638.gif'>
-
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201013220531552.gif'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201013220800638.gif'></p>
 ]]></content>
       <categories>
         <category>Logs</category>
@@ -1399,9 +1441,7 @@
   <entry>
     <title>RPG Game开发日志(四)</title>
     <url>/2020/10/14/RPG-Dev-Log-4/</url>
-    <content><![CDATA[<p>涉及内容：自动回复系统，迷你小地图制作，IceLands场景导入等。</p>
-<a id="more"></a>
-
+    <content><![CDATA[<p>涉及内容：自动回复系统，迷你小地图制作，IceLands场景导入等。<br><a id="more"></a></p>
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>UI素材来源：</p>
 <p>虚幻商城[Infinity Blade IceLands]</p>
 <p><a href="https://www.iconfont.cn/">阿里巴巴矢量图表库</a> [关键词：目标]</p>
@@ -1435,9 +1475,9 @@
 <li>完成场景地面的延伸扩展，Nav Mesh Bounds的延伸扩展（需勾选Can ever Affect Navigation),为扩展的地面添加Default碰撞预设；</li>
 <li>修改玩家出生点至平台。</li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201014171750989.gif'>
-
-<img src='https://img-blog.csdnimg.cn/2020101417191758.png'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201014171750989.gif'></p>
+<p><img src='https://img-blog.csdnimg.cn/2020101417191758.png'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -1450,7 +1490,6 @@
     <url>/2020/10/18/RPG-Dev-Log-5/</url>
     <content><![CDATA[<p>涉及内容：跳跃动作制作，创建任务系统（开篇）</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>虚幻商城[Advanced Mission And Notification System]</p>
 <h2 id="跳跃动作制作"><a href="#跳跃动作制作" class="headerlink" title="跳跃动作制作"></a>跳跃动作制作</h2><ol>
 <li>打开ABP_Shibi事件图表，将Is Falling返回值保存至变量IsInAir;</li>
@@ -1483,7 +1522,7 @@
 <li>创建函数void SetopStartingSubGoals()，用于设置CurrentSubGoalIndices,并调用UpdateSubGoalInfo;<img src='https://img-blog.csdnimg.cn/20201018135750624.png'></li>
 <li>创建函数Boolean GoToNextSubGoal()，用于判断当前Quest是否还有SubGoal，若有，则将NextIndex保存至CurrentSubGoalIndices，并返回true;<img src='https://img-blog.csdnimg.cn/20201018140354801.png'></li>
 </ol>
-<h3 id="创建UI"><a href="#创建UI" class="headerlink" title="创建UI"></a>创建UI</h3><h4 id="创建W-SubGoal"><a href="#创建W-SubGoal" class="headerlink" title="创建W_SubGoal"></a>创建W_SubGoal</h4><ol start="2">
+<h3 id="创建UI"><a href="#创建UI" class="headerlink" title="创建UI"></a>创建UI</h3><h4 id="创建W-SubGoal"><a href="#创建W-SubGoal" class="headerlink" title="创建W_SubGoal"></a>创建W_SubGoal</h4><ol>
 <li><p>创建Widget [W_SubGoal],</p>
 <p>层级面板如下<img src='https://img-blog.csdnimg.cn/20201018141429316.png'>,</p>
 <p>最终效果<img src='https://img-blog.csdnimg.cn/20201018141521486.png'>;</p>
@@ -1536,14 +1575,9 @@
 <li><p>创建函数void AddQuest(BP_MasterQuest),用于从所有Quest class中添加、生成Quest Actor实例,并调用BP_MasterQuest.SetupStartingSubGoals和W_Quest.UpdateQuest;<img src='https://img-blog.csdnimg.cn/20201018153733195.png'></p>
 </li>
 </ol>
-<h3 id="绑定Q键盘事件"><a href="#绑定Q键盘事件" class="headerlink" title="绑定Q键盘事件"></a>绑定Q键盘事件</h3><img src='https://img-blog.csdnimg.cn/20201018154325823.png'>
-
-
-
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201018123029836.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201018123051461.png'>
-
+<h3 id="绑定Q键盘事件"><a href="#绑定Q键盘事件" class="headerlink" title="绑定Q键盘事件"></a>绑定Q键盘事件</h3><p><img src='https://img-blog.csdnimg.cn/20201018154325823.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201018123029836.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201018123051461.png'></p>
 ]]></content>
       <categories>
         <category>Logs</category>
@@ -1557,7 +1591,6 @@
     <url>/2020/10/20/RPG-Dev-Log-6/</url>
     <content><![CDATA[<p>涉及内容：创建NPC，骨骼重定向，任务互动发放等；</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
 <p>虚幻商城[Generic NPC Anim Pack]</p>
 <p>虚幻商城[Infinity Blade:Warriors]</p>
@@ -1598,16 +1631,11 @@
 </li>
 <li><p>添加NPC互动效果蓝图 <img src='https://img-blog.csdnimg.cn/20201020152018538.png'></p>
 </li>
-<li><p>打开Char_Shibi,创建事件调度OnInteract，将与E键盘事件关联；</p>
-</li>
-<li><p>打开BP_RPG_NPC,创建自定义事件OnInteract，用于判断角色与NPC交互时，NPC身上是否有未分发的任务<img src='https://img-blog.csdnimg.cn/20201020152724167.png'></p>
-</li>
-<li><p>打开Char_Shibi，创建事件调度UpdateLevelForQuest(Integer),在UpLevel之后调用；</p>
-</li>
-<li><p>打开BP_RPG_NPC,创建变量QuestInLevel(Map)，将Level映射到Quest类。创建自定义事件UpdateQuest(Integer),用于在角色升级后，判断NPC身上是否产生新的任务；<img src='https://img-blog.csdnimg.cn/20201020153139435.png'></p>
-</li>
-<li><p>复制BP_MasterQuest两份，命名为BP_FirstEventQuest和BP_FirstSideQuest，并修改任务信息；</p>
-</li>
+<li>打开Char_Shibi,创建事件调度OnInteract，将与E键盘事件关联；</li>
+<li>打开BP_RPG_NPC,创建自定义事件OnInteract，用于判断角色与NPC交互时，NPC身上是否有未分发的任务<img src='https://img-blog.csdnimg.cn/20201020152724167.png'></li>
+<li>打开Char_Shibi，创建事件调度UpdateLevelForQuest(Integer),在UpLevel之后调用；</li>
+<li>打开BP_RPG_NPC,创建变量QuestInLevel(Map)，将Level映射到Quest类。创建自定义事件UpdateQuest(Integer),用于在角色升级后，判断NPC身上是否产生新的任务；<img src='https://img-blog.csdnimg.cn/20201020153139435.png'></li>
+<li>复制BP_MasterQuest两份，命名为BP_FirstEventQuest和BP_FirstSideQuest，并修改任务信息；</li>
 </ol>
 <h2 id="UI动画添加"><a href="#UI动画添加" class="headerlink" title="UI动画添加"></a>UI动画添加</h2><ol>
 <li>打开W_Quest，为Border创建HideAll动画；<img src='https://img-blog.csdnimg.cn/20201020154300252.png'></li>
@@ -1616,7 +1644,8 @@
 <li>打开W_Quest事件蓝图，添加宏[Exec] PlayHideAll(Exec,Boolean)，组织和关联HideAll、Text、Show动画执行时机<img src='https://img-blog.csdnimg.cn/20201020154615593.png'></li>
 <li>创建自定义事件PlayQuest调用PlayHideAll，并在UpdateQuest末尾添加调用;</li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201020134241578.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201020134241578.gif'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -1627,9 +1656,8 @@
   <entry>
     <title>RPG Game开发日志(七)</title>
     <url>/2020/10/20/RPG-Dev-Log-7/</url>
-    <content><![CDATA[<p>涉及内容：AI初讲，BehaviorTree–Patrol等;</p>
+    <content><![CDATA[<p>涉及内容：AI初讲，BehaviorTree—Patrol等;</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="角色边界跳跃"><a href="#角色边界跳跃" class="headerlink" title="角色边界跳跃"></a>角色边界跳跃</h2><ol>
 <li>在场景中添加NavLinkProxy，设置PointLink[0].Left和PointLinks[0].Right在场景中的位置；</li>
 <li>打开细节面板，按照实际情况将Simple Link和Smart Link Direction都设置为Right to Left，将Area Class都设置为NavArea_Default;<img src='https://img-blog.csdnimg.cn/20201020213951911.png'></li>
@@ -1648,7 +1676,7 @@
 <li>为BP_RPG_Character添加组件PatrolComponent;</li>
 <li>点击场景中的巡逻NPC，将场景中的PatrolPath指定给NPC;</li>
 </ol>
-<h3 id="BehaviorTree–Patrol"><a href="#BehaviorTree–Patrol" class="headerlink" title="BehaviorTree–Patrol"></a>BehaviorTree–Patrol</h3><ol>
+<h3 id="BehaviorTree—Patrol"><a href="#BehaviorTree—Patrol" class="headerlink" title="BehaviorTree—Patrol"></a>BehaviorTree—Patrol</h3><ol>
 <li><p>创建Enum [Behaviors] = {Idle,Patrol,Hit,Ability};</p>
 </li>
 <li><p>创建BehaviorTree [BT_NPC]；</p>
@@ -1678,7 +1706,7 @@
 <p>四、Services服务节点</p>
 <p>　　只能附加在Composite组合节点上，只要其附加的节点被执行，Services节点就会被执行，通常用来检查和更新黑板。</p>
 </blockquote>
-<img src='https://img-blog.csdnimg.cn/20201020223938437.png'>
+<p><img src='https://img-blog.csdnimg.cn/20201020223938437.png'></p>
 </li>
 <li><p>选取父类AIController，创建蓝图AIC_NPCController,进入蓝图，在EventBeginPlay添加BlackBoard [BB_Base]和BehaviorTree [BT_NPC];<img src='https://img-blog.csdnimg.cn/20201020214613446.png'></p>
 </li>
@@ -1687,7 +1715,8 @@
 <p>Pawn&gt;Auto Possess AI = Placed in World or Spawned,AI Controller Class = AIC_NPCController;</p>
 </li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102021303566.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020102021303566.gif'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -1700,7 +1729,6 @@
     <url>/2020/10/21/RPG-Dev-Log-8/</url>
     <content><![CDATA[<p>涉及内容：任务坐标，Money互动等;</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
 <p>虚幻商城[Content Examples]</p>
 <p><a href="https://www.iconfont.cn/">阿里巴巴矢量图表库</a> [关键词：脚印、钱包]</p>
@@ -1749,7 +1777,8 @@
 <li>创建自定义事件[void] GetMoney(Integer)，使用TimerHandle控制CountMoney函数的循环调用；<img src='https://img-blog.csdnimg.cn/20201021214258222.png'></li>
 <li>打开Object_Treasure事件图表，在Event OnInteractWith末尾添加GetMoney事件的调用，可实现宝箱打开金币旋转动画结束后，自动增加Money的值；</li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201021165022723.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201021165022723.gif'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>
@@ -1762,7 +1791,6 @@
     <url>/2020/10/23/RPG-Dev-Log-9/</url>
     <content><![CDATA[<p>涉及内容：任务完成的互动，混合骨骼动画，普通攻击三连制作等；</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><p>素材来源：</p>
 <p>虚幻商城[Infinity Blade:Adversaries]</p>
 <p>虚幻商城[Infinity Blade:Effects]</p>
@@ -1811,15 +1839,12 @@
 <li><p>打开ABP_Shibi事件图表，完善动画更新事件，判断角色是否处于加速状态或FullBody状态；<img src='https://img-blog.csdnimg.cn/20201024180437185.png'></p>
 </li>
 <li><p>打开ABP_Shibi动画图表，添加按骨骼分层混合，以及按布尔值混合姿势。当角色处于加速状态并且Body Curve返回值为0时，输出按骨骼分层混合姿势，否则输出UpBody姿势；<img src='https://img-blog.csdnimg.cn/20201024181347328.png'></p>
-<img src='https://img-blog.csdnimg.cn/20201024180639713.png'>
-
-
-
+<p><img src='https://img-blog.csdnimg.cn/20201024180639713.png'></p>
 </li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102417301295.gif'>
-
-<img src='https://img-blog.csdnimg.cn/20201024173043229.gif'>]]></content>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020102417301295.gif'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201024173043229.gif'></p>
+]]></content>
       <categories>
         <category>Logs</category>
       </categories>

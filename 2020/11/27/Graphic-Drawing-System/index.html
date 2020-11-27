@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-400x400-ue.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-400x400-ue.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="图形绘制系统的主要内容：Modeling(建模)、Geometric processing(几何处理)、Rasterization(光栅化)、Fragment processing(片元处理)、Frame buffer(帧缓存)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graphic-Drawing-System">
+<meta property="og:url" content="http://example.com/2020/11/27/Graphic-Drawing-System/index.html">
+<meta property="og:site_name" content="unreal-engine-channel">
+<meta property="og:description" content="图形绘制系统的主要内容：Modeling(建模)、Geometric processing(几何处理)、Rasterization(光栅化)、Fragment processing(片元处理)、Frame buffer(帧缓存)。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127213955149.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128001507408.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128002206685.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128013208174.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128013227487.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128020858774.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128020312218.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128020336728.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201128020621398.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127214343608.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020112723281810.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127232917795.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127234421587.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127234441934.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127225018489.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127225157233.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201127234649217.png">
+<meta property="article:published_time" content="2020-11-27T13:16:36.000Z">
+<meta property="article:modified_time" content="2020-11-27T18:30:35.953Z">
+<meta property="article:author" content="Jocoboy">
+<meta property="article:tag" content="Computer Graphics">
+<meta property="article:tag" content="OpenGL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201127213955149.png">
+
+<link rel="canonical" href="http://example.com/2020/11/27/Graphic-Drawing-System/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Graphic-Drawing-System | unreal-engine-channel</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="unreal-engine-channel" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">unreal-engine-channel</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/27/Graphic-Drawing-System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jocoboy">
+      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="unreal-engine-channel">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Graphic-Drawing-System
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-11-27 21:16:36" itemprop="dateCreated datePublished" datetime="2020-11-27T21:16:36+08:00">2020-11-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-28 02:30:35" itemprop="dateModified" datetime="2020-11-28T02:30:35+08:00">2020-11-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Theories/" itemprop="url" rel="index"><span itemprop="name">Theories</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>图形绘制系统的主要内容：Modeling(建模)、Geometric processing(几何处理)、Rasterization(光栅化)、Fragment processing(片元处理)、Frame buffer(帧缓存)。</p>
+<a id="more"></a>
+<h1 id="Geometric-processing-几何处理"><a href="#Geometric-processing-几何处理" class="headerlink" title="Geometric processing(几何处理)"></a>Geometric processing(几何处理)</h1><p><img src='https://img-blog.csdnimg.cn/20201127213955149.png'></p>
+<blockquote>
+<ul>
+<li><p>完整的图形绘制管道</p>
+<ol>
+<li>通过给P添加分量1将其扩展为齐次4元组；</li>
+<li>用这个4元组乘上矩阵modelview，得到视点坐标系下的4元组；</li>
+<li>再将点乘上投影矩阵，得到裁剪坐标下的4元组；</li>
+<li>对以此点为端点的边实施裁剪操作；</li>
+<li>执行透视除法，得到一个3元组（规范化的设备坐标）；</li>
+<li>在视区变换过程中3元组被乘上一个矩阵：得到的结果被用于绘制和深度计算（窗口坐标）。</li>
+</ol>
+</li>
+<li><p>从三维空间到二维平面，就如同用相机拍照一样，通常都要经历以下几个步骤（括号内表示的是相应的图形学概念） </p>
+<ol>
+<li><p>将相机置于三角架上，让它对准三维景物（视点变换，Viewing Transformation）； </p>
+</li>
+<li><p>将三维物体放在适当的位置（模型变换，Modeling Transformation ）； </p>
+</li>
+<li><p>选择相机镜头并调焦，使三维物体投影在二维胶片上（投影变换，Projection Transformation ）;</p>
+</li>
+<li><p>决定二维像片的大小（视口变换，Viewport Transformation ）。 </p>
+</li>
+</ol>
+<p>这样，一个三维空间里的物体就可以用相应的二维平面物体表示了，也就能在二维的计算机屏幕上正确显示了。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="Viewing-amp-Modeling-Transformation-视点-amp-模型变换"><a href="#Viewing-amp-Modeling-Transformation-视点-amp-模型变换" class="headerlink" title="Viewing &amp; Modeling  Transformation(视点&amp;模型变换)"></a>Viewing &amp; Modeling  Transformation(视点&amp;模型变换)</h2><h3 id="摄像机的定位和定向"><a href="#摄像机的定位和定向" class="headerlink" title="摄像机的定位和定向"></a>摄像机的定位和定向</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p><img src='https://img-blog.csdnimg.cn/20201128001507408.png'></p>
+<p>给定eye、look和up，我们得到：</p>
+<p><img src='https://img-blog.csdnimg.cn/20201128002206685.png'></p>
+<h4 id="Modelview-matrix-模型视点矩阵"><a href="#Modelview-matrix-模型视点矩阵" class="headerlink" title="Modelview matrix(模型视点矩阵)"></a>Modelview matrix(模型视点矩阵)</h4><p><img src='https://img-blog.csdnimg.cn/20201128013208174.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201128013227487.png'></p>
+<p>模型视点矩阵的作用是把世界坐标系转换成摄像机坐标系。</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><blockquote>
+<p>考虑一个摄像机，其eye=(4,4,4)，look=(0,1,0)，up为(0,1,0)，求出u，v，n。</p>
+<p>n=(4,4,4)-(0,1,0)=(4,3,4)</p>
+<script type="math/tex; mode=display">
+\left[
+ \begin{matrix}
+   i & j & k \\
+   0 & 1 & 0 \\
+   4 & 3 & 4
+  \end{matrix}
+  \right]</script><p>u=(0,1,0)×(4,3,4)=(4,0,-4)</p>
+<script type="math/tex; mode=display">
+\left[
+ \begin{matrix}
+   i & j & k \\
+   4 & 3 & 4 \\
+   4 & 0 & -4
+  \end{matrix}
+  \right]</script><p>v=(4,3,4)×(4,0,-4)=(-12,32,-12)</p>
+</blockquote>
+<h4 id="OpenGL视点变换API"><a href="#OpenGL视点变换API" class="headerlink" title="OpenGL视点变换API"></a>OpenGL视点变换API</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/opengl/glulookat">gluLookAt(GLdouble eyex,   GLdouble eyey,   GLdouble eyez,   GLdouble centerx,   GLdouble centery,   GLdouble centerz,   GLdouble upx,   GLdouble upy,   GLdouble upz)</a></li>
+</ul>
+<h2 id="Projection-Transformation-投影变换"><a href="#Projection-Transformation-投影变换" class="headerlink" title="Projection Transformation(投影变换)"></a>Projection Transformation(投影变换)</h2><h3 id="平行投影-正交投影"><a href="#平行投影-正交投影" class="headerlink" title="平行投影(正交投影)"></a>平行投影(正交投影)</h3><h4 id="平行投影矩阵"><a href="#平行投影矩阵" class="headerlink" title="平行投影矩阵"></a>平行投影矩阵</h4><p><img src='https://img-blog.csdnimg.cn/20201128020858774.png'></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/leixinyue/p/11166135.html">推导过程</a></p>
+<h4 id="OpenGL平行投影API"><a href="#OpenGL平行投影API" class="headerlink" title="OpenGL平行投影API"></a>OpenGL平行投影API</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/opengl/glortho">glOrtho(GLdouble left,   GLdouble right,   GLdouble bottom,   GLdouble top,   GLdouble zNear,   GLdouble zFar)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/opengl/gluortho2d">gluOrtho2D(GLdouble left,   GLdouble right,   GLdouble top,   GLdouble bottom)</a></p>
+</li>
+</ul>
+<h3 id="透视投影"><a href="#透视投影" class="headerlink" title="透视投影"></a>透视投影</h3><h4 id="透视除法"><a href="#透视除法" class="headerlink" title="透视除法"></a>透视除法</h4><p><img src='https://img-blog.csdnimg.cn/20201128020312218.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201128020336728.png'></p>
+<p>在Eye coordinates(观察坐标）被Projection matrix相乘后，得到的Clip coordinates(裁剪坐标)仍然是homogeneous coordinates(齐次坐标)。最终它需要除以Clip coordinates的w分量，才能变成Normalized device coordinates(规范化设备坐标NDC)。因此，我们可以把裁剪坐标的Wc分量设置为-Ze，则投影矩阵第4行变为(0, 0, -1, 0)。</p>
+<h4 id="透视投影矩阵"><a href="#透视投影矩阵" class="headerlink" title="透视投影矩阵"></a>透视投影矩阵</h4><p><img src='https://img-blog.csdnimg.cn/20201128020621398.png'></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/leixinyue/p/11166135.html">推导过程</a></p>
+<h4 id="OpenGL透视投影API"><a href="#OpenGL透视投影API" class="headerlink" title="OpenGL透视投影API"></a>OpenGL透视投影API</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/opengl/glfrustum">glFrustum(GLdouble left,   GLdouble right,   GLdouble bottom,   GLdouble top,   GLdouble zNear,   GLdouble zFar)</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/opengl/gluperspective">gluPerspective(GLdouble fovy,   GLdouble aspect,   GLdouble zNear,   GLdouble zFar)</a></li>
+</ul>
+<h2 id="Viewport-Transformation-视口变换"><a href="#Viewport-Transformation-视口变换" class="headerlink" title="Viewport Transformation(视口变换)"></a>Viewport Transformation(视口变换)</h2><p><img src='https://img-blog.csdnimg.cn/20201127214343608.png'></p>
+<h3 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ol>
+<li>仿射变换可以很容易地对物体实施缩放、旋转和平移操作</li>
+<li>一系列仿射变换可以组合成一个单一的仿射变换</li>
+<li>仿射变换可以使用一个紧凑的矩阵形式表示</li>
+</ol>
+<h4 id="基本变换"><a href="#基本变换" class="headerlink" title="基本变换"></a>基本变换</h4><ul>
+<li>平移<img src='https://img-blog.csdnimg.cn/2020112723281810.png'></li>
+<li>缩放<img src='https://img-blog.csdnimg.cn/20201127232917795.png'></li>
+<li>旋转<img src='https://img-blog.csdnimg.cn/20201127234421587.png'><img src='https://img-blog.csdnimg.cn/20201127234441934.png'></li>
+</ul>
+<h4 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h4><blockquote>
+<p>假设裁剪矩形的左下角坐标为（wxl=10,wyb=10），右上角坐标为（wxr=50，wyt=50）。</p>
+<p>设备坐标系中视口的左下角坐标为（vxl=10,vyb=30），右上角坐标为（vxr=50,vyt=90）。</p>
+<p>已知在窗口内有一点p(20,30)，要将点p映射到视区内的点p’，请问p’点在设备坐标系中的坐标是多少？</p>
+<ol>
+<li><p>将窗口坐标系（window coordinates）左下角（10,10）平移至观察坐标系的坐标原点（0,0），平移矢量为（-10，-10）。</p>
+</li>
+<li><p>针对坐标原点进行比例变换，使窗口大小和视区相等，比例因子为 Sx=(50-10)/(50-10)=1， Sy=(90-30)/(50-10)=1.5。</p>
+</li>
+<li><p>将窗口内的点映射到设备坐标系（device coordinates）的视区中，再进行反平移，将视区的左下角移回到设备坐标系中的位置（10,30），平移矢量为（10,30）。</p>
+</li>
+<li><p>计算得到变换矩阵T。<br><img src='https://img-blog.csdnimg.cn/20201127225018489.png'><br><img src='https://img-blog.csdnimg.cn/20201127225157233.png'></p>
+</li>
+<li><p>将变换矩阵T左乘p点齐次坐标得到p’齐次坐标。</p>
+<p><img src='https://img-blog.csdnimg.cn/20201127234649217.png'></p>
+</li>
+</ol>
+</blockquote>
+<h3 id="OpenGL视口变换API"><a href="#OpenGL视口变换API" class="headerlink" title="OpenGL视口变换API"></a>OpenGL视口变换API</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/opengl/glviewport">glViewport(GLint x, GLint y , GLsizei width , GLsizei height)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/opengl/gldepthrange">glDepthRange(GLclampd zNear, GLclampd zFar )</a></p>
+</li>
+</ul>
+<h1 id="Rasterization-光栅化"><a href="#Rasterization-光栅化" class="headerlink" title="Rasterization(光栅化)"></a>Rasterization(光栅化)</h1><h1 id="Fragment-processing-片元处理"><a href="#Fragment-processing-片元处理" class="headerlink" title="Fragment processing(片元处理)"></a>Fragment processing(片元处理)</h1><h1 id="Frame-buffer-帧缓存"><a href="#Frame-buffer-帧缓存" class="headerlink" title="Frame buffer(帧缓存)"></a>Frame buffer(帧缓存)</h1>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Computer-Graphics/" rel="tag"># Computer Graphics</a>
+              <a href="/tags/OpenGL/" rel="tag"># OpenGL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/22/RPG-Dev-Log-22/" rel="prev" title="RPG Game开发日志(二十二)">
+      <i class="fa fa-chevron-left"></i> RPG Game开发日志(二十二)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Geometric-processing-%E5%87%A0%E4%BD%95%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Geometric processing(几何处理)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Viewing-amp-Modeling-Transformation-%E8%A7%86%E7%82%B9-amp-%E6%A8%A1%E5%9E%8B%E5%8F%98%E6%8D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">Viewing &amp; Modeling  Transformation(视点&amp;模型变换)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%84%E5%83%8F%E6%9C%BA%E7%9A%84%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%AE%9A%E5%90%91"><span class="nav-number">1.1.1.</span> <span class="nav-text">摄像机的定位和定向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Modelview-matrix-%E6%A8%A1%E5%9E%8B%E8%A7%86%E7%82%B9%E7%9F%A9%E9%98%B5"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Modelview matrix(模型视点矩阵)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenGL%E8%A7%86%E7%82%B9%E5%8F%98%E6%8D%A2API"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">OpenGL视点变换API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Projection-Transformation-%E6%8A%95%E5%BD%B1%E5%8F%98%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">Projection Transformation(投影变换)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E8%A1%8C%E6%8A%95%E5%BD%B1-%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1"><span class="nav-number">1.2.1.</span> <span class="nav-text">平行投影(正交投影)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E8%A1%8C%E6%8A%95%E5%BD%B1%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">平行投影矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenGL%E5%B9%B3%E8%A1%8C%E6%8A%95%E5%BD%B1API"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">OpenGL平行投影API</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1"><span class="nav-number">1.2.2.</span> <span class="nav-text">透视投影</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E9%99%A4%E6%B3%95"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">透视除法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1%E7%9F%A9%E9%98%B5"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">透视投影矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OpenGL%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1API"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">OpenGL透视投影API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Viewport-Transformation-%E8%A7%86%E5%8F%A3%E5%8F%98%E6%8D%A2"><span class="nav-number">1.3.</span> <span class="nav-text">Viewport Transformation(视口变换)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">仿射变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8F%98%E6%8D%A2"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">基本变换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98-1"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">例题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenGL%E8%A7%86%E5%8F%A3%E5%8F%98%E6%8D%A2API"><span class="nav-number">1.3.2.</span> <span class="nav-text">OpenGL视口变换API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rasterization-%E5%85%89%E6%A0%85%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">Rasterization(光栅化)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fragment-processing-%E7%89%87%E5%85%83%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">Fragment processing(片元处理)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Frame-buffer-%E5%B8%A7%E7%BC%93%E5%AD%98"><span class="nav-number">4.</span> <span class="nav-text">Frame buffer(帧缓存)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jocoboy</p>
+  <div class="site-description" itemprop="description">A website to share technologies for the latest version of Unreal Engine.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/unreal-engine-channel" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;unreal-engine-channel" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:unreal-engine-channel@outlook.com" title="E-Mail → mailto:unreal-engine-channel@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jocoboy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">56k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">51 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

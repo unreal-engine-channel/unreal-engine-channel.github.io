@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="涉及内容：AI初讲，BehaviorTree–Patrol等;">
+  <meta name="description" content="涉及内容：AI初讲，BehaviorTree—Patrol等;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RPG Game开发日志(七)">
 <meta property="og:url" content="http://example.com/2020/10/20/RPG-Dev-Log-7/index.html">
 <meta property="og:site_name" content="unreal-engine-channel">
-<meta property="og:description" content="涉及内容：AI初讲，BehaviorTree–Patrol等;">
+<meta property="og:description" content="涉及内容：AI初讲，BehaviorTree—Patrol等;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201020213951911.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201020215735408.png">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201020214613446.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2020102021303566.gif">
 <meta property="article:published_time" content="2020-10-20T13:19:37.000Z">
-<meta property="article:modified_time" content="2020-11-26T14:02:37.485Z">
+<meta property="article:modified_time" content="2020-11-27T18:30:35.953Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
@@ -239,7 +239,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-26 22:02:37" itemprop="dateModified" datetime="2020-11-26T22:02:37+08:00">2020-11-26</time>
+                <time title="Modified: 2020-11-28 02:30:35" itemprop="dateModified" datetime="2020-11-28T02:30:35+08:00">2020-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,9 +276,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>涉及内容：AI初讲，BehaviorTree–Patrol等;</p>
+        <p>涉及内容：AI初讲，BehaviorTree—Patrol等;</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="角色边界跳跃"><a href="#角色边界跳跃" class="headerlink" title="角色边界跳跃"></a>角色边界跳跃</h2><ol>
 <li>在场景中添加NavLinkProxy，设置PointLink[0].Left和PointLinks[0].Right在场景中的位置；</li>
 <li>打开细节面板，按照实际情况将Simple Link和Smart Link Direction都设置为Right to Left，将Area Class都设置为NavArea_Default;<img src='https://img-blog.csdnimg.cn/20201020213951911.png'></li>
@@ -297,7 +296,7 @@
 <li>为BP_RPG_Character添加组件PatrolComponent;</li>
 <li>点击场景中的巡逻NPC，将场景中的PatrolPath指定给NPC;</li>
 </ol>
-<h3 id="BehaviorTree–Patrol"><a href="#BehaviorTree–Patrol" class="headerlink" title="BehaviorTree–Patrol"></a>BehaviorTree–Patrol</h3><ol>
+<h3 id="BehaviorTree—Patrol"><a href="#BehaviorTree—Patrol" class="headerlink" title="BehaviorTree—Patrol"></a>BehaviorTree—Patrol</h3><ol>
 <li><p>创建Enum [Behaviors] = {Idle,Patrol,Hit,Ability};</p>
 </li>
 <li><p>创建BehaviorTree [BT_NPC]；</p>
@@ -327,7 +326,7 @@
 <p>四、Services服务节点</p>
 <p>　　只能附加在Composite组合节点上，只要其附加的节点被执行，Services节点就会被执行，通常用来检查和更新黑板。</p>
 </blockquote>
-<img src='https://img-blog.csdnimg.cn/20201020223938437.png'>
+<p><img src='https://img-blog.csdnimg.cn/20201020223938437.png'></p>
 </li>
 <li><p>选取父类AIController，创建蓝图AIC_NPCController,进入蓝图，在EventBeginPlay添加BlackBoard [BB_Base]和BehaviorTree [BT_NPC];<img src='https://img-blog.csdnimg.cn/20201020214613446.png'></p>
 </li>
@@ -336,7 +335,8 @@
 <p>Pawn&gt;Auto Possess AI = Placed in World or Spawned,AI Controller Class = AIC_NPCController;</p>
 </li>
 </ol>
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/2020102021303566.gif'>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/2020102021303566.gif'></p>
+
     </div>
 
     
@@ -438,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%92%E8%89%B2%E8%BE%B9%E7%95%8C%E8%B7%B3%E8%B7%83"><span class="nav-number">1.1.</span> <span class="nav-text">角色边界跳跃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI%E8%A1%8C%E4%B8%BA%E6%A0%91%E5%88%9D%E8%AE%B2"><span class="nav-number">1.2.</span> <span class="nav-text">AI行为树初讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PatrolPath"><span class="nav-number">1.2.1.</span> <span class="nav-text">PatrolPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PatrolComponent"><span class="nav-number">1.2.2.</span> <span class="nav-text">PatrolComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BehaviorTree%E2%80%93Patrol"><span class="nav-number">1.2.3.</span> <span class="nav-text">BehaviorTree–Patrol</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">涉及内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%92%E8%89%B2%E8%BE%B9%E7%95%8C%E8%B7%B3%E8%B7%83"><span class="nav-number">1.1.</span> <span class="nav-text">角色边界跳跃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI%E8%A1%8C%E4%B8%BA%E6%A0%91%E5%88%9D%E8%AE%B2"><span class="nav-number">1.2.</span> <span class="nav-text">AI行为树初讲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PatrolPath"><span class="nav-number">1.2.1.</span> <span class="nav-text">PatrolPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PatrolComponent"><span class="nav-number">1.2.2.</span> <span class="nav-text">PatrolComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BehaviorTree%E2%80%94Patrol"><span class="nav-number">1.2.3.</span> <span class="nav-text">BehaviorTree—Patrol</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">最终效果展示</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -452,7 +452,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -465,7 +465,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -521,12 +521,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">54k</span>
+    <span title="Symbols count total">56k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">49 mins.</span>
+    <span title="Reading time total">51 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -583,6 +583,8 @@
 
 
 
+
+  
 
   
 

@@ -71,7 +71,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201110195118759.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201110195145659.png">
 <meta property="article:published_time" content="2020-11-10T11:39:49.000Z">
-<meta property="article:modified_time" content="2020-11-26T14:02:37.485Z">
+<meta property="article:modified_time" content="2020-11-27T18:30:35.953Z">
 <meta property="article:author" content="Jocoboy">
 <meta property="article:tag" content="UE_4.22">
 <meta name="twitter:card" content="summary">
@@ -269,7 +269,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-26 22:02:37" itemprop="dateModified" datetime="2020-11-26T22:02:37+08:00">2020-11-26</time>
+                <time title="Modified: 2020-11-28 02:30:35" itemprop="dateModified" datetime="2020-11-28T02:30:35+08:00">2020-11-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,7 +308,6 @@
       
         <p>涉及内容：创建Npc对话系统（开篇），编辑剧本。</p>
 <a id="more"></a>
-
 <h1 id="涉及内容"><a href="#涉及内容" class="headerlink" title="涉及内容"></a>涉及内容</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
 <li>创建枚举E_TalkType，代表当前对话选项对应的查看内容；<img src='https://img-blog.csdnimg.cn/20201110195932647.png'></li>
 <li>创建枚举E_SelectSubGoalType，代表对话时分支选项的类型；<img src='https://img-blog.csdnimg.cn/2020111020024350.png'></li>
@@ -316,8 +315,7 @@
 <li>创建结构体S_SpeechContent，包含Player与NPC对话的名字、内容、延迟(默认为4s)、是否有分支选项、分支选项内容；<img src='https://img-blog.csdnimg.cn/20201110200855293.png'></li>
 <li>创建结构体S_Conversation，包含对话内容、对话信息、任务类、对话类型、指定任务是否已完成、推荐等级信息；<img src='https://img-blog.csdnimg.cn/20201110201213956.png'></li>
 </ol>
-<h2 id="创建BP-FindGrain"><a href="#创建BP-FindGrain" class="headerlink" title="创建BP_FindGrain"></a>创建BP_FindGrain</h2><img src='https://img-blog.csdnimg.cn/20201110220053550.png'>
-
+<h2 id="创建BP-FindGrain"><a href="#创建BP-FindGrain" class="headerlink" title="创建BP_FindGrain"></a>创建BP_FindGrain</h2><p><img src='https://img-blog.csdnimg.cn/20201110220053550.png'></p>
 <h2 id="创建UI"><a href="#创建UI" class="headerlink" title="创建UI"></a>创建UI</h2><h3 id="创建对话选项条W-TalkInfo"><a href="#创建对话选项条W-TalkInfo" class="headerlink" title="创建对话选项条W_TalkInfo"></a>创建对话选项条W_TalkInfo</h3><ol>
 <li>层级面板和预览效果;<img src='https://img-blog.csdnimg.cn/20201110210022230.png'></li>
 <li>打开事件图表，创建函数Update，用于根据TalkType更新TalkInfoImage、HotKeyText（选项数字）、SelectTalkInfo(按钮文本)，并在事件构造时调用;<img src='https://img-blog.csdnimg.cn/20201110210336891.png'></li>
@@ -354,18 +352,12 @@
 </li>
 <li><p>创建事件OnClickedEndTalk，结束对话并清空UI;</p>
 </li>
-<li><p>创建事件OnClickedElseInfo(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedGoodsStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedWeaponStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedEquipStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedDrugStore(尚未实装)</p>
-</li>
-<li><p>创建事件OnClickedFoodStore(尚未实装)</p>
-</li>
+<li>创建事件OnClickedElseInfo(尚未实装)</li>
+<li>创建事件OnClickedGoodsStore(尚未实装)</li>
+<li>创建事件OnClickedWeaponStore(尚未实装)</li>
+<li>创建事件OnClickedEquipStore(尚未实装)</li>
+<li>创建事件OnClickedDrugStore(尚未实装)</li>
+<li>创建事件OnClickedFoodStore(尚未实装)</li>
 </ul>
 <p><img src='https://img-blog.csdnimg.cn/20201110213742981.png'><img src='https://img-blog.csdnimg.cn/20201110213844323.png'></p>
 </li>
@@ -378,15 +370,13 @@
 </ul>
 </li>
 </ol>
-<h3 id="实例设置-NPC皮特"><a href="#实例设置-NPC皮特" class="headerlink" title="实例设置(NPC皮特)"></a>实例设置(NPC皮特)</h3><img src='https://img-blog.csdnimg.cn/20201110220234754.png'>
-
-
+<h3 id="实例设置-NPC皮特"><a href="#实例设置-NPC皮特" class="headerlink" title="实例设置(NPC皮特)"></a>实例设置(NPC皮特)</h3><p><img src='https://img-blog.csdnimg.cn/20201110220234754.png'></p>
 <h2 id="剧本编辑"><a href="#剧本编辑" class="headerlink" title="剧本编辑"></a>剧本编辑</h2><h3 id="创建Data-Table"><a href="#创建Data-Table" class="headerlink" title="创建Data Table"></a>创建Data Table</h3><ol>
 <li>创建D_NPC_Conversation；<img src='https://img-blog.csdnimg.cn/20201110202006809.png'></li>
 </ol>
 <h3 id="编辑对话选项内容（含分支选项）"><a href="#编辑对话选项内容（含分支选项）" class="headerlink" title="编辑对话选项内容（含分支选项）"></a>编辑对话选项内容（含分支选项）</h3><ol>
 <li><p>[QuestInfo]任务接取向——接取FindGrain任务：</p>
-<img src='https://img-blog.csdnimg.cn/20201110203722362.png'>
+<p><img src='https://img-blog.csdnimg.cn/20201110203722362.png'></p>
 </li>
 <li><p>[ElseInfo]剧情介绍向——与NPC闲聊；<img src='https://img-blog.csdnimg.cn/20201110202040377.png'></p>
 </li>
@@ -403,85 +393,83 @@
 <li><p>[End]结束对话：<img src='https://img-blog.csdnimg.cn/2020111020280739.png'></p>
 </li>
 </ol>
-<h3 id="编辑对话剧本"><a href="#编辑对话剧本" class="headerlink" title="编辑对话剧本"></a>编辑对话剧本</h3><table>
+<h3 id="编辑对话剧本"><a href="#编辑对话剧本" class="headerlink" title="编辑对话剧本"></a>编辑对话剧本</h3><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">TalkerName</th>
-<th align="center">SpeechInfo</th>
+<th style="text-align:center">TalkerName</th>
+<th style="text-align:center">SpeechInfo</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">Shinbi</td>
-<td align="center">嗨，大叔，你知道如何才能进入峡谷吗？</td>
+<tbody>
+<tr>
+<td style="text-align:center">Shinbi</td>
+<td style="text-align:center">嗨，大叔，你知道如何才能进入峡谷吗？</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">大叔？小哥年方十八！</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">大叔？小哥年方十八！</td>
 </tr>
 <tr>
-<td align="center">Shibi</td>
-<td align="center">…</td>
+<td style="text-align:center">Shibi</td>
+<td style="text-align:center">…</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">咳咳。。。峡谷常年迷雾，又有猛兽出没，凶险万分，姑娘切莫深入。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">咳咳。。。峡谷常年迷雾，又有猛兽出没，凶险万分，姑娘切莫深入。</td>
 </tr>
 <tr>
-<td align="center">Shinbi</td>
-<td align="center">大叔放心，小女子十八般武艺样样精通，拳打南山猛虎，脚踢北海蛟龙，正好顺道为名除害！</td>
+<td style="text-align:center">Shinbi</td>
+<td style="text-align:center">大叔放心，小女子十八般武艺样样精通，拳打南山猛虎，脚踢北海蛟龙，正好顺道为名除害！</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">。。。大叔。。的确，看姑娘的着装并非普通女子，非富即贵，只是。。。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">。。。大叔。。的确，看姑娘的着装并非普通女子，非富即贵，只是。。。</td>
 </tr>
 <tr>
-<td align="center">Shinbi</td>
-<td align="center">哈哈…就是，小女子才貌双全，大叔有何难处尽管直言！</td>
+<td style="text-align:center">Shinbi</td>
+<td style="text-align:center">哈哈…就是，小女子才貌双全，大叔有何难处尽管直言！</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">呃。。这个，最近天降大雪，家中缺粮，我这不出来寻粮了吗，如果姑娘能带来一袋小麦，我将带你进入峡谷的入口。。。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">呃。。这个，最近天降大雪，家中缺粮，我这不出来寻粮了吗，如果姑娘能带来一袋小麦，我将带你进入峡谷的入口。。。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支1-1)</td>
-<td align="center">哈哈，小事情，交给我吧！不过这荒天雪地的能不能折现？？</td>
+<td style="text-align:center">Shinbi(分支1-1)</td>
+<td style="text-align:center">哈哈，小事情，交给我吧！不过这荒天雪地的能不能折现？？</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支1-2)</td>
-<td align="center">这荒天雪地的上哪去找一袋小麦。。</td>
+<td style="text-align:center">Shinbi(分支1-2)</td>
+<td style="text-align:center">这荒天雪地的上哪去找一袋小麦。。</td>
 </tr>
 <tr>
-<td align="center">皮特</td>
-<td align="center">这个、、、多谢女侠，折合成市价30硬币。</td>
+<td style="text-align:center">皮特</td>
+<td style="text-align:center">这个、、、多谢女侠，折合成市价30硬币。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支2-1)</td>
-<td align="center">给与30硬币。</td>
+<td style="text-align:center">Shinbi(分支2-1)</td>
+<td style="text-align:center">给与30硬币。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支2-2)</td>
-<td align="center">给与一袋小麦。</td>
+<td style="text-align:center">Shinbi(分支2-2)</td>
+<td style="text-align:center">给与一袋小麦。</td>
 </tr>
 <tr>
-<td align="center">Shinbi(分支2-3)</td>
-<td align="center">我再想想。。</td>
+<td style="text-align:center">Shinbi(分支2-3)</td>
+<td style="text-align:center">我再想想。。</td>
 </tr>
-</tbody></table>
-<img src='https://img-blog.csdnimg.cn/20201110203809964.png'>
+</tbody>
+</table>
+</div>
+<p><img src='https://img-blog.csdnimg.cn/20201110203809964.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110203838787.png'></p>
+<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><p><img src='https://img-blog.csdnimg.cn/20201110194837692.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110194928442.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110195002450.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/2020111019504116.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110195118759.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201110195145659.png'></p>
 
-<img src='https://img-blog.csdnimg.cn/20201110203838787.png'>
-
-<h1 id="最终效果展示"><a href="#最终效果展示" class="headerlink" title="最终效果展示"></a>最终效果展示</h1><img src='https://img-blog.csdnimg.cn/20201110194837692.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110194928442.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110195002450.png'>
-
-<img src='https://img-blog.csdnimg.cn/2020111019504116.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110195118759.png'>
-
-<img src='https://img-blog.csdnimg.cn/20201110195145659.png'>
     </div>
 
     
@@ -597,7 +585,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -610,7 +598,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -666,12 +654,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">54k</span>
+    <span title="Symbols count total">56k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">49 mins.</span>
+    <span title="Reading time total">51 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -728,6 +716,8 @@
 
 
 
+
+  
 
   
 
