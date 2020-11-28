@@ -192,11 +192,98 @@
 </ol>
 </blockquote>
 <h3 id="OpenGL视口变换API"><a href="#OpenGL视口变换API" class="headerlink" title="OpenGL视口变换API"></a>OpenGL视口变换API</h3><ul>
-<li><p><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/glviewport">glViewport(GLint x, GLint y , GLsizei width , GLsizei height)</a></p>
-</li>
-<li><p><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/gldepthrange">glDepthRange(GLclampd zNear, GLclampd zFar )</a></p>
-</li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/glviewport">glViewport(GLint x, GLint y , GLsizei width , GLsizei height)</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/opengl/gldepthrange">glDepthRange(GLclampd zNear, GLclampd zFar )</a></li>
 </ul>
+<h2 id="Clip-裁剪"><a href="#Clip-裁剪" class="headerlink" title="Clip(裁剪)"></a>Clip(裁剪)</h2><h3 id="直线裁剪算法"><a href="#直线裁剪算法" class="headerlink" title="直线裁剪算法"></a>直线裁剪算法</h3><h4 id="Cohen-Sutherland算法"><a href="#Cohen-Sutherland算法" class="headerlink" title="Cohen-Sutherland算法"></a>Cohen-Sutherland算法</h4><h5 id="建立区域码"><a href="#建立区域码" class="headerlink" title="建立区域码"></a>建立区域码</h5><p><img src='https://img-blog.csdnimg.cn/20201128143628195.png'></p>
+<p>Cohen-Sutherland直线裁剪算法的核心是把所有直线的端点均分配一个表示其相对位置的4位二进制代码。此代码称为区域码。区域码按照端点与窗口边界的相对位置编码，即区域码的4位分别代表端点位于窗口的上、下、右、左。</p>
+<p><img src='https://img-blog.csdnimg.cn/20201128145429326.png'></p>
+<p>Cohen-Sutherland算法通常在两种情况下，可以快速的检测。即平凡接受（两个码字都是0000）和平凡拒绝（两个码字在某一位元素上都是1(相与不为0)）。</p>
+<p><img src='https://img-blog.csdnimg.cn/2020112815010542.png'></p>
+<p><img src='https://img-blog.csdnimg.cn/20201128150125553.png'></p>
+<p>对于第三种情况，取窗口外的一个端点与窗口边界比较以确定可排除直线的哪一部分，然后，把直线剩下的部分与其他边界比较，这样一直到直线全部被排除或确定直线的哪一部分在窗口之内为止。可按“左、右、下、上”的次序建立检查直线端点与窗口边界关系的算法。</p>
+<h5 id="代码实现-C"><a href="#代码实现-C" class="headerlink" title="代码实现(C++)"></a>代码实现(C++)</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Implementation of Cohen-Sutherland Algorithm, written by Jocoboy.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line">    <span class="built_in">string</span> code;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="keyword">bool</span> <span class="title">ordinaryAccept</span><span class="params">(<span class="keyword">const</span> Point&amp; p1,cont Point&amp; p2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.code == <span class="string">&quot;0000&quot;</span> &amp;&amp; p2.code == <span class="string">&quot;0000&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="keyword">bool</span> <span class="title">ordinaryRefused</span><span class="params">(<span class="keyword">const</span> Point&amp; p1,cont Point&amp; p2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1.code[i]== p2.code[i] &amp;&amp; p,.code[i] == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">            	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line">     	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RealRect</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> left;</span><br><span class="line">    <span class="keyword">int</span> top;</span><br><span class="line">    <span class="keyword">int</span> right;</span><br><span class="line">    <span class="keyword">int</span> bottom;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">leftClip</span><span class="params">(Point&amp; p1,Point&amp; p2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> e = <span class="keyword">this</span>.left - p1.x;				</span><br><span class="line">        <span class="keyword">int</span> delx = p2.x - p1.x;</span><br><span class="line">        <span class="keyword">int</span> dely = p1.y - p2.y; <span class="comment">// 此处p1和p2顺序无所谓</span></span><br><span class="line">        <span class="keyword">if</span>(dely!=<span class="number">0</span>)&#123;</span><br><span class="line">   			<span class="keyword">int</span> d = e*dely/delx;</span><br><span class="line">            p1.y += -d;	</span><br><span class="line">        &#125;</span><br><span class="line">        p1.x = <span class="keyword">this</span>.left;	</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rightClip</span><span class="params">(Point&amp; p1,Point&amp; p2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> e = p1.x - <span class="keyword">this</span>.right;				</span><br><span class="line">        <span class="keyword">int</span> delx = p1.x - p2.x;</span><br><span class="line">        <span class="keyword">int</span> dely = p1.y - p2.y; <span class="comment">// 此处p1和p2顺序无所谓</span></span><br><span class="line">        <span class="keyword">if</span>(dely!=<span class="number">0</span>)&#123;</span><br><span class="line">             <span class="keyword">int</span> d = e*dely/delx;</span><br><span class="line">             p1.y += -d;	</span><br><span class="line">        &#125;</span><br><span class="line">        p1.x = <span class="keyword">this</span>.right;		 </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">bottomClip</span><span class="params">(Point&amp; p1, Point&amp; p2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> d = <span class="keyword">this</span>.bottom - p1.y;				</span><br><span class="line">        <span class="keyword">int</span> delx = p2.x - p1.x; <span class="comment">// 此处p1和p2顺序无所谓</span></span><br><span class="line">        <span class="keyword">int</span> dely = p2.y - p1.y;</span><br><span class="line">        <span class="keyword">if</span>(delx!=<span class="number">0</span>)&#123;</span><br><span class="line">              <span class="keyword">int</span> e = d*delx/dely;</span><br><span class="line">           	  p1.x += -e;	</span><br><span class="line">         &#125;</span><br><span class="line">         p1.y = <span class="keyword">this</span>.bottom;		 </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">topClip</span><span class="params">(Point&amp; p1，Point&amp; p2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> d = p1.y - <span class="keyword">this</span>.top;				</span><br><span class="line">        <span class="keyword">int</span> delx = p2.x - p1.x; <span class="comment">// 此处p1和p2顺序无所谓</span></span><br><span class="line">        <span class="keyword">int</span> dely = p1.y - p2.y;</span><br><span class="line">        <span class="keyword">if</span>(delx!=<span class="number">0</span>)&#123;</span><br><span class="line">              <span class="keyword">int</span> e = d*delx/dely;</span><br><span class="line">              p1.x += -e;	</span><br><span class="line">        &#125;</span><br><span class="line">        p1.y = <span class="keyword">this</span>.top;	</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">clipSegment</span><span class="params">(Point&amp; p1, Point&amp; p2, RealRect w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">do</span> &#123;</span><br><span class="line">   	<span class="keyword">if</span>(ordinaryAccept(p1,p2)) <span class="keyword">return</span> <span class="number">1</span>;<span class="comment">// 平凡接受(完全可见)</span></span><br><span class="line">   	<span class="keyword">if</span>(ordinaryRefused(p1,p2)) <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">// 平凡拒绝(完全不可见)</span></span><br><span class="line">   	<span class="keyword">if</span>(p2.x&gt;=w.left&amp;&amp;p2.x&lt;=w.right&amp;&amp;p2.y&gt;=w.bottom&amp;&amp;p2.y&lt;=w.top)&#123;<span class="comment">// p1在窗口外面</span></span><br><span class="line">        <span class="keyword">if</span>(p1.x&lt;=w.left)&#123;<span class="comment">// p1在窗口左边,用左边界截断，更新p1； 	    </span></span><br><span class="line">	  		w.leftClip(p1,p2);  </span><br><span class="line">        &#125; 			 </span><br><span class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(p1.x&gt;=w.right)&#123;<span class="comment">// p1在窗口右边,用右边界截断，更新p1；</span></span><br><span class="line">            w.rightClip(p1,p2);		  	   </span><br><span class="line">        &#125;</span><br><span class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(p1.y&lt;=w.bottom)&#123;<span class="comment">// p1 在窗口下面,用下边界截断，更新p1；</span></span><br><span class="line">            w.bottomClip(P1,P2); 				</span><br><span class="line">        &#125;</span><br><span class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(p1.y&gt;=w.top)&#123;<span class="comment">// p1 在窗口上面,用上边界截断，更新p1；</span></span><br><span class="line">            w.topClip(p1,p2);			</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;  <span class="comment">// p2 在窗口外面</span></span><br><span class="line">        <span class="keyword">if</span>(p2.x&lt;=w.left)&#123;<span class="comment">// p2在窗口左边,用左边界截断，更新p2；    	    </span></span><br><span class="line">           w.leftClip(p2,p1);   					   </span><br><span class="line">        &#125; 			 </span><br><span class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(p2.x&gt;=w.right)&#123;<span class="comment">// p2在窗口右边,用右边界截断，更新p2；</span></span><br><span class="line">           w.rightClip(p2,p1);	 				  	  </span><br><span class="line">        &#125;</span><br><span class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(p2.y&lt;=w.bottom)&#123;<span class="comment">// p2 在窗口下面,用下边界截断，更新p2；</span></span><br><span class="line">           w.bottomClip(P2,P1);   				</span><br><span class="line">        &#125;</span><br><span class="line">    	<span class="keyword">else</span> <span class="keyword">if</span>(p2.y&gt;=w.top)&#123;<span class="comment">// p2 在窗口上面,用上边界截断，更新p2；</span></span><br><span class="line">           w.topClip(p2,p1);	  				</span><br><span class="line">        &#125; </span><br><span class="line">   &#125;<span class="keyword">while</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Liang-Barsky算法"><a href="#Liang-Barsky算法" class="headerlink" title="Liang-Barsky算法"></a>Liang-Barsky算法</h4><p>一个复杂的画面中可能包含有几千条直线，为了提高算法效率，加快裁剪速度，应当采用计算量较小的算法求直线与窗口边界的交点。</p>
+<h5 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h5><ol>
+<li><p>Liang-Barsky算法又称为参数方程法，以直线的参数方程为基础，对不同情况下的裁剪求得相应的参数值。</p>
+</li>
+<li><p>首先写出端点及之间连线的参数方程如下：</p>
+<script type="math/tex; mode=display">
+x = x_1 + (x_2-x_1)u = x_1 + t\Delta x
+\\
+y = y_1 + (y_2-y_1)u = y_1 + t\Delta y
+\\
+\Delta x = x_2 - x_1,\Delta y = y_2 - y_1</script><p>  参数u可取0到1之间的值，坐标表示此范围内的u值定义的直线上的一个点。</p>
+</li>
+<li><p>如果直线上的某点处于(x,y)即(xmin,ymin)以及(xmax,ymax)所定义的窗口之内，则满足以下条件：</p>
+</li>
+</ol>
+<script type="math/tex; mode=display">
+x_{wmin} \leqslant x_1 + t\Delta x  \leqslant x_{wmax}
+\\
+y_{wmin} \leqslant y_1 + t\Delta y  \leqslant y_{wmax}</script><h5 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h5><ol>
+<li><p>输入直线段的两端点坐标以及窗口的四条边界坐标。</p>
+</li>
+<li><p>若Δx=0，则有</p>
+<script type="math/tex; mode=display">
+x_{wmin} \leqslant x_1 \leqslant x_{wmax}</script></li>
+</ol>
+<p>   进一步判断是否满足</p>
+<script type="math/tex; mode=display">
+   x_1 < x_{wmin}或x_1 > x_{wmax}</script><p>   若满足，则该直线段不在窗口内，转(7)。</p>
+<p>   否则，满足</p>
+<script type="math/tex; mode=display">
+   x_{wmin} \leqslant x_1   \leqslant x_{wmax}</script><p>   则进一步计算ts和te。转(5)。</p>
+<ol>
+<li><p>若Δy=0，则有</p>
+<script type="math/tex; mode=display">
+y_{wmin} \leqslant y_1 \leqslant y_{wmax}</script><p>进一步判断是否满足</p>
+<script type="math/tex; mode=display">
+y_1 < y_{wmin}或y_1 > y_{wmax}</script><p>若满足，则该直线段不在窗口内，转(7)。</p>
+<p>否则，满足</p>
+<script type="math/tex; mode=display">
+y_{wmin} \leqslant y_1   \leqslant y_{wmax}</script><p>则进一步计算ts和te。转(5)。</p>
+</li>
+<li><p>若上述两条均不满足,则有Δx≠0且Δy≠0。此时计算ts和te。</p>
+</li>
+<li><p>求得ts和te后进行判断：</p>
+<p>若ts&gt;te,则直线段在窗口外,转(7)。</p>
+<p>若ts&lt;te,利用直线的参数方程求得直线段在窗口内的两端点坐标。</p>
+</li>
+<li><p>利用直线的扫描转换算法绘制在窗口内的直线段。</p>
+</li>
+<li><p>算法结束。</p>
+</li>
+</ol>
+<h3 id="多边形裁剪算法"><a href="#多边形裁剪算法" class="headerlink" title="多边形裁剪算法"></a>多边形裁剪算法</h3><h4 id="Sutherland-Hodgeman算法"><a href="#Sutherland-Hodgeman算法" class="headerlink" title="Sutherland-Hodgeman算法"></a>Sutherland-Hodgeman算法</h4><h5 id="基本思想-分冶"><a href="#基本思想-分冶" class="headerlink" title="基本思想(分冶)"></a>基本思想(分冶)</h5><ol>
+<li><p>将多边形的边界作为一个整体，每次用窗口的一条边界对要裁剪的多边形进行裁剪。</p>
+</li>
+<li><p>窗口的一条边以及延长线构成的裁剪线把平面分为两个区域：包含窗口区域的域称为可见侧，不包含窗口区域的域为不可见侧。</p>
+</li>
+<li><p>将每条线段的端点S, P与裁剪线比较之后，可以输出0～2个点:</p>
+<p>(1) S在不可见一侧，P在可见一侧，输出SP与裁剪线的交点I和顶点P。</p>
+<p>(2) S, P都在可见一侧，输出顶点P。</p>
+<p>(3) S在可见一侧，P在不可见一侧，输出SP与裁剪线的交点I。</p>
+<p>(4) S, P都在不可见一侧，输出0个顶点。</p>
+</li>
+</ol>
+<p><img src='https://img-blog.csdnimg.cn/20201128233030391.png'></p>
+<h5 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h5><p><img src='https://img-blog.csdnimg.cn/20201128232040829.png'></p>
+<p>(a)用左边界裁剪</p>
+<p>​    输入顶点：ABCDEFGH</p>
+<p>​    输出顶点：12DEFGHA</p>
+<p><img src='https://img-blog.csdnimg.cn/20201128232219190.png'></p>
+<p>(b)用下边界裁剪</p>
+<p>​    输入顶点：12DEFGHA</p>
+<p>​    输出顶点：34D56FFGHA1</p>
+<p><img src='https://img-blog.csdnimg.cn/2020112823231526.png'></p>
+<p>(c)用右边界裁剪</p>
+<p>​    输入顶点：34D56FFGHA1</p>
+<p>​    输出顶点：78GHA134D56</p>
+<p><img src='https://img-blog.csdnimg.cn/20201128232408110.png'></p>
+<p>(d)用上边界裁剪</p>
+<p>​    输入顶点：78GHA134D56</p>
+<p>​    输出顶点：9IHJK34D5678</p>
 <h1 id="Rasterization-光栅化"><a href="#Rasterization-光栅化" class="headerlink" title="Rasterization(光栅化)"></a>Rasterization(光栅化)</h1><h1 id="Fragment-processing-片元处理"><a href="#Fragment-processing-片元处理" class="headerlink" title="Fragment processing(片元处理)"></a>Fragment processing(片元处理)</h1><h1 id="Frame-buffer-帧缓存"><a href="#Frame-buffer-帧缓存" class="headerlink" title="Frame buffer(帧缓存)"></a>Frame buffer(帧缓存)</h1>]]></content>
       <categories>
         <category>Theories</category>
