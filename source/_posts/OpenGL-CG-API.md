@@ -454,6 +454,62 @@ glEnable(GL_TEXTURE_GEN_S);
 glEnable(GL_TEXTURE_GEN_T);
 ```
 
+#### 纹理导入
+
+##### 读取bmp位图
+
+```c++
+static AUX_RGBImageRec* LoadBMP(CHAR* Filename)
+{
+	FILE* File = NULL;
+	if (!Filename)
+	{
+		return NULL;
+	}
+	File = fopen(Filename, "r");
+	if (File)
+	{
+		fclose(File);
+		return auxDIBImageLoadA(Filename);
+	}
+	return NULL;
+}
+```
+
+##### 从bmp位图加载纹理
+
+```c++
+GLuint texture[6];
+GLsizei textureSize = 6;
+static int LoadGLTextures(CHAR* Filename, GLuint ID)
+{
+	int Status = FALSE;
+	AUX_RGBImageRec* TextureImage[1];
+	memset(TextureImage, 0, sizeof(void*) * 1);
+	if (TextureImage[0] = LoadBMP(Filename))
+	{
+		Status = TRUE;
+		glBindTexture(GL_TEXTURE_2D, texture[ID]);
+		/*	glBindTexture(GL_TEXTURE_2D, ID);*/
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	}
+
+	if (TextureImage[0])
+	{
+		if (TextureImage[0]->data)
+		{
+			free(TextureImage[0]->data);
+		}
+		free(TextureImage[0]);
+	}
+	return Status;
+}
+```
+
+
+
 ### 三维纹理
 
 ## Animations(动画)
@@ -549,7 +605,7 @@ void main(void)
 
 ### 着色器与OpenGL的连接
 
-1. 从glsl源文件读取着色器
+#### 读取GLSL源文件
 
 ```c++
 /* create a null-terminated string by reading the provided file */
@@ -566,12 +622,83 @@ static char* readShaderSource(const char* shaderFile)
 
 	buf = (char*)malloc((size + 1) * sizeof(char));
 	fread(buf, 1, size, fp);
-	buf[size] = ' ';
-		fclose(fp);
+	buf[size] = '\0';
+	fclose(fp);
 	return buf;
 }
+```
 
-/* error check */
+#### 初始化GLSL
+
+```c++
+GLuint program;
+GLuint vxParam, vyParam, timeParam;
+/* GLSL initialization */
+static void initShader(const GLchar* vShaderFile, const GLchar* fShaderFile)
+{
+	GLint status;
+	GLchar* vSource, * fSource;
+	GLuint vShader, fShader;
+
+	/* read shader files */
+	vSource = readShaderSource(vShaderFile);
+	if (vSource == NULL)
+	{
+		printf("Failed to read vertex shaderi\n");
+		exit(EXIT_FAILURE);
+	}
+
+	fSource = readShaderSource(fShaderFile);
+	if (fSource == NULL)
+	{
+		printf("Failed to read fragment shader");
+		exit(EXIT_FAILURE);
+	}
+
+	/* create program and shader objects */
+	glewInit();
+	vShader = glCreateShader(GL_VERTEX_SHADER);
+	fShader = glCreateShader(GL_FRAGMENT_SHADER);
+	program = glCreateProgram();
+
+	/* attach shaders to the program object */
+	glAttachShader(program, vShader);
+	glAttachShader(program, fShader);
+
+	/* read shaders */
+	glShaderSource(vShader, 1, (const GLchar**)&vSource, NULL);
+	glShaderSource(fShader, 1, (const GLchar**)&fSource, NULL);
+
+	/* compile shaders */
+	glCompileShader(vShader);
+	glCompileShader(fShader);
+
+	/* error check */
+	glGetShaderiv(vShader, GL_COMPILE_STATUS, &status);
+	checkError(status, "Failed to compile the vertex shader.");
+
+	glGetShaderiv(fShader, GL_COMPILE_STATUS, &status);
+	checkError(status, "Failed to compile the fragment shader.");
+
+	/* link */
+	glLinkProgram(program);
+	glGetProgramiv(program, GL_LINK_STATUS, &status);
+	checkError(status, "Failed to link the shader program object.");
+
+	/* use program object */
+	glUseProgram(program);
+
+	/* set up uniform parameter */
+	timeParam = glGetUniformLocation(program, "time");
+	vxParam = glGetAttribLocation(program, "vx");
+	vyParam = glGetAttribLocation(program, "vy");
+}
+```
+
+#### 打印错误信息
+
+```c++
+/* error printing function */
 static void checkError(GLint status, const char* msg)
 {
 	if (status == GL_FALSE)
@@ -580,79 +707,6 @@ static void checkError(GLint status, const char* msg)
 		exit(EXIT_FAILURE);
 	}
 }
-
-/* read shader files */
-GLchar* vSource = readShaderSource(vShaderFile);
-if(vSource == NULL){
-    printf("Failed to read vertex shaderi\n");
-	exit(EXIT_FAILURE);
-}
- 
-GLchar* fSource = readShaderSource(fShaderFile);
-if(fSource == NULL){
-    printf("Failed to read fragment shaderi\n");
-	exit(EXIT_FAILURE);
-}
-```
-
-2. 创建程序对象
-
-```c++
-/* create a program object */
-GLuint  myProgObj;
-myProgObj = glCreateProgram();
-```
-
-3. 创建着色器对象
-
-```c++
-/* create shader objects*/
-GLuint vShader, fShader;
-vShader = glCreateShader(GL_VERTEX_SHADER);
-fShader = glCreateShader(GL_FRAGMENT_SHADER);
-```
-
-4. 将着色器对象绑定到程序对象
-
-```c++
-/* attach shaders to the program object */
-glAttachShader(program, vShader);
-glAttachShader(program, fShader);
-
-/* read shaders */
-glShaderSource(vShader, 1, (const GLchar**)&vSource, NULL);
-glShaderSource(fShader, 1, (const GLchar**)&fSource, NULL);
-```
-
-5. 编译着色器并检查错误
-
-```c++
-/* shader compile */
-glCompileShader(vShader);
-glCompileShader(fShader);
-
-/* error check */
-glGetShaderiv(vShader, GL_COMPILE_STATUS, &status);
-checkError(status, "Failed to compile the vertex shader.");
-
-glGetShaderiv(fShader, GL_COMPILE_STATUS, &status);
-checkError(status, "Failed to compile the fragment shader.");
-```
-
-6. 将所有的程序连接起来
-
-```c++
-/* link */
-glLinkProgram(program);
-glGetProgramiv(program, GL_LINK_STATUS, &status);
-checkError(status, "Failed to link the shader program object.");
-```
-
-7. 选择当前的程序对象
-
-```c++
-/* use current program object */
-glUseProgram(myProgObj);
 ```
 
 ## Interaction(交互)
