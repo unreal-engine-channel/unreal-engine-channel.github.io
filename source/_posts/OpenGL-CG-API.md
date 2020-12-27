@@ -292,14 +292,14 @@ glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
 ###### 遗留镜面光
 
 ```c++
-GLfloat mat_shininess[] = { 50.0 }; 
+GLfloat mat_specular[] = { 0.0, 0.0, 0.8, 1.0 }; 
 glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 ```
 
 ###### 设置镜面指数
 
 ```c++
-GLfloat mat_specular[] = { 0.0, 0.0, 0.8, 1.0 }; 
+GLfloat mat_shininess[] = { 50.0 };
 glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 ```
 
@@ -778,6 +778,55 @@ void (*func)(int button, int state, int x, int y)
     }
 }
 ```
+
+#### 菜单事件
+
+##### 注册菜单事件
+
+```c++
+#define RED 1
+#define GREEN 2
+#define BLUE 3
+#define BLACK 4
+
+// 注册菜单事件处理函数
+glutCreateMenu(void(*func)(int op));
+
+// 添加菜单项
+glutAddMenuEntry("Red", RED);
+glutAddMenuEntry("Green", GREEN);
+glutAddMenuEntry("Blue", BLUE);
+glutAddMenuEntry("Black", BLACK);
+
+// 绑定菜单触发的按键
+glutAttachMenu(GLUT_RIGHT_BUTTON);
+```
+
+##### 处理菜单事件的函数模板
+
+```c++
+void processMenuEvents(int op) {
+	switch (op) {
+	case RED:
+		glColor3f(1.0f, 0.0f, 0.0f);
+		break;
+	case GREEN:
+		glColor3f(0.0f, 1.0f, 0.0f);
+		break;
+	case BLUE:
+		glColor3f(0.0f, 0.0f, 1.0f);
+		break;
+	case BLACK:
+		glColor3f(0.0f, 0.0f, 0.0f);
+		break;
+	default:
+		break;
+	}
+	glutPostRedisplay();
+}
+```
+
+
 
 ### 键盘交互
 
