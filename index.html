@@ -193,6 +193,259 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/28/Digital-Image-Processing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jocoboy">
+      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="unreal-engine-channel">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/28/Digital-Image-Processing/" class="post-title-link" itemprop="url">Digital-Image-Processing</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-28 22:11:36" itemprop="dateCreated datePublished" datetime="2021-06-28T22:11:36+08:00">2021-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Theories/" itemprop="url" rel="index"><span itemprop="name">Theories</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Image-enhancement-in-the-spatial-domain-空间域图像增强"><a href="#Image-enhancement-in-the-spatial-domain-空间域图像增强" class="headerlink" title="Image enhancement in the spatial domain (空间域图像增强)"></a>Image enhancement in the spatial domain (空间域图像增强)</h2><h3 id="Intensity-transformation-灰度变换"><a href="#Intensity-transformation-灰度变换" class="headerlink" title="Intensity transformation (灰度变换)"></a>Intensity transformation (灰度变换)</h3><h4 id="基本灰度变换函数"><a href="#基本灰度变换函数" class="headerlink" title="基本灰度变换函数"></a>基本灰度变换函数</h4><h5 id="Image-negatives-图像反转"><a href="#Image-negatives-图像反转" class="headerlink" title="Image negatives (图像反转)"></a>Image negatives (图像反转)</h5><p>s = L - 1 - r</p>
+<h5 id="log-transformation-对数变换"><a href="#log-transformation-对数变换" class="headerlink" title="log transformation (对数变换)"></a>log transformation (对数变换)</h5><p>s = clog(1+r)</p>
+<h5 id="power-law-transformation-gamma-correction-幂次变换（gamma校正）"><a href="#power-law-transformation-gamma-correction-幂次变换（gamma校正）" class="headerlink" title="power-law transformation (gamma correction) (幂次变换（gamma校正）)"></a>power-law transformation (gamma correction) (幂次变换（gamma校正）)</h5><p>s = cr^r</p>
+<h4 id="分段线性变换函数"><a href="#分段线性变换函数" class="headerlink" title="分段线性变换函数"></a>分段线性变换函数</h4><h5 id="Contrast-stretching-对比拉伸"><a href="#Contrast-stretching-对比拉伸" class="headerlink" title="Contrast stretching (对比拉伸)"></a>Contrast stretching (对比拉伸)</h5><p><img src="https://img-blog.csdnimg.cn/20210629155650684.png"></p>
+<h5 id="gray-level-slicing-灰度切割"><a href="#gray-level-slicing-灰度切割" class="headerlink" title="gray-level slicing (灰度切割)"></a>gray-level slicing (灰度切割)</h5><h5 id="bit-plane-slicing-位图切割"><a href="#bit-plane-slicing-位图切割" class="headerlink" title="bit-plane slicing (位图切割)"></a>bit-plane slicing (位图切割)</h5><h4 id="Histogram-Processing-直方图处理"><a href="#Histogram-Processing-直方图处理" class="headerlink" title="Histogram Processing (直方图处理)"></a>Histogram Processing (直方图处理)</h4><h5 id="Histogram-equalization-直方图均衡化"><a href="#Histogram-equalization-直方图均衡化" class="headerlink" title="Histogram equalization (直方图均衡化)"></a>Histogram equalization (直方图均衡化)</h5><p>(1) 统计各灰度级rk的像素数目n k (k=0,1,2,…L-1)<br>(2) 用p(rk)=n k /n 计算图像直方图<br>(3) 用变换函数<img src="https://img-blog.csdnimg.cn/20210629160359854.png"><br>计算映射后输出的灰度级sk，舍入处理得sk’<br>(4)将灰度级为rk的像素灰度级变为sk’<br>(5) 统计映射后新的灰度级sk’的像素数目nk ’<br>(6) 计算输出图像的直方图 </p>
+<h5 id="Histogram-matching-specification-直方图规定化（直方图匹配）"><a href="#Histogram-matching-specification-直方图规定化（直方图匹配）" class="headerlink" title="Histogram matching(specification) (直方图规定化（直方图匹配）)"></a>Histogram matching(specification) (直方图规定化（直方图匹配）)</h5><p> (1)求出已知图像的直方图</p>
+<p>(2)利用 <img src="https://img-blog.csdnimg.cn/20210629161712194.png">对每一灰度级rk预计算映射灰度级sk.<br> (3)利用<img src="https://img-blog.csdnimg.cn/20210629161734137.png">从给定的Pz(z)得到变换函数G.<br> (4)利用<img src="https://img-blog.csdnimg.cn/20210629161755669.png">对每一个sk值求zk.<br> (5)将灰度级为rk的像素灰度级变为zk.<br> 对于原始图像的每个像素,若像素值为rk,将该值映射到其对应的灰度级sk; 然后映射灰度级sk到最终灰度级zk.</p>
+<h3 id="Spatial-filtering-空域滤波"><a href="#Spatial-filtering-空域滤波" class="headerlink" title="Spatial filtering (空域滤波)"></a>Spatial filtering (空域滤波)</h3><h4 id="Smoothing-spatial-filters-平滑空域滤波器"><a href="#Smoothing-spatial-filters-平滑空域滤波器" class="headerlink" title="Smoothing spatial filters (平滑空域滤波器)"></a>Smoothing spatial filters (平滑空域滤波器)</h4><h5 id="Averaging-filter-均值滤波器"><a href="#Averaging-filter-均值滤波器" class="headerlink" title="Averaging filter (均值滤波器)"></a>Averaging filter (均值滤波器)</h5><p>The output (response) of a smoothing, linear spatial filter is simply the average of the pixels contained in the neighborhood of the filter mask. These filters sometimes are called averaging filter. </p>
+<p><img src="https://img-blog.csdnimg.cn/2021062916243138.png"></p>
+<h5 id="Order-Statistic-Filters-顺序排序滤波器"><a href="#Order-Statistic-Filters-顺序排序滤波器" class="headerlink" title="Order-Statistic Filters (顺序排序滤波器)"></a>Order-Statistic Filters (顺序排序滤波器)</h5><p>Order-statistics filters are nonlinear spatial filters whose response is based on ordering the pixels contained in the image area encompassed by the filter, and then replacing the value of the center pixel with the value determined by the ranking result.</p>
+<h5 id="median-filter-中值滤波器"><a href="#median-filter-中值滤波器" class="headerlink" title="median filter (中值滤波器)"></a>median filter (中值滤波器)</h5><p>Replace the value of a pixel by the median of the gray levels in the neighborhood of that pixel.</p>
+<h4 id="sharpening-spatial-filters-锐化空域滤波器"><a href="#sharpening-spatial-filters-锐化空域滤波器" class="headerlink" title="sharpening spatial filters (锐化空域滤波器)"></a>sharpening spatial filters (锐化空域滤波器)</h4><h5 id="一阶微分"><a href="#一阶微分" class="headerlink" title="一阶微分"></a>一阶微分</h5><ul>
+<li><p>the gradient operator (梯度算子)</p>
+<p><img src="https://img-blog.csdnimg.cn/2021062916362410.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629163645554.png"></p>
+</li>
+<li><p>the Roberts cross-gradient operators (Roberts交叉算子)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629163945506.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/2021062916401035.png"></p>
+</li>
+<li><p>Sobel operators (Sobel算子)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629164038662.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629164103664.png"></p>
+</li>
+<li><p>Prewitt operators (Prewitt算子)</p>
+<p><img src="https://img-blog.csdnimg.cn/2021062916413020.png"></p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210629164149919.png"></p>
+<h5 id="二阶微分"><a href="#二阶微分" class="headerlink" title="二阶微分"></a>二阶微分</h5><ul>
+<li><p>The laplacian operator (拉普拉斯算子)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629163003867.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629163033680.png"></p>
+</li>
+<li><p>Laplacian-based Enhancement operator (拉普拉斯增强算子)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629163255390.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629163322935.png"></p>
+</li>
+<li><p>unsharp masking (非锐化掩蔽)</p>
+</li>
+<li><p>highboost filtering (高提升滤波)</p>
+</li>
+</ul>
+<h2 id="Image-enhancement-in-the-frequency-domain-频域图像增强"><a href="#Image-enhancement-in-the-frequency-domain-频域图像增强" class="headerlink" title="Image enhancement in the frequency domain (频域图像增强)"></a>Image enhancement in the frequency domain (频域图像增强)</h2><h3 id="Fourier-transform-傅里叶变换"><a href="#Fourier-transform-傅里叶变换" class="headerlink" title="Fourier transform (傅里叶变换)"></a>Fourier transform (傅里叶变换)</h3><h4 id="Discrete-Fourier-Transform-离散傅里叶变换DFT"><a href="#Discrete-Fourier-Transform-离散傅里叶变换DFT" class="headerlink" title="Discrete Fourier Transform (离散傅里叶变换DFT)"></a>Discrete Fourier Transform (离散傅里叶变换DFT)</h4><p><img src="https://img-blog.csdnimg.cn/20210629134320105.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629134354229.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629134811667.png"></p>
+<ul>
+<li><p>Translational property (平移性)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629135229681.png"></p>
+</li>
+<li><p>Periodic property (周期性)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629135706652.png"></p>
+</li>
+<li><p>Conjugate symmetric property (共轭对称性)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629135737567.png"></p>
+</li>
+<li><p>Average property (平均值定理)</p>
+<p>令u=0,v=0,则F(0,0)=~f(x,y):</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629140040481.png"></p>
+</li>
+<li><p>Convolution theorem (卷积定理)</p>
+</li>
+</ul>
+<p>  <img src="https://img-blog.csdnimg.cn/20210629141847116.png"></p>
+<p>  <img src="https://img-blog.csdnimg.cn/20210629141918104.png"></p>
+<p>  令s=-m,t=-n,g(x,y)=f(x,y)*h(x,y):</p>
+<p>  <img src="https://img-blog.csdnimg.cn/20210629141702901.png"></p>
+<h3 id="频域滤波流程"><a href="#频域滤波流程" class="headerlink" title="频域滤波流程"></a>频域滤波流程</h3><p><img src="https://img-blog.csdnimg.cn/20210629143232377.png"></p>
+<h3 id="Low-pass-filtering-低通滤波器"><a href="#Low-pass-filtering-低通滤波器" class="headerlink" title="Low-pass filtering (低通滤波器)"></a>Low-pass filtering (低通滤波器)</h3><h4 id="Ideal-lowpass-filters-理想低通滤波器"><a href="#Ideal-lowpass-filters-理想低通滤波器" class="headerlink" title="Ideal lowpass filters (理想低通滤波器)"></a>Ideal lowpass filters (理想低通滤波器)</h4><p><img src="https://img-blog.csdnimg.cn/20210629143940232.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629144013339.png"></p>
+<h4 id="Butterworth-lowpass-filters-巴特沃斯低通滤波器"><a href="#Butterworth-lowpass-filters-巴特沃斯低通滤波器" class="headerlink" title="Butterworth lowpass filters (巴特沃斯低通滤波器)"></a>Butterworth lowpass filters (巴特沃斯低通滤波器)</h4><p><img src="https://img-blog.csdnimg.cn/20210629144115517.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629144141403.png"></p>
+<h4 id="Gaussian-lowpass-filters-高斯低通滤波器"><a href="#Gaussian-lowpass-filters-高斯低通滤波器" class="headerlink" title="Gaussian lowpass filters (高斯低通滤波器)"></a>Gaussian lowpass filters (高斯低通滤波器)</h4><p><img src="https://img-blog.csdnimg.cn/20210629144231223.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629144304278.png"></p>
+<h3 id="High-pass-filtering-高通滤波器"><a href="#High-pass-filtering-高通滤波器" class="headerlink" title="High-pass filtering (高通滤波器)"></a>High-pass filtering (高通滤波器)</h3><h4 id="Ideal-highpass-filters-理想高通滤波器"><a href="#Ideal-highpass-filters-理想高通滤波器" class="headerlink" title="Ideal highpass filters (理想高通滤波器)"></a>Ideal highpass filters (理想高通滤波器)</h4><p><img src="https://img-blog.csdnimg.cn/20210629144444982.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629144511267.png"></p>
+<h4 id="Butterworth-highpass-filters-巴特沃斯高通滤波器"><a href="#Butterworth-highpass-filters-巴特沃斯高通滤波器" class="headerlink" title="Butterworth highpass filters (巴特沃斯高通滤波器)"></a>Butterworth highpass filters (巴特沃斯高通滤波器)</h4><p><img src="https://img-blog.csdnimg.cn/20210629144558939.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629144624469.png"></p>
+<h4 id="Gaussian-highpass-filters-高斯高通滤波器"><a href="#Gaussian-highpass-filters-高斯高通滤波器" class="headerlink" title="Gaussian highpass filters (高斯高通滤波器)"></a>Gaussian highpass filters (高斯高通滤波器)</h4><p><img src="https://img-blog.csdnimg.cn/20210629144659924.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629144854316.png"></p>
+<h3 id="Homomorphic-Filtering-同态滤波"><a href="#Homomorphic-Filtering-同态滤波" class="headerlink" title="Homomorphic Filtering (同态滤波)"></a>Homomorphic Filtering (同态滤波)</h3><h4 id="同态滤波流程"><a href="#同态滤波流程" class="headerlink" title="同态滤波流程"></a>同态滤波流程</h4><p>An image f(x, y) can be expressed as the product of </p>
+<p>illumination i(x, y) </p>
+<p>and </p>
+<p>reflectance components r(x, y):</p>
+<p><img src="https://img-blog.csdnimg.cn/2021062914560259.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629145343962.png"></p>
+<h4 id="Gray-level-range-compression-灰度范围压缩"><a href="#Gray-level-range-compression-灰度范围压缩" class="headerlink" title="Gray-level range compression (灰度范围压缩)"></a>Gray-level range compression (灰度范围压缩)</h4><h4 id="Contrast-enhancement-对比度增强"><a href="#Contrast-enhancement-对比度增强" class="headerlink" title="Contrast enhancement (对比度增强)"></a>Contrast enhancement (对比度增强)</h4><h2 id="Morphological-image-processing（形态学图像处理）"><a href="#Morphological-image-processing（形态学图像处理）" class="headerlink" title="Morphological image processing（形态学图像处理）"></a>Morphological image processing（形态学图像处理）</h2><h3 id="Dilation-膨胀"><a href="#Dilation-膨胀" class="headerlink" title="Dilation (膨胀)"></a>Dilation (膨胀)</h3><p>在B相对于自身原点的反射对这些元素移位操作的结果与A至少重叠一个元素，B的原点位置的集合。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629131220812.png"></p>
+<h3 id="Erosion-腐蚀"><a href="#Erosion-腐蚀" class="headerlink" title="Erosion (腐蚀)"></a>Erosion (腐蚀)</h3><p>在B完全包括在A中时，B的原点位置的集合。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629131029843.png"></p>
+<h3 id="Opening-开"><a href="#Opening-开" class="headerlink" title="Opening (开)"></a>Opening (开)</h3><p>复合运算：先腐蚀后膨胀。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629131601431.png"></p>
+<h3 id="Closing-闭"><a href="#Closing-闭" class="headerlink" title="Closing  (闭)"></a>Closing  (闭)</h3><p>复合运算：先膨胀后腐蚀。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210629131635639.png"></p>
+<h3 id="Hit-or-miss-击中与否"><a href="#Hit-or-miss-击中与否" class="headerlink" title="Hit-or-miss (击中与否)"></a>Hit-or-miss (击中与否)</h3><p><img src="https://img-blog.csdnimg.cn/20210629132222221.png"></p>
+<h2 id="Image-segmentation（图像分割）"><a href="#Image-segmentation（图像分割）" class="headerlink" title="Image segmentation（图像分割）"></a>Image segmentation（图像分割）</h2><h3 id="Discontinuity（间断性）"><a href="#Discontinuity（间断性）" class="headerlink" title="Discontinuity（间断性）"></a>Discontinuity（间断性）</h3><h4 id="Edge-detection（边缘检测）"><a href="#Edge-detection（边缘检测）" class="headerlink" title="Edge detection（边缘检测）"></a>Edge detection（边缘检测）</h4><h5 id="Laplacian-of-Gaussian（LOG算子）"><a href="#Laplacian-of-Gaussian（LOG算子）" class="headerlink" title="Laplacian of Gaussian（LOG算子）"></a>Laplacian of Gaussian（LOG算子）</h5><p><img src="https://img-blog.csdnimg.cn/20210629115447698.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629115512268.png"></p>
+<h5 id="The-Canny-edge-detector-Canny算子"><a href="#The-Canny-edge-detector-Canny算子" class="headerlink" title="The Canny edge detector (Canny算子)"></a>The Canny edge detector (Canny算子)</h5><p>算法的基本步骤：<br>  1）用Gaussian滤波器对图像进行卷积<br>  2）计算图像梯度的幅值和方向<br>  3）对梯度幅值应用非极大值抑制（置零）<br> 4）用双阈值处理和连接分析来检测并连接边缘</p>
+<h5 id="Edge-linking-边缘连接"><a href="#Edge-linking-边缘连接" class="headerlink" title="Edge linking (边缘连接)"></a>Edge linking (边缘连接)</h5><h5 id="Hough-transform-霍夫变换"><a href="#Hough-transform-霍夫变换" class="headerlink" title="Hough transform (霍夫变换)"></a>Hough transform (霍夫变换)</h5><p>通过Hough变换可以把在图像空间中的直线检测问题转换到在参数空间的点检测问题。其算法步骤如下：<br>（1）在ρ、θ 的取值范围内对其分别进行m，n等分，设一个二维数组的下标与ρi 、 θj的取值对应；<br>（2）对图像上的边缘点作Hough变换，求每个点在θj (j＝0,1,…,n)对应的ρi (i=0,1,…,m)，判断(ρi ,θj )与哪个数组元素对应．则让该数组元素值加1；<br>（3）比较数组元素值的大小，最大值所对应的（ ρi 、 θj ）就是这些共线点对应的直线方程的参数。</p>
+<p>检测到的直线方程为：</p>
+<p><img src="https://img-blog.csdnimg.cn/2021062912062728.png"></p>
+<h3 id="Similarity（相似性）"><a href="#Similarity（相似性）" class="headerlink" title="Similarity（相似性）"></a>Similarity（相似性）</h3><h4 id="Thresholding（阈值法）"><a href="#Thresholding（阈值法）" class="headerlink" title="Thresholding（阈值法）"></a>Thresholding（阈值法）</h4><h5 id="Basic-global-thresholding（基本全局阈值法）"><a href="#Basic-global-thresholding（基本全局阈值法）" class="headerlink" title="Basic global thresholding（基本全局阈值法）"></a>Basic global thresholding（基本全局阈值法）</h5><p>（1）选取一个初始估计值T；<br>（2）用T分割图像。这样便会生成两组像素集合：G1由所有灰度值大于T的像素组成，而G2由所有灰度值小于或等于T的像素组成。<br>（3）对G1和G2中所有像素计算平均灰度值u1和u2。<br>（4）计算新的阈值：T=(u1 + u2)/2。<br>（5）重复步骤（2）到（4），直到得到的T值之差小于一个事先定义的参数T0。</p>
+<h5 id="Otsu’s-method（Otsu法）"><a href="#Otsu’s-method（Otsu法）" class="headerlink" title="Otsu’s method（Otsu法）"></a>Otsu’s method（Otsu法）</h5><p>（1）先计算图像的归一化直方图<br>（2） i表示分类的阈值，也即一个灰度级，从0开始迭代<br>（3通过归一化的直方图，统计0~i 灰度级的像素(背景像素) 所占整幅图像的比例w0，并统计背景像素的平均灰度u0；统计i~255灰度级的像素(前景像素) 所占整幅图像的比例w1，并统计前景像素的平均灰度u1；<br>（4）计算前景像素和背景像素的方差 g = w0<em>w1</em>(u0-u1) (u0-u1)<br>（5） i++，直到i为255时循环结束<br>（6）将最大g相应的i值作为图像的全局阈值</p>
+<h5 id="Basic-adaptive-thresholding（基本自适应阈值法）"><a href="#Basic-adaptive-thresholding（基本自适应阈值法）" class="headerlink" title="Basic adaptive thresholding（基本自适应阈值法）"></a>Basic adaptive thresholding（基本自适应阈值法）</h5><h4 id="Region-based-segmentation（基于区域的分割）"><a href="#Region-based-segmentation（基于区域的分割）" class="headerlink" title="Region-based segmentation（基于区域的分割）"></a>Region-based segmentation（基于区域的分割）</h4><h5 id="Region-growing（区域生长）"><a href="#Region-growing（区域生长）" class="headerlink" title="Region growing（区域生长）"></a>Region growing（区域生长）</h5><p>1）根据图像的不同应用选择一组或多组开始点，把靠近这些点族中心的像素作为种子点（通常采用腐蚀算法）<br>2）选择一个相似性准则。<br>（灰度级、 色彩、 纹理、 梯度等特性相似）<br>3）从该种子开始向外扩张，不断将与集合中各个像素连通、且满足相似性准则的像素加入集合。<br>4）上一过程进行到不再有满足条件的新结点加入集合为止。（终止准则）</p>
+<h5 id="Region-splitting-and-mergin（区域分裂与合并）"><a href="#Region-splitting-and-mergin（区域分裂与合并）" class="headerlink" title="Region splitting and mergin（区域分裂与合并）"></a>Region splitting and mergin（区域分裂与合并）</h5><h2 id="Image-feature-description（图像特征描述）"><a href="#Image-feature-description（图像特征描述）" class="headerlink" title="Image feature description（图像特征描述）"></a>Image feature description（图像特征描述）</h2><h3 id="Shape-feature（形状特征）"><a href="#Shape-feature（形状特征）" class="headerlink" title="Shape feature（形状特征）"></a>Shape feature（形状特征）</h3><h4 id="Euler-number（欧拉数）"><a href="#Euler-number（欧拉数）" class="headerlink" title="Euler number（欧拉数）"></a>Euler number（欧拉数）</h4><h4 id="Convexity-and-concavity（凹凸性）"><a href="#Convexity-and-concavity（凹凸性）" class="headerlink" title="Convexity and concavity（凹凸性）"></a>Convexity and concavity（凹凸性）</h4><h4 id="Region-measurement（区域测量）"><a href="#Region-measurement（区域测量）" class="headerlink" title="Region measurement（区域测量）"></a>Region measurement（区域测量）</h4><ul>
+<li><p>Area S</p>
+</li>
+<li><p>Perimeter L</p>
+</li>
+<li><p>Length and Width</p>
+</li>
+<li><p>Minimum Enclosing Rectangle（最小外接矩形）</p>
+<p> Rectangle Degree (矩形度) R = S / S(MER)</p>
+</li>
+<li><p>Roundness (圆形度)</p>
+<p> R0 = 4πS / L²</p>
+</li>
+<li><p>Shape Complexity (形状复杂度)</p>
+<p> e =  L² / S</p>
+</li>
+</ul>
+<h4 id="skeletonization-骨架化"><a href="#skeletonization-骨架化" class="headerlink" title="skeletonization (骨架化)"></a>skeletonization (骨架化)</h4><ul>
+<li><p>thinning algorithm (细化算法)</p>
+<p>假设区域内点的值为1，背景点的值为0。由两个基本操作组成。</p>
+<p>1.对于满足以下四个条件的边界点打标记准备删除：<br>(a)2≤N(p1)≤6  (N(p1)=p2+p3+…+p9，是点p1邻域中1的个数)<br>(b)S(p1)=1    (S(p1)是按p2,p3,…,p9顺序，0-1转换的个数)<br>(c)p2 <em> p4 </em> p6 = 0    （p2 、p4 、p6 至少有一个0）<br>(d)p4 <em> p6 </em> p8 = 0    （p4 、p6 、p8 至少有一个0）</p>
+<p>2.对于满足以下四个条件的边界点打标记准备删除：</p>
+<p>条件(a)、(b)与1相同，条件(c)、(d)改为：<br>(c’) p2<em> p4</em> p8= 0 （p2 、p4 、p8 至少有一个0）<br>(d’) p2<em> p6</em> p8= 0（p2 、p6 、p8 至少有一个0）</p>
+</li>
+</ul>
+<h4 id="Moment-method-矩量法"><a href="#Moment-method-矩量法" class="headerlink" title="Moment method (矩量法)"></a>Moment method (矩量法)</h4><ul>
+<li>Invariant moment (不变矩)</li>
+</ul>
+<h4 id="Projection-投影"><a href="#Projection-投影" class="headerlink" title="Projection (投影)"></a>Projection (投影)</h4><p><img src="https://img-blog.csdnimg.cn/20210629002244776.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210629002312284.png"></p>
+<h4 id="Shape-descriptor-形状描述子"><a href="#Shape-descriptor-形状描述子" class="headerlink" title="Shape descriptor (形状描述子)"></a>Shape descriptor (形状描述子)</h4><ul>
+<li><p>Chain code (链码)</p>
+<p><img src="https://img-blog.csdnimg.cn/20210628230738596.png" alt="schematic diagram"></p>
+<ul>
+<li>链码旋转归一化得到差分码</li>
+<li>差分码起点归一化得到最小差分码（形状数）</li>
+</ul>
+</li>
+<li>shape number (形状数)</li>
+<li>Fourier descriptor (傅里叶描述子)</li>
+</ul>
+<h3 id="Color-feature（颜色特征）"><a href="#Color-feature（颜色特征）" class="headerlink" title="Color feature（颜色特征）"></a>Color feature（颜色特征）</h3><h4 id="Color-Histogram-颜色直方图"><a href="#Color-Histogram-颜色直方图" class="headerlink" title="Color Histogram (颜色直方图)"></a>Color Histogram (颜色直方图)</h4><p><img src="https://img-blog.csdnimg.cn/20210628234440533.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210628234511119.png"></p>
+<ul>
+<li>L1norm distance </li>
+</ul>
+<p><img src='https://img-blog.csdnimg.cn/20210628234357804.png'></p>
+<ul>
+<li>L2norm distance</li>
+</ul>
+<p><img src='https://img-blog.csdnimg.cn/2021062823471372.png'></p>
+<ul>
+<li>histogram intersection (直方图交)</li>
+</ul>
+<p><img src='https://img-blog.csdnimg.cn/20210628234810144.png'></p>
+<h4 id="Color-Moment-颜色矩"><a href="#Color-Moment-颜色矩" class="headerlink" title="Color Moment (颜色矩)"></a>Color Moment (颜色矩)</h4><p><img src="https://img-blog.csdnimg.cn/20210629001941115.png"></p>
+<h4 id="Color-Set-颜色集"><a href="#Color-Set-颜色集" class="headerlink" title="Color Set (颜色集)"></a>Color Set (颜色集)</h4><p><img src="https://img-blog.csdnimg.cn/20210628235137337.png"></p>
+<h3 id="Texture-feature（纹理特征）"><a href="#Texture-feature（纹理特征）" class="headerlink" title="Texture feature（纹理特征）"></a>Texture feature（纹理特征）</h3><h4 id="Statistical-texture-统计纹理"><a href="#Statistical-texture-统计纹理" class="headerlink" title="Statistical texture (统计纹理)"></a>Statistical texture (统计纹理)</h4><ul>
+<li>Space gray level dependence matrix/entropy（空间灰度共生矩阵/熵）</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210629000539776.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/2021062900061649.png" alt="schematic diagram"></p>
+<h4 id="Structural-texture-结构纹理"><a href="#Structural-texture-结构纹理" class="headerlink" title="Structural texture (结构纹理)"></a>Structural texture (结构纹理)</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/16/OpenGL-CG-API/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -224,7 +477,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -319,7 +572,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -414,7 +667,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -509,7 +762,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -604,7 +857,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -699,7 +952,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -794,7 +1047,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -889,7 +1142,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -984,7 +1237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
+                <time title="Modified: 2021-06-29 17:13:55" itemprop="dateModified" datetime="2021-06-29T17:13:55+08:00">2021-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1025,101 +1278,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/11/10/RPG-Dev-Log-16/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/07/RPG-Dev-Log-15/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jocoboy">
-      <meta itemprop="description" content="A website to share technologies for the latest version of Unreal Engine.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="unreal-engine-channel">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/07/RPG-Dev-Log-15/" class="post-title-link" itemprop="url">RPG Game开发日志(十五)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-08 00:13:02" itemprop="dateCreated datePublished" datetime="2020-11-08T00:13:02+08:00">2020-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-27 23:42:21" itemprop="dateModified" datetime="2020-12-27T23:42:21+08:00">2020-12-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Logs/" itemprop="url" rel="index"><span itemprop="name">Logs</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>涉及内容：大任务系统续，任务分支完成互动。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/07/RPG-Dev-Log-15/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1208,7 +1366,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1221,7 +1379,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1268,7 +1426,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1277,12 +1435,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">82k</span>
+    <span title="Symbols count total">87k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:15</span>
+    <span title="Reading time total">1:19</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
