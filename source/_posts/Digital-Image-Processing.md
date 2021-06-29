@@ -6,6 +6,10 @@ tags:
 - OpenCV
 ---
 
+数字图像处理包括空间域图像增强、频率域图像增强、形态学图像处理、图像分割、特征提取等。
+
+<!--more-->
+
 ## Image enhancement in the spatial domain (空间域图像增强)
 
 ### Intensity transformation (灰度变换)
